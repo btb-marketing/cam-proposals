@@ -384,6 +384,17 @@ section {
   letter-spacing: 0.05em;
 }
 
+.team-photo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 2px solid var(--accent-border);
+  margin-bottom: 16px;
+  display: block;
+}
+
 .team-name {
   font-size: 15px;
   font-weight: 600;

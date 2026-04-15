@@ -2,6 +2,7 @@ export interface TeamMember {
   name: string;
   title: string;
   initials: string;
+  photo?: string;
 }
 
 export interface PricingTier {
@@ -44,6 +45,7 @@ export interface Proposal {
     subTagline: string;
   };
   about: {
+    heading?: string;
     description: string;
     notableClients: string[];
   };

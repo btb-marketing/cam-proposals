@@ -14,14 +14,22 @@
     "subTagline": "A focused 3–4 month engagement to close the competitive gap, optimize high-intent treatment pages, and turn organic traffic into consultation bookings."
   },
   "about": {
-    "description": "I'm Cameron Gallacher — a digital marketing consultant specializing in SEO, paid media, and conversion strategy. I work with a focused roster of clients across Canada and the United States, with a track record of driving measurable organic growth for competitive service-based businesses.",
+    "heading": "About Us",
+    "description": "Worked with 200+ businesses across Canada and the United States ranging from small businesses to large publicly traded enterprises. Worked with clients ranging from CPG brands, brick & mortar retail, e-commerce, software companies, consultants, doctors, real estate agents, and more. Generated over $500 million USD in revenue for clients through highly targeted digital marketing strategies. Founder and CEO of multiple marketing agencies.",
     "notableClients": []
   },
   "team": [
     {
       "name": "Cameron Gallacher",
-      "title": "Lead Strategist & Consultant",
-      "initials": "CG"
+      "title": "CEO & Lead Consultant",
+      "initials": "CG",
+      "photo": "/team/cameron-gallacher.jpg"
+    },
+    {
+      "name": "Naomi Peng",
+      "title": "COO & Senior Consultant",
+      "initials": "NP",
+      "photo": "/team/naomi-peng.jpg"
     }
   ],
   "overview": {

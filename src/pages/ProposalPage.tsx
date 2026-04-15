@@ -70,12 +70,12 @@ export default function ProposalPage() {
         </div>
       </section>
 
-      {/* ── ABOUT CAMERON ── */}
+      {/* ── ABOUT ── */}
       <section className="about-section">
         <div className="container">
           <div className="about-grid">
             <div className="reveal">
-              <div className="eyebrow">About Cameron Gallacher</div>
+              <div className="eyebrow">{about.heading || 'About Cameron Gallacher'}</div>
               <p className="about-description">{about.description}</p>
             </div>
             <div className="reveal">
@@ -96,7 +96,15 @@ export default function ProposalPage() {
                   <div className="team-grid" style={{ marginTop: '16px' }}>
                     {team.map((member) => (
                       <div key={member.name} className="team-card">
-                        <div className="team-initials">{member.initials}</div>
+                        {member.photo ? (
+                          <img
+                            src={member.photo}
+                            alt={member.name}
+                            className="team-photo"
+                          />
+                        ) : (
+                          <div className="team-initials">{member.initials}</div>
+                        )}
                         <div className="team-name">{member.name}</div>
                         <div className="team-title">{member.title}</div>
                       </div>
