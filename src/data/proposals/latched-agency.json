@@ -1,0 +1,405 @@
+{
+  "slug": "latched-agency",
+  "brand": "cameron-gallacher",
+  "password": "latched2026",
+  "meta": {
+    "title": "SEO Growth Proposal",
+    "preparedBy": "Cameron Gallacher",
+    "preparedFor": "Latched Agency",
+    "date": "April 2026",
+    "ctaUrl": "https://calendly.com/belowtheboard/intro-call",
+    "ctaLabel": "Book Onboarding Call",
+    "brand": "cameron-gallacher"
+  },
+  "hero": {
+    "clientName": "Latched Agency",
+    "tagline": "SEO Growth\nProposal",
+    "subTagline": "A targeted engagement to grow Latched Agency's organic search presence, dominate cannabis marketing keywords, and generate a consistent pipeline of inbound leads from SEO."
+  },
+  "about": {
+    "heading": "About Us",
+    "description": "With over a decade of experience in digital marketing, I've had the privilege of working with 200+ businesses across Canada and the United States — from small local businesses to large publicly traded enterprises. My client roster spans CPG brands, brick-and-mortar retail, e-commerce, software companies, consultants, medical professionals, and real estate agents, among others. Across those engagements, I've helped generate over $500 million USD in revenue for clients through highly targeted, performance-driven digital strategies. I'm the founder and CEO of multiple marketing agencies, and I bring that same operator-level thinking to every client relationship.",
+    "notableClients": []
+  },
+  "team": [
+    {
+      "name": "Cameron Gallacher",
+      "title": "CEO & Lead Consultant",
+      "initials": "CG",
+      "photo": "/team/cameron-gallacher.jpg"
+    },
+    {
+      "name": "Naomi Peng",
+      "title": "COO & Senior Consultant",
+      "initials": "NP",
+      "photo": "/team/naomi-peng.jpg"
+    }
+  ],
+  "overview": {
+    "headline": "The Opportunity",
+    "subheadline": "Latched Agency is already the recognized leader in cannabis digital marketing — serving hundreds of cannabis brands across North America with SEO, CRO, content, and web design. The opportunity is to ensure Latched's own website ranks as aggressively for cannabis marketing keywords as the clients it serves. Right now, high-value searches like 'cannabis marketing agency', 'cannabis SEO agency', and 'dispensary SEO' are being captured by competitors. A focused SEO engagement will close that gap, build Latched's domain authority, and generate a consistent flow of inbound leads directly from organic search.",
+    "objectives": [
+      "Rank for high-intent 'cannabis marketing agency' and 'cannabis SEO' keywords in the US and Canada",
+      "Outrank competitors including Coalition Technologies, Client Verge, and Hybrid Marketing Co.",
+      "Build domain authority through targeted, high-DR backlink acquisition",
+      "Improve the site's ability to convert organic visitors into booked intro calls",
+      "Establish Latched as the top organic result for cannabis agency searches in key markets"
+    ],
+    "strategy": [
+      {
+        "title": "Competitive Gap Analysis",
+        "description": "Audit Latched's current rankings against top competitors (Coalition Technologies, Client Verge, Hybrid Marketing Co.) to identify exactly which keywords they're winning and why — then build a plan to close those gaps."
+      },
+      {
+        "title": "High-Intent SEO Optimization",
+        "description": "Optimize Latched's service pages, location pages, and blog content around the highest-value cannabis marketing and SEO keywords with the strongest commercial intent."
+      },
+      {
+        "title": "Authority Building via Backlinks",
+        "description": "Acquire high-DR backlinks from cannabis industry publications, marketing blogs, and business directories to increase Latched's domain authority and accelerate keyword rankings."
+      },
+      {
+        "title": "Conversion Rate Optimization",
+        "description": "Ensure that improved organic traffic converts into booked intro calls by reviewing CTAs, landing page structure, and the inquiry flow across key service pages."
+      }
+    ]
+  },
+  "keywordAreas": {
+    "intro": "The initial keyword focus will target high-intent cannabis marketing and SEO searches with strong commercial intent in both the US and Canadian markets.",
+    "keywords": [
+      "Cannabis Marketing Agency",
+      "Cannabis SEO Agency",
+      "Dispensary SEO",
+      "Cannabis Digital Marketing",
+      "Marijuana Marketing Agency",
+      "CBD Marketing Agency",
+      "Cannabis SEO Services",
+      "Cannabis Content Marketing",
+      "Hemp Marketing Agency",
+      "Delta 8 Marketing Agency",
+      "Cannabis Marketing Vancouver",
+      "Cannabis Agency Canada"
+    ]
+  },
+  "scopeOfWork": {
+    "months": [
+      {
+        "month": "Month 1",
+        "title": "Foundation & Audit",
+        "tasks": [
+          "Full technical SEO audit of latchedagency.com",
+          "Competitive gap analysis vs. Coalition Technologies, Client Verge, Hybrid Marketing Co.",
+          "Keyword mapping across all service pages and blog content",
+          "Google Search Console & Analytics setup/review",
+          "Identify quick-win pages for immediate optimization",
+          "Backlink profile audit and disavow plan if needed"
+        ]
+      },
+      {
+        "month": "Month 2",
+        "title": "On-Page Optimization",
+        "tasks": [
+          "Optimize all primary service pages for target keywords",
+          "Rewrite and expand meta titles and descriptions site-wide",
+          "Improve internal linking structure across service and blog pages",
+          "Add structured data (schema markup) to key pages",
+          "Optimize page load speed and Core Web Vitals",
+          "Begin backlink acquisition campaign"
+        ]
+      },
+      {
+        "month": "Month 3",
+        "title": "Authority & Content",
+        "tasks": [
+          "Publish 4 SEO-optimized blog articles targeting high-volume cannabis marketing keywords",
+          "Continue backlink acquisition (target: 4–6 high-DR placements)",
+          "Optimize Google Business Profile for local search",
+          "Build local citation consistency across directories",
+          "Review and optimize conversion paths on key landing pages",
+          "Monthly performance report with keyword ranking progress"
+        ]
+      },
+      {
+        "month": "Month 4+",
+        "title": "Scale & Momentum",
+        "tasks": [
+          "Ongoing content production and keyword expansion",
+          "Accelerated backlink acquisition based on Month 3 results",
+          "A/B testing on high-traffic landing pages",
+          "Quarterly executive summary with ROI analysis",
+          "Strategy review and roadmap for next quarter"
+        ]
+      }
+    ]
+  },
+  "deliverables": [
+    "Full technical SEO audit with prioritized fix list",
+    "Competitive gap analysis report (vs. top 3 competitors)",
+    "Keyword map covering all service pages and blog content",
+    "On-page optimization of up to 15 URLs per month",
+    "4 SEO-optimized blog articles per month (Month 3+)",
+    "4–8 high-DR backlinks per month",
+    "Google Business Profile optimization",
+    "Local citation buildout and consistency audit",
+    "Monthly keyword ranking report",
+    "Bi-weekly strategy calls",
+    "24/7 accessible reporting dashboard",
+    "Slack support with <24hr response time"
+  ],
+  "successMetrics": [
+    {
+      "metric": "Keyword Rankings",
+      "description": "Track position improvements for target cannabis marketing and SEO keywords in Google US and Canada"
+    },
+    {
+      "metric": "Organic Traffic Growth",
+      "description": "Month-over-month increase in organic sessions to latchedagency.com"
+    },
+    {
+      "metric": "Domain Authority",
+      "description": "Improvement in Ahrefs DR / Moz DA from backlink acquisition"
+    },
+    {
+      "metric": "Inbound Lead Volume",
+      "description": "Increase in 'Book an Intro Call' form submissions and Calendly bookings from organic traffic"
+    },
+    {
+      "metric": "Conversion Rate",
+      "description": "Improvement in organic visitor-to-lead conversion rate on key service pages"
+    }
+  ],
+  "investment": {
+    "sectionTitle": "Investment",
+    "sectionSubtitle": "Choose the engagement level that fits your current growth goals.",
+    "packagesLabel": "SEO Packages",
+    "addonsLabel": "Optional Add-Ons — click to select",
+    "packages": [
+      {
+        "id": "kickstarter",
+        "name": "Kickstarter",
+        "price": 2500,
+        "currency": "CAD",
+        "period": "mo",
+        "plusTax": true,
+        "badge": "Best for Getting Started",
+        "defaultSelected": false,
+        "description": "A focused foundation sprint to audit, optimize, and start building authority for Latched's most important service pages.",
+        "deliverables": [
+          {
+            "category": "Keyword Research",
+            "items": [
+              "Full keyword research & mapping",
+              "Competitor gap analysis"
+            ]
+          },
+          {
+            "category": "On-Page + Technical SEO",
+            "items": [
+              "Up to 8 URLs manually optimized/month",
+              "Technical SEO audit + fixes",
+              "Meta title & description optimization"
+            ]
+          },
+          {
+            "category": "Reporting",
+            "items": [
+              "Monthly reporting call",
+              "Email support with <48hr response",
+              "Keyword ranking dashboard"
+            ]
+          },
+          {
+            "category": "Backlinks",
+            "items": [
+              "2 backlinks per month"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "growth",
+        "name": "Growth",
+        "price": 4500,
+        "currency": "CAD",
+        "period": "mo",
+        "plusTax": true,
+        "badge": "Most Popular",
+        "defaultSelected": true,
+        "description": "The full-stack SEO engagement — on-page optimization, content production, authority building, and conversion optimization working together.",
+        "deliverables": [
+          {
+            "category": "Keyword Research",
+            "items": [
+              "Full keyword research & mapping",
+              "Competitor gap analysis",
+              "Monthly keyword expansion"
+            ]
+          },
+          {
+            "category": "Content",
+            "items": [
+              "4 SEO-optimized blog articles/month",
+              "Service page copy refresh"
+            ]
+          },
+          {
+            "category": "On-Page + Technical SEO",
+            "items": [
+              "Up to 15 URLs manually optimized/month",
+              "Weekly technical audits",
+              "Core Web Vitals optimization",
+              "Schema markup implementation"
+            ]
+          },
+          {
+            "category": "Reporting",
+            "items": [
+              "Bi-weekly calls + quarterly executive summary",
+              "Slack support with <24hr response",
+              "Multiple dashboards (content, SEO, keyword lift, ROI)"
+            ]
+          },
+          {
+            "category": "Backlinks",
+            "items": [
+              "6 backlinks per month"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "domination",
+        "name": "Domination",
+        "price": 7500,
+        "currency": "CAD",
+        "period": "mo",
+        "plusTax": true,
+        "badge": "Maximum Impact",
+        "defaultSelected": false,
+        "description": "Full-scale SEO domination — designed to outrank every competitor in the cannabis marketing space within 6 months.",
+        "deliverables": [
+          {
+            "category": "Keyword Research",
+            "items": [
+              "Full keyword research & mapping",
+              "Competitor gap analysis",
+              "Monthly keyword expansion",
+              "International keyword targeting (US + Canada)"
+            ]
+          },
+          {
+            "category": "Content",
+            "items": [
+              "8 SEO-optimized blog articles/month",
+              "Full service page rewrites",
+              "Landing page creation for new keyword targets"
+            ]
+          },
+          {
+            "category": "On-Page + Technical SEO",
+            "items": [
+              "Unlimited URL optimization",
+              "Weekly technical audits",
+              "Core Web Vitals optimization",
+              "Schema markup implementation",
+              "CRO review + A/B testing setup"
+            ]
+          },
+          {
+            "category": "Reporting",
+            "items": [
+              "Weekly calls + monthly executive summary",
+              "Dedicated Slack channel with <4hr response",
+              "Full analytics suite with custom dashboards"
+            ]
+          },
+          {
+            "category": "Backlinks",
+            "items": [
+              "12 backlinks per month",
+              "Priority outreach to high-DR cannabis publications"
+            ]
+          }
+        ]
+      }
+    ],
+    "addons": [
+      {
+        "id": "backlink-pack-1",
+        "name": "Backlink Pack 1",
+        "price": 500,
+        "currency": "CAD",
+        "period": "mo",
+        "plusTax": true,
+        "badge": "Recommended + Optional",
+        "defaultSelected": false,
+        "description": "Boost domain authority with 2 high-DR guest post placements per month in cannabis and marketing publications.",
+        "deliverables": [
+          {
+            "category": "Inclusions",
+            "items": [
+              "2 High DR Guest Posts per month",
+              "Keyword Research",
+              "Guest Post Writing",
+              "Placement Outreach",
+              "Negotiations with Backlink Providers",
+              "Monthly Backlink Delivery & Report"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "backlink-pack-2",
+        "name": "Backlink Pack 2",
+        "price": 1000,
+        "currency": "CAD",
+        "period": "mo",
+        "plusTax": true,
+        "badge": "Optional",
+        "defaultSelected": false,
+        "description": "Double the guest post volume for accelerated domain authority growth.",
+        "deliverables": [
+          {
+            "category": "Inclusions",
+            "items": [
+              "4 High DR Guest Posts per month",
+              "Keyword Research",
+              "Guest Post Writing",
+              "Placement Outreach",
+              "Negotiations with Backlink Providers",
+              "Monthly Backlink Delivery & Report"
+            ]
+          }
+        ]
+      }
+    ],
+    "roiContext": "Latched already has a proven service offering and a strong client base. The missing piece is organic visibility — the agency's own website should be generating as many inbound leads as the clients it serves. This engagement is designed to fix that directly and measurably.",
+    "exitClause": "No long-term lock-in. I recommend a 3–4 month initial term to allow enough time to see meaningful ranking movement, but I'm happy to discuss a month-to-month arrangement after the initial sprint."
+  },
+  "caseStudies": [
+    {
+      "client": "E-Commerce Brand",
+      "service": "SEO",
+      "result": "+982% Revenue in 7 Months",
+      "description": "$630,574 in revenue generated in 7 months vs. $58,306 the prior year. 538+ keywords ranked. Built from near-zero organic presence to market dominance in a competitive niche."
+    },
+    {
+      "client": "Specialty Retailer",
+      "service": "Paid Media",
+      "result": "14x Revenue Growth",
+      "description": "Scaled from $1,699/mo to $23,479/mo in 7 months. 7.57x ROAS on best-performing campaign. Achieved in a competitive niche with limited advertising options."
+    },
+    {
+      "client": "Health & Wellness Brand",
+      "service": "Paid Media + Email",
+      "result": "5.52x Average ROAS",
+      "description": "5.52x average ROAS across 7 campaigns. Grew email revenue from $0 to $45K/month. Full-funnel approach combining paid social with lifecycle email marketing."
+    }
+  ],
+  "nextSteps": {
+    "closing": "I'm ready to get started. The next step is a short call to align on priorities, confirm access to latchedagency.com and Google Search Console, and kick off the Month 1 audit. The sooner we start, the sooner Latched starts ranking as well as the clients it serves.",
+    "ctaUrl": "https://calendly.com/belowtheboard/intro-call",
+    "ctaLabel": "Book Onboarding Call",
+    "email": "cam@latchedinc.com"
+  }
+}

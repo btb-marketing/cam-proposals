@@ -3861,3 +3861,273 @@ section {
   .admin-content { padding: 32px 20px; }
   .admin-header { padding: 14px 20px; }
 }
+
+/* ─── Admin Header Actions ───────────────────────────────────────────────── */
+.admin-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-new-proposal-btn {
+  background: #c8ff00;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  font-family: inherit;
+}
+.admin-new-proposal-btn:hover { background: #d4ff33; transform: translateY(-1px); }
+
+/* ─── New Proposal Form Overlay ──────────────────────────────────────────── */
+.npf-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 16px;
+  overflow-y: auto;
+}
+
+.new-proposal-form {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 720px;
+  padding: 32px;
+  position: relative;
+  margin: auto;
+}
+
+.npf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+.npf-header h3 {
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+}
+.npf-close-x {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+.npf-close-x:hover { color: #fff; }
+
+.npf-form { display: flex; flex-direction: column; gap: 0; }
+
+.npf-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c8ff00;
+  margin: 24px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #1a1a1a;
+}
+.npf-section-title:first-child { margin-top: 0; }
+
+.npf-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+@media (max-width: 600px) { .npf-row { grid-template-columns: 1fr; } }
+
+.npf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.npf-field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.npf-optional { font-weight: 400; text-transform: none; letter-spacing: 0; color: #555; }
+
+.npf-field input,
+.npf-field select,
+.npf-field textarea {
+  background: #0a0a0a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  padding: 10px 14px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  outline: none;
+}
+.npf-field input:focus,
+.npf-field select:focus,
+.npf-field textarea:focus { border-color: #c8ff00; }
+.npf-field select { cursor: pointer; }
+.npf-field textarea { resize: vertical; min-height: 100px; }
+
+/* Logo Upload */
+.npf-logo-upload {
+  background: #0a0a0a;
+  border: 2px dashed #2a2a2a;
+  border-radius: 10px;
+  padding: 28px;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.2s;
+  margin-bottom: 8px;
+}
+.npf-logo-upload:hover { border-color: #c8ff00; }
+.npf-logo-placeholder { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.npf-logo-icon { font-size: 24px; color: #555; }
+.npf-logo-placeholder span { color: #666; font-size: 14px; }
+.npf-logo-hint { font-size: 12px !important; color: #444 !important; }
+.npf-logo-preview { max-height: 80px; max-width: 200px; object-fit: contain; }
+.npf-remove-logo {
+  background: none;
+  border: none;
+  color: #ff4d4d;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 8px;
+  font-family: inherit;
+}
+.npf-remove-logo:hover { text-decoration: underline; }
+
+/* Actions */
+.npf-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid #1a1a1a;
+}
+.npf-cancel-btn {
+  background: none;
+  border: 1px solid #333;
+  color: #888;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.2s, color 0.2s;
+}
+.npf-cancel-btn:hover:not(:disabled) { border-color: #666; color: #fff; }
+.npf-submit-btn {
+  background: #c8ff00;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s, opacity 0.2s;
+}
+.npf-submit-btn:hover:not(:disabled) { background: #d4ff33; }
+.npf-submit-btn:disabled,
+.npf-cancel-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.npf-error {
+  background: rgba(255,77,77,0.1);
+  border: 1px solid rgba(255,77,77,0.3);
+  border-radius: 8px;
+  color: #ff4d4d;
+  font-size: 13px;
+  padding: 12px 16px;
+  margin-top: 8px;
+}
+
+/* Success State */
+.npf-success {
+  text-align: center;
+  padding: 16px 0;
+}
+.npf-success-icon {
+  width: 56px;
+  height: 56px;
+  background: #c8ff00;
+  color: #000;
+  border-radius: 50%;
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+.npf-success h3 { color: #fff; font-size: 1.3rem; margin: 0 0 10px; }
+.npf-success p { color: #aaa; font-size: 14px; margin: 0 0 24px; line-height: 1.6; }
+.npf-result-grid {
+  background: #0a0a0a;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+.npf-result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #1a1a1a;
+}
+.npf-result-row:last-child { border-bottom: none; }
+.npf-result-label { color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+.npf-result-value { color: #fff; font-family: monospace; font-size: 13px; }
+.npf-password { color: #c8ff00 !important; font-size: 15px !important; }
+.npf-result-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.npf-approve-btn {
+  display: inline-block;
+  background: #c8ff00;
+  color: #000;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+.npf-approve-btn:hover { background: #d4ff33; }
+.npf-close-btn {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: #888;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.2s, color 0.2s;
+}
+.npf-close-btn:hover { border-color: #666; color: #fff; }

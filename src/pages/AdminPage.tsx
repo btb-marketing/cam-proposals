@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { getAllSlugs, loadProposal } from '../data/loader'
 import { isProposalAuthenticated, clearProposalAuth } from '../hooks/useProposalAuth'
 import { useBrandMeta } from '../hooks/useBrandMeta'
@@ -16,6 +16,335 @@ function copyToClipboard(text: string) {
   })
 }
 
+// ─── New Proposal Form ────────────────────────────────────────────────────────
+
+interface ProposalFormData {
+  clientName: string
+  clientEmail: string
+  clientWebsite: string
+  brand: 'cameron-gallacher' | 'below-the-board'
+  industry: string
+  location: string
+  services: string
+  notes: string
+  recommendedPkg: 'kickstarter' | 'growth' | 'domination'
+  password: string
+  logoFile: File | null
+  logoPreview: string | null
+}
+
+function NewProposalForm({ onClose }: { onClose: () => void }) {
+  const [form, setForm] = useState<ProposalFormData>({
+    clientName: '',
+    clientEmail: '',
+    clientWebsite: '',
+    brand: 'cameron-gallacher',
+    industry: '',
+    location: '',
+    services: 'SEO, Content Marketing',
+    notes: '',
+    recommendedPkg: 'growth',
+    password: '',
+    logoFile: null,
+    logoPreview: null,
+  })
+  const [status, setStatus] = useState<'idle' | 'uploading-logo' | 'generating' | 'success' | 'error'>('idle')
+  const [result, setResult] = useState<{ slug: string; password: string; approveUrl: string } | null>(null)
+  const [errorMsg, setErrorMsg] = useState('')
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  function set(key: keyof ProposalFormData, value: unknown) {
+    setForm(f => ({ ...f, [key]: value }))
+  }
+
+  function handleLogoChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    set('logoFile', file)
+    const reader = new FileReader()
+    reader.onload = ev => set('logoPreview', ev.target?.result as string)
+    reader.readAsDataURL(file)
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setStatus('generating')
+    setErrorMsg('')
+
+    try {
+      let logoUrl: string | undefined
+
+      // Upload logo if provided
+      if (form.logoFile) {
+        setStatus('uploading-logo')
+        const base64: string = await new Promise((resolve, reject) => {
+          const reader = new FileReader()
+          reader.onload = ev => {
+            const result = ev.target?.result as string
+            resolve(result.split(',')[1])
+          }
+          reader.onerror = reject
+          reader.readAsDataURL(form.logoFile!)
+        })
+
+        const uploadRes = await fetch('/api/upload-logo', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-admin-key': ADMIN_PASSWORD,
+          },
+          body: JSON.stringify({
+            filename: `${form.clientName.toLowerCase().replace(/[^a-z0-9]/g, '-')}-logo.${form.logoFile.name.split('.').pop()}`,
+            content: base64,
+            mimeType: form.logoFile.type,
+          }),
+        })
+        const uploadData = await uploadRes.json()
+        if (!uploadRes.ok) throw new Error(uploadData.error || 'Logo upload failed')
+        logoUrl = uploadData.url
+        setStatus('generating')
+      }
+
+      // Generate proposal
+      const genRes = await fetch('/api/generate-proposal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-key': ADMIN_PASSWORD,
+        },
+        body: JSON.stringify({
+          clientName: form.clientName,
+          clientEmail: form.clientEmail,
+          clientWebsite: form.clientWebsite,
+          brand: form.brand,
+          industry: form.industry,
+          location: form.location,
+          services: form.services,
+          notes: form.notes,
+          recommendedPkg: form.recommendedPkg,
+          password: form.password || undefined,
+          logoUrl,
+        }),
+      })
+
+      const genData = await genRes.json()
+      if (!genRes.ok) throw new Error(genData.error || 'Proposal generation failed')
+
+      setResult({
+        slug: genData.slug,
+        password: genData.password,
+        approveUrl: genData.approveUrl,
+      })
+      setStatus('success')
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Something went wrong'
+      setErrorMsg(msg)
+      setStatus('error')
+    }
+  }
+
+  if (status === 'success' && result) {
+    return (
+      <div className="new-proposal-form">
+        <div className="npf-success">
+          <div className="npf-success-icon">✓</div>
+          <h3>Proposal Draft Created!</h3>
+          <p>A review email has been sent to <strong>richard@belowtheboard.com</strong>. Click Approve in that email to deploy the proposal, or use the button below.</p>
+          <div className="npf-result-grid">
+            <div className="npf-result-row">
+              <span className="npf-result-label">Proposal URL</span>
+              <code className="npf-result-value">/proposal/{result.slug}/</code>
+            </div>
+            <div className="npf-result-row">
+              <span className="npf-result-label">Client Password</span>
+              <code className="npf-result-value npf-password">{result.password}</code>
+            </div>
+          </div>
+          <div className="npf-result-actions">
+            <a href={result.approveUrl} target="_blank" rel="noopener noreferrer" className="npf-approve-btn">
+              ✓ Approve &amp; Deploy Now ↗
+            </a>
+            <button className="npf-close-btn" onClick={onClose}>Close</button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  const isLoading = status === 'uploading-logo' || status === 'generating'
+
+  return (
+    <div className="new-proposal-form">
+      <div className="npf-header">
+        <h3>New Proposal</h3>
+        <button className="npf-close-x" onClick={onClose} aria-label="Close">✕</button>
+      </div>
+
+      <form onSubmit={handleSubmit} className="npf-form">
+        <div className="npf-section-title">Client Information</div>
+
+        <div className="npf-row">
+          <div className="npf-field">
+            <label>Client Name *</label>
+            <input
+              type="text"
+              value={form.clientName}
+              onChange={e => set('clientName', e.target.value)}
+              placeholder="e.g. Dr. Katie Beleznay"
+              required
+            />
+          </div>
+          <div className="npf-field">
+            <label>Client Email *</label>
+            <input
+              type="email"
+              value={form.clientEmail}
+              onChange={e => set('clientEmail', e.target.value)}
+              placeholder="e.g. katie@example.com"
+              required
+            />
+          </div>
+        </div>
+
+        <div className="npf-row">
+          <div className="npf-field">
+            <label>Client Website</label>
+            <input
+              type="url"
+              value={form.clientWebsite}
+              onChange={e => set('clientWebsite', e.target.value)}
+              placeholder="https://example.com"
+            />
+          </div>
+          <div className="npf-field">
+            <label>Industry</label>
+            <input
+              type="text"
+              value={form.industry}
+              onChange={e => set('industry', e.target.value)}
+              placeholder="e.g. Cosmetic Dermatology"
+            />
+          </div>
+        </div>
+
+        <div className="npf-row">
+          <div className="npf-field">
+            <label>Location</label>
+            <input
+              type="text"
+              value={form.location}
+              onChange={e => set('location', e.target.value)}
+              placeholder="e.g. Vancouver, BC"
+            />
+          </div>
+          <div className="npf-field">
+            <label>Services Requested</label>
+            <input
+              type="text"
+              value={form.services}
+              onChange={e => set('services', e.target.value)}
+              placeholder="e.g. SEO, Content Marketing, Paid Media"
+            />
+          </div>
+        </div>
+
+        <div className="npf-section-title">Client Logo</div>
+        <div
+          className="npf-logo-upload"
+          onClick={() => fileInputRef.current?.click()}
+          role="button"
+          tabIndex={0}
+          onKeyDown={e => e.key === 'Enter' && fileInputRef.current?.click()}
+        >
+          {form.logoPreview ? (
+            <img src={form.logoPreview} alt="Logo preview" className="npf-logo-preview" />
+          ) : (
+            <div className="npf-logo-placeholder">
+              <span className="npf-logo-icon">↑</span>
+              <span>Click to upload client logo (PNG, SVG, WebP)</span>
+              <span className="npf-logo-hint">Transparent background recommended</span>
+            </div>
+          )}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/png,image/svg+xml,image/webp,image/jpeg"
+            onChange={handleLogoChange}
+            style={{ display: 'none' }}
+          />
+        </div>
+        {form.logoPreview && (
+          <button
+            type="button"
+            className="npf-remove-logo"
+            onClick={() => { set('logoFile', null); set('logoPreview', null) }}
+          >
+            Remove logo
+          </button>
+        )}
+
+        <div className="npf-section-title">Proposal Settings</div>
+
+        <div className="npf-row">
+          <div className="npf-field">
+            <label>Brand</label>
+            <select value={form.brand} onChange={e => set('brand', e.target.value as 'cameron-gallacher' | 'below-the-board')}>
+              <option value="cameron-gallacher">Cameron Gallacher Consulting</option>
+              <option value="below-the-board">Below the Board Marketing</option>
+            </select>
+          </div>
+          <div className="npf-field">
+            <label>Recommended Package</label>
+            <select value={form.recommendedPkg} onChange={e => set('recommendedPkg', e.target.value as 'kickstarter' | 'growth' | 'domination')}>
+              <option value="kickstarter">Kickstarter (~$2,500/mo)</option>
+              <option value="growth">Growth (~$4,500/mo)</option>
+              <option value="domination">Domination (~$7,500/mo)</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="npf-field">
+          <label>Custom Password <span className="npf-optional">(leave blank to auto-generate)</span></label>
+          <input
+            type="text"
+            value={form.password}
+            onChange={e => set('password', e.target.value)}
+            placeholder="Auto-generated if blank"
+          />
+        </div>
+
+        <div className="npf-section-title">Research Notes &amp; Requirements</div>
+        <div className="npf-field">
+          <label>Notes for AI Research</label>
+          <textarea
+            value={form.notes}
+            onChange={e => set('notes', e.target.value)}
+            placeholder="Include any specific requirements, pain points, competitor names, target keywords, budget constraints, or anything else the AI should know when generating this proposal..."
+            rows={5}
+          />
+        </div>
+
+        {status === 'error' && (
+          <div className="npf-error">{errorMsg}</div>
+        )}
+
+        <div className="npf-actions">
+          <button type="button" className="npf-cancel-btn" onClick={onClose} disabled={isLoading}>
+            Cancel
+          </button>
+          <button type="submit" className="npf-submit-btn" disabled={isLoading || !form.clientName || !form.clientEmail}>
+            {status === 'uploading-logo' ? 'Uploading logo...' :
+             status === 'generating' ? 'Generating proposal...' :
+             'Generate Proposal →'}
+          </button>
+        </div>
+      </form>
+    </div>
+  )
+}
+
+// ─── Main Admin Page ──────────────────────────────────────────────────────────
+
 export default function AdminPage() {
   useBrandMeta({ brand: 'cameron-gallacher', pageTitle: 'Admin Panel' })
   const [authed, setAuthed] = useState(false)
@@ -23,6 +352,7 @@ export default function AdminPage() {
   const [pwError, setPwError] = useState('')
   const [copied, setCopied] = useState<string | null>(null)
   const [, forceUpdate] = useState(0)
+  const [showNewProposal, setShowNewProposal] = useState(false)
 
   useEffect(() => {
     if (sessionStorage.getItem('admin_authed') === 'true') setAuthed(true)
@@ -87,13 +417,31 @@ export default function AdminPage() {
     <div className="admin-page">
       <div className="admin-header">
         <div className="admin-header-logo">CG. Admin</div>
-        <button
-          className="admin-logout-btn"
-          onClick={() => { sessionStorage.removeItem('admin_authed'); setAuthed(false) }}
-        >
-          Log Out
-        </button>
+        <div className="admin-header-actions">
+          <button
+            className="admin-new-proposal-btn"
+            onClick={() => setShowNewProposal(true)}
+          >
+            + New Proposal
+          </button>
+          <button
+            className="admin-logout-btn"
+            onClick={() => { sessionStorage.removeItem('admin_authed'); setAuthed(false) }}
+          >
+            Log Out
+          </button>
+        </div>
       </div>
+
+      {/* New Proposal Modal */}
+      {showNewProposal && (
+        <div
+          className="npf-overlay"
+          onClick={e => { if (e.target === e.currentTarget) setShowNewProposal(false) }}
+        >
+          <NewProposalForm onClose={() => setShowNewProposal(false)} />
+        </div>
+      )}
 
       <div className="admin-content">
         <h1 className="admin-title">Proposal Management</h1>
