@@ -341,7 +341,7 @@ export default function ProposalPage() {
                         >
                           <div className="pricing-card-header">
                             <div className="pricing-card-name">{pkg.name}</div>
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '12px' }}>
                               {pkg.badge && (
                                 <div className="pricing-card-badge" style={{
                                   background: isRecommended ? 'var(--accent)' : 'transparent',
@@ -407,14 +407,22 @@ export default function ProposalPage() {
                         >
                           <div className="pricing-card-header">
                             <div className="pricing-card-name">{addon.name}</div>
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '12px' }}>
+                              {isRecommended && (
+                                <div className="pricing-card-badge" style={{
+                                  background: 'var(--accent)',
+                                  color: 'var(--bg)',
+                                  border: 'none',
+                                  fontSize: '9px'
+                                }}>Recommended</div>
+                              )}
                               {addon.badge && (
                                 <div className="pricing-card-badge" style={{
-                                  background: isRecommended ? 'var(--accent)' : 'transparent',
-                                  color: isRecommended ? 'var(--bg)' : 'var(--text-dim)',
-                                  border: isRecommended ? 'none' : '1px solid var(--border)',
+                                  background: 'transparent',
+                                  color: 'var(--text-dim)',
+                                  border: '1px solid var(--border)',
                                   fontSize: '9px'
-                                }}>{addon.badge}</div>
+                                }}>Optional</div>
                               )}
                               <div className={`pricing-card-checkbox${isSelected ? ' checked' : ''}`}>
                                 {isSelected ? '✓' : '+'}
@@ -450,7 +458,7 @@ export default function ProposalPage() {
               {totalMonthly !== null && (
                 <div className="pricing-total-bar">
                   <div className="pricing-total-label">
-                    Estimated Monthly Investment
+                    Total Monthly Investment
                     {selectedAddonId && (() => {
                       const selectedPkg = packages.find((p: any) => p.id === selectedPackageId)
                       const selectedAddon = addons.find((a: any) => a.id === selectedAddonId)
