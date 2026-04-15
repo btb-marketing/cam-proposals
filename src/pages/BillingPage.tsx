@@ -2,6 +2,11 @@ import { useParams, useLocation, useSearch } from 'wouter'
 import { useState } from 'react'
 import { loadProposal } from '../data/loader'
 
+// Format a number as North American currency: $3,150.00
+function fmtCAD(amount: number): string {
+  return amount.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+}
+
 export default function BillingPage() {
   const params = useParams<{ slug: string }>()
   const slug = params.slug || ''
@@ -18,6 +23,7 @@ export default function BillingPage() {
   const [expiry, setExpiry] = useState('')
   const [cvv, setCvv] = useState('')
   const [cardName, setCardName] = useState('')
+  const [authAgreed, setAuthAgreed] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
   if (!proposal) {
@@ -35,7 +41,11 @@ export default function BillingPage() {
   const selectedAddon   = addons.find((a: any) => a.id === addonId) || null
 
   const totalMonthly = (selectedPackage?.price || 0) + (selectedAddon?.price || 0)
-  const totalWithGST = (totalMonthly * 1.05).toFixed(2)
+  const totalGST = totalMonthly * 0.05
+  const totalWithGST = totalMonthly * 1.05
+
+  // Last 4 digits of card number for the authorization text
+  const last4 = cardNumber.replace(/\s/g, '').slice(-4) || '____'
 
   const formatCardNumber = (val: string) => {
     const digits = val.replace(/\D/g, '').slice(0, 16)
@@ -48,7 +58,12 @@ export default function BillingPage() {
     return digits
   }
 
-  const canSubmit = cardName.trim().length > 2 && cardNumber.replace(/\s/g, '').length === 16 && expiry.length === 5 && cvv.length >= 3
+  const canSubmit =
+    cardName.trim().length > 2 &&
+    cardNumber.replace(/\s/g, '').length === 16 &&
+    expiry.length === 5 &&
+    cvv.length >= 3 &&
+    authAgreed
 
   const handleBack = () => {
     navigate(`/proposal/${slug}/agreement?pkg=${pkgId}&addon=${addonId}`)
@@ -69,7 +84,7 @@ export default function BillingPage() {
               { n: 2, label: 'Agreement' },
               { n: 3, label: 'Billing' },
             ].map(({ n, label }) => (
-              <div key={n} className={`funnel-page-step active${n === 3 ? ' current' : ''}`}>
+              <div key={n} className="funnel-page-step active">
                 <div className="funnel-page-step-dot">✓</div>
                 <div className="funnel-page-step-label">{label}</div>
                 {n < 3 && <div className="funnel-page-step-line" />}
@@ -137,22 +152,22 @@ export default function BillingPage() {
             {selectedPackage && (
               <div className="billing-summary-row">
                 <span>{selectedPackage.name} SEO Package</span>
-                <span>${selectedPackage.price.toLocaleString()} CAD/mo</span>
+                <span>${fmtCAD(selectedPackage.price)} CAD/mo</span>
               </div>
             )}
             {selectedAddon && (
               <div className="billing-summary-row">
                 <span>{selectedAddon.name}</span>
-                <span>${selectedAddon.price.toLocaleString()} CAD/mo</span>
+                <span>${fmtCAD(selectedAddon.price)} CAD/mo</span>
               </div>
             )}
             <div className="billing-summary-row billing-summary-gst">
               <span>GST (5%)</span>
-              <span>${(totalMonthly * 0.05).toFixed(2)} CAD/mo</span>
+              <span>${fmtCAD(totalGST)} CAD/mo</span>
             </div>
             <div className="billing-summary-row billing-summary-total">
               <span>Total Monthly</span>
-              <span>${totalWithGST} CAD/mo</span>
+              <span>${fmtCAD(totalWithGST)} CAD/mo</span>
             </div>
           </div>
           <div className="billing-summary-note">
@@ -216,6 +231,49 @@ export default function BillingPage() {
             </svg>
             Your payment information is encrypted and secure. We use industry-standard SSL encryption.
           </p>
+        </div>
+
+        {/* Credit Card Authorization */}
+        <div className="cc-auth-section">
+          <div className="funnel-form-title">Credit Card Authorization</div>
+          <div className="cc-auth-doc">
+            <div className="cc-auth-doc-title display">Credit Card Authorization Form</div>
+            <p className="cc-auth-body">
+              I, <strong>{cardName || '___________________________'}</strong>, authorize{' '}
+              <strong>12894891 Canada Inc. (o/a Cameron Gallacher)</strong> to charge my credit card on file ending in{' '}
+              <strong>{last4}</strong> for agreed upon recurring subscription purchases and/or advertising spend. I understand that my information will be securely saved through Stripe for future transactions on my account.
+            </p>
+            <div className="cc-auth-fields">
+              <div className="cc-auth-field-row">
+                <span className="cc-auth-field-label">Card Details:</span>
+                <span className="cc-auth-field-value">
+                  {cardName ? `${cardName} — ending in ${last4} — Exp: ${expiry || '__/__'}` : '___________________________'}
+                </span>
+              </div>
+              <div className="cc-auth-field-row">
+                <span className="cc-auth-field-label">Customer Signature:</span>
+                <span className="cc-auth-field-value cc-auth-sig">
+                  {cardName || '___________________________'}
+                </span>
+              </div>
+              <div className="cc-auth-field-row">
+                <span className="cc-auth-field-label">Date Signed:</span>
+                <span className="cc-auth-field-value">
+                  {new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })}
+                </span>
+              </div>
+            </div>
+          </div>
+          <label className="funnel-agree-check cc-auth-check">
+            <input
+              type="checkbox"
+              checked={authAgreed}
+              onChange={(e) => setAuthAgreed(e.target.checked)}
+            />
+            <span>
+              I authorize 12894891 Canada Inc. (o/a Cameron Gallacher) to charge my credit card on file ending in <strong>{last4}</strong> for the agreed upon recurring monthly subscription of <strong>${fmtCAD(totalWithGST)} CAD/mo</strong> (incl. GST). Billing begins only once my campaign is launched.
+            </span>
+          </label>
         </div>
 
         {/* Actions */}

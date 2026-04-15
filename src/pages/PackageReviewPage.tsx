@@ -1,6 +1,11 @@
 import { useParams, useLocation, useSearch } from 'wouter'
 import { loadProposal } from '../data/loader'
 
+// Format a number as North American currency: $3,150.00
+function fmtCAD(amount: number): string {
+  return amount.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+}
+
 export default function PackageReviewPage() {
   const params = useParams<{ slug: string }>()
   const slug = params.slug || ''
@@ -29,8 +34,8 @@ export default function PackageReviewPage() {
   const selectedAddon   = addons.find((a: any) => a.id === addonId) || null
 
   const totalMonthly = (selectedPackage?.price || 0) + (selectedAddon?.price || 0)
-  const totalGST = (totalMonthly * 0.05).toFixed(2)
-  const totalWithGST = (totalMonthly * 1.05).toFixed(2)
+  const totalGST = totalMonthly * 0.05
+  const totalWithGST = totalMonthly * 1.05
 
   const today = new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })
 
@@ -91,27 +96,27 @@ export default function PackageReviewPage() {
                 <tr>
                   <td>{selectedPackage.name} SEO Package</td>
                   <td>Monthly Retainer</td>
-                  <td>${selectedPackage.price.toLocaleString()} {selectedPackage.currency}/mo</td>
+                  <td>${fmtCAD(selectedPackage.price)} {selectedPackage.currency}/mo</td>
                 </tr>
               )}
               {selectedAddon && (
                 <tr>
                   <td>{selectedAddon.name}</td>
                   <td>Monthly Add-On</td>
-                  <td>${selectedAddon.price.toLocaleString()} {selectedAddon.currency}/mo</td>
+                  <td>${fmtCAD(selectedAddon.price)} {selectedAddon.currency}/mo</td>
                 </tr>
               )}
               <tr className="funnel-invoice-subtotal">
                 <td colSpan={2}>Subtotal</td>
-                <td>${totalMonthly.toLocaleString()} CAD/mo</td>
+                <td>${fmtCAD(totalMonthly)} CAD/mo</td>
               </tr>
               <tr>
                 <td colSpan={2}>GST (5%)</td>
-                <td>${totalGST} CAD/mo</td>
+                <td>${fmtCAD(totalGST)} CAD/mo</td>
               </tr>
               <tr className="funnel-invoice-total">
                 <td colSpan={2}>Total Monthly</td>
-                <td>${totalWithGST} CAD/mo</td>
+                <td>${fmtCAD(totalWithGST)} CAD/mo</td>
               </tr>
             </tbody>
           </table>

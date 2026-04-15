@@ -2,6 +2,11 @@ import { useParams, useLocation, useSearch } from 'wouter'
 import { useState } from 'react'
 import { loadProposal } from '../data/loader'
 
+// Format a number as North American currency: $3,150.00
+function fmtCAD(amount: number): string {
+  return amount.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+}
+
 export default function AgreementPage() {
   const params = useParams<{ slug: string }>()
   const slug = params.slug || ''
@@ -35,8 +40,8 @@ export default function AgreementPage() {
   const selectedAddon   = addons.find((a: any) => a.id === addonId) || null
 
   const totalMonthly = (selectedPackage?.price || 0) + (selectedAddon?.price || 0)
-  const totalGST = (totalMonthly * 0.05).toFixed(2)
-  const totalWithGST = (totalMonthly * 1.05).toFixed(2)
+  const totalGST = totalMonthly * 0.05
+  const totalWithGST = totalMonthly * 1.05
 
   const today = new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })
 
@@ -154,13 +159,13 @@ export default function AgreementPage() {
             <p>The Company engages the Marketer to provide the following digital marketing services:</p>
             <ul>
               {selectedPackage && (
-                <li><strong>{selectedPackage.name} SEO Package</strong> — ${selectedPackage.price.toLocaleString()} CAD/mo + GST</li>
+                <li><strong>{selectedPackage.name} SEO Package</strong> — ${fmtCAD(selectedPackage.price)} CAD/mo + GST</li>
               )}
               {selectedAddon && (
-                <li><strong>{selectedAddon.name}</strong> — ${selectedAddon.price.toLocaleString()} CAD/mo + GST</li>
+                <li><strong>{selectedAddon.name}</strong> — ${fmtCAD(selectedAddon.price)} CAD/mo + GST</li>
               )}
             </ul>
-            <p><strong>Total Monthly Investment: ${totalMonthly.toLocaleString()} CAD/mo + GST (${totalWithGST} CAD/mo incl. GST)</strong></p>
+            <p><strong>Total Monthly Investment: ${fmtCAD(totalMonthly)} CAD/mo + GST (${fmtCAD(totalWithGST)} CAD/mo incl. GST)</strong></p>
             <p>The Marketer represents and warrants that it has the knowledge, skills, and experience necessary for the services described. The Marketer does not guarantee specific results (including but not limited to rankings, traffic, or revenue increases), as such outcomes depend on factors outside of its control.</p>
             <p>During the Term and for two years following termination, the Company shall not solicit, induce, or attempt to hire any employees, contractors, or agents of the Marketer involved in this Agreement.</p>
           </div>

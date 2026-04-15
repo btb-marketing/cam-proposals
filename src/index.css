@@ -3324,3 +3324,105 @@ section {
   align-items: center;
   gap: 4px;
 }
+
+/* ─── CC Authorization Section ─────────────────────────────────────── */
+.cc-auth-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  margin-top: 32px;
+}
+
+.cc-auth-doc {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 28px 32px;
+  margin-top: 20px;
+  margin-bottom: 24px;
+}
+
+.cc-auth-doc-title {
+  font-size: 18px;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cc-auth-body {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.cc-auth-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+
+.cc-auth-field-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.cc-auth-field-label {
+  color: var(--text-muted);
+  white-space: nowrap;
+  min-width: 160px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.cc-auth-field-value {
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  flex: 1;
+  padding-bottom: 4px;
+  min-height: 22px;
+}
+
+.cc-auth-sig {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
+.cc-auth-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 8px;
+  background: rgba(200, 241, 53, 0.04);
+  border: 1px solid rgba(200, 241, 53, 0.2);
+  border-radius: 8px;
+  padding: 16px 20px;
+  cursor: pointer;
+}
+
+.cc-auth-check input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.cc-auth-check span {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text);
+}
