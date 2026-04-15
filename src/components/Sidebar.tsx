@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useLocation } from 'wouter'
 
 interface TocItem {
   id: string
@@ -13,6 +14,7 @@ interface SidebarProps {
 export default function Sidebar({ sections }: SidebarProps) {
   const [activeId, setActiveId] = useState<string>('')
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [location] = useLocation()
 
   useEffect(() => {
     const observers: IntersectionObserver[] = []
@@ -41,6 +43,11 @@ export default function Sidebar({ sections }: SidebarProps) {
     setMobileOpen(false)
   }
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setMobileOpen(false)
+  }
+
   const activeLabel = sections.find((s) => s.id === activeId)?.label || 'Contents'
 
   return (
@@ -48,11 +55,17 @@ export default function Sidebar({ sections }: SidebarProps) {
       {/* ── Desktop Sidebar ── */}
       <nav className="sidebar" aria-label="Proposal navigation">
 
-        {/* Logo */}
+        {/* Logo — clickable, scrolls to top */}
         <div className="sidebar-logo-wrap">
-          <div className="sidebar-logo-text">
-            Cameron<br />Gallacher<span className="sidebar-logo-dot">.</span>
-          </div>
+          <button
+            className="sidebar-logo-btn"
+            onClick={scrollToTop}
+            aria-label="Back to top"
+          >
+            <div className="sidebar-logo-text">
+              Cameron<br />Gallacher<span className="sidebar-logo-dot">.</span>
+            </div>
+          </button>
         </div>
 
         {/* TOC */}
@@ -70,7 +83,7 @@ export default function Sidebar({ sections }: SidebarProps) {
           ))}
         </ul>
 
-        {/* Footer */}
+        {/* Footer — contact only, no legal links */}
         <div className="sidebar-footer">
           <div className="sidebar-contact-label">Contact</div>
 
@@ -98,18 +111,6 @@ export default function Sidebar({ sections }: SidebarProps) {
                 <circle cx="4" cy="4" r="2"/>
               </svg>
             </a>
-          </div>
-
-          <div className="sidebar-legal-links">
-            <a href="/privacy-policy" className="sidebar-legal-link">Privacy Policy</a>
-            <span className="sidebar-legal-sep">|</span>
-            <a href="/cookie-policy" className="sidebar-legal-link">Cookie Policy</a>
-            <span className="sidebar-legal-sep">|</span>
-            <a href="/terms" className="sidebar-legal-link">Terms &amp; Conditions</a>
-          </div>
-
-          <div className="sidebar-copyright">
-            © {new Date().getFullYear()} Cameron Gallacher · All Rights Reserved
           </div>
         </div>
       </nav>

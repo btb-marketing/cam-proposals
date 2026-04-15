@@ -2371,3 +2371,814 @@ section {
     padding: 20px;
   }
 }
+
+
+/* ============================================================
+   SIDEBAR LOGO BUTTON (clickable)
+   ============================================================ */
+
+.sidebar-logo-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+  display: block;
+  width: 100%;
+  transition: opacity 0.2s;
+}
+
+.sidebar-logo-btn:hover {
+  opacity: 0.75;
+}
+
+/* ============================================================
+   FOOTER LEGAL LINKS
+   ============================================================ */
+
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 8px;
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.footer-legal-link {
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-legal-link:hover {
+  color: var(--accent);
+}
+
+.footer-legal-sep {
+  color: var(--border);
+  user-select: none;
+}
+
+.footer-copyright {
+  color: var(--text-dim);
+}
+
+/* ============================================================
+   YELLOW BUTTON VARIANT
+   ============================================================ */
+
+.btn-yellow {
+  background: var(--accent) !important;
+  color: var(--bg) !important;
+  border-color: var(--accent) !important;
+}
+
+.btn-yellow:hover {
+  background: #d4f02a !important;
+  border-color: #d4f02a !important;
+}
+
+/* ============================================================
+   REVAMPED CASE STUDIES SECTION
+   ============================================================ */
+
+.case-studies-section {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.cs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+  gap: 28px;
+  margin-top: 48px;
+}
+
+@media (max-width: 1100px) {
+  .cs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cs-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 32px;
+  transition: border-color 0.2s, transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cs-card:hover {
+  border-color: var(--accent-border);
+  transform: translateY(-3px);
+}
+
+/* Card Header */
+.cs-card-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cs-logo-wrap {
+  width: 80px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+}
+
+.cs-logo {
+  max-width: 80px;
+  max-height: 48px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.cs-header-meta {
+  flex: 1;
+}
+
+.cs-client-name {
+  font-family: var(--font-display);
+  font-size: 26px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.cs-industry {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* Description */
+.cs-description {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Meta Row */
+.cs-meta-row {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.cs-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cs-meta-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.cs-meta-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Metrics */
+.cs-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.cs-metric {
+  background: var(--bg-card);
+  padding: 18px 16px;
+  text-align: center;
+}
+
+.cs-metric-value {
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.cs-metric-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+}
+
+.cs-metric-sub {
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+}
+
+/* Deliverables */
+.cs-deliverables {
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+.cs-deliverables-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+
+.cs-deliverables-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.cs-deliverables-list li {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--bg-card2);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  letter-spacing: 0.03em;
+}
+
+/* ============================================================
+   FUNNEL PAGE (full-page review + agreement)
+   ============================================================ */
+
+.funnel-page {
+  min-height: 100vh;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.funnel-page-header {
+  width: 100%;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  padding: 24px 40px;
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.funnel-page-steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.funnel-page-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.35;
+}
+
+.funnel-page-step.active {
+  opacity: 1;
+}
+
+.funnel-page-step-dot {
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: var(--bg);
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.funnel-page-step.active .funnel-page-step-dot {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.funnel-page-step.current .funnel-page-step-dot {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+.funnel-page-step-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.funnel-page-step.current .funnel-page-step-label {
+  color: var(--text);
+}
+
+.funnel-page-step-line {
+  width: 48px;
+  height: 1px;
+  background: var(--border);
+  margin: 0 12px;
+  flex-shrink: 0;
+}
+
+.funnel-page-body {
+  width: 100%;
+  max-width: 760px;
+  padding: 60px 40px;
+  flex: 1;
+}
+
+@media (max-width: 640px) {
+  .funnel-page-body {
+    padding: 40px 20px;
+  }
+}
+
+.funnel-page-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.funnel-page-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 6vw, 56px);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text);
+  line-height: 1;
+  margin: 0 0 16px;
+}
+
+.funnel-page-subtitle {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0 0 40px;
+  max-width: 600px;
+}
+
+.funnel-page-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.funnel-page-footer {
+  width: 100%;
+  border-top: 1px solid var(--border);
+  padding: 24px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.funnel-page-footer-logo {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+
+.funnel-page-footer-text {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+}
+
+/* ============================================================
+   AGREEMENT DOCUMENT STYLES
+   ============================================================ */
+
+.agreement-doc {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 40px;
+  margin-bottom: 40px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.agreement-doc-header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 28px;
+  margin-bottom: 28px;
+}
+
+.agreement-doc-logo {
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.agreement-doc-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 20px;
+  line-height: 1;
+}
+
+.agreement-doc-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.agreement-doc-meta strong {
+  color: var(--text);
+}
+
+.agreement-section {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.agreement-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.agreement-section h3 {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin: 0 0 12px;
+}
+
+.agreement-section p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0 0 10px;
+}
+
+.agreement-section p:last-child {
+  margin-bottom: 0;
+}
+
+.agreement-section ul {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+
+.agreement-section ul li {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 4px;
+}
+
+.agreement-section ul li strong {
+  color: var(--text);
+}
+
+/* ============================================================
+   FUNNEL SUCCESS STATE
+   ============================================================ */
+
+.funnel-success {
+  text-align: center;
+  padding-top: 80px;
+}
+
+.funnel-success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 28px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 32px;
+}
+
+/* ============================================================
+   FUNNEL INVOICE
+   ============================================================ */
+
+.funnel-invoice {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 36px;
+  margin-bottom: 0;
+}
+
+.funnel-invoice-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.funnel-invoice-title {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+
+.funnel-invoice-meta {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.funnel-invoice-meta strong {
+  color: var(--text);
+}
+
+.funnel-invoice-logo {
+  font-family: var(--font-display);
+  font-size: 32px;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.funnel-invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.funnel-invoice-table th {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-align: left;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.funnel-invoice-table td {
+  padding: 16px;
+  font-size: 14px;
+  color: var(--text-muted);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.funnel-invoice-table td:last-child {
+  text-align: right;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.funnel-invoice-subtotal td {
+  color: var(--text-dim) !important;
+  font-size: 13px !important;
+  padding-top: 20px !important;
+}
+
+.funnel-invoice-total td {
+  font-weight: 700 !important;
+  color: var(--text) !important;
+  font-size: 16px !important;
+  border-top: 1px solid var(--border);
+  border-bottom: none !important;
+  padding-top: 20px !important;
+}
+
+.funnel-invoice-total td:last-child {
+  color: var(--accent) !important;
+}
+
+.funnel-invoice-note {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.funnel-invoice-note strong {
+  color: var(--text);
+}
+
+/* ============================================================
+   FUNNEL FORM FIELDS
+   ============================================================ */
+
+.funnel-form-section {
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+
+.funnel-form-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.funnel-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .funnel-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.funnel-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.funnel-field--full {
+  grid-column: 1 / -1;
+}
+
+.funnel-field label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.funnel-field input {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.funnel-field input:focus {
+  border-color: var(--accent);
+}
+
+/* ============================================================
+   FUNNEL SIGNATURE
+   ============================================================ */
+
+.funnel-signature-section {
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+
+.funnel-sig-note {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+
+.funnel-sig-input {
+  font-family: 'Georgia', serif !important;
+  font-size: 18px !important;
+  font-style: italic;
+  color: var(--text) !important;
+}
+
+.funnel-sig-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border: 1px solid var(--accent-border);
+  padding: 20px 24px;
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+
+.funnel-sig-text {
+  font-family: 'Georgia', serif;
+  font-size: 22px;
+  font-style: italic;
+  color: var(--text);
+}
+
+.funnel-sig-date {
+  font-size: 12px;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+}
+
+.funnel-agree-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.funnel-agree-check input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+/* ============================================================
+   PRICING COMMITMENT NOTE
+   ============================================================ */
+
+.pricing-commitment-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-border);
+  padding: 16px 20px;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-top: 32px;
+}
+
+.pricing-commitment-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.pricing-commitment-note strong {
+  color: var(--text);
+}

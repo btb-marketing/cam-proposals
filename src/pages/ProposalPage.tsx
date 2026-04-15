@@ -1,4 +1,4 @@
-import { useParams } from 'wouter'
+import { useParams, useLocation } from 'wouter'
 import { useState, useEffect } from 'react'
 import { loadProposal } from '../data/loader'
 import { useScrollReveal } from '../hooks/useScrollReveal'
@@ -6,7 +6,6 @@ import type { Proposal } from '../types/proposal'
 import NotFound from './NotFound'
 import ProgressBar from '../components/ProgressBar'
 import Sidebar from '../components/Sidebar'
-import FunnelModal from '../components/FunnelModal'
 
 const TOC_SECTIONS = [
   { id: 'section-overview',  label: 'Project Overview',     number: '01' },
@@ -19,14 +18,81 @@ const TOC_SECTIONS = [
   { id: 'section-nextsteps', label: 'Next Steps',           number: '08' },
 ]
 
+// ── Case Studies data (from Google Slides) ──────────────────────────────────
+const CASE_STUDIES_DATA = [
+  {
+    id: 'zigzag',
+    client: 'Zig-Zag',
+    industry: 'Premium Rolling Papers & Smoking Accessories',
+    description: "World's leading rolling papers brand, competing in a highly competitive global market.",
+    package: 'Amplify (Customized)',
+    duration: '6 months (Mar–Aug 2025)',
+    logo: '/logos/zigzag.png',
+    logoStyle: { filter: 'invert(1)', maxHeight: '36px' },
+    metrics: [
+      { label: 'Organic Traffic', value: '+43%', sub: '+14,898 monthly visits' },
+      { label: 'Top 3 Keywords', value: '+67%', sub: '+963 keywords' },
+      { label: 'Page 1 Keywords', value: '+59%', sub: '+2,954 keywords' },
+    ],
+    deliverables: ['Research & Strategy', '8 SEO Content Briefs/mo', '8 Premium Articles/mo (~2,500 words each)', 'Internal Linking', 'White Glove Support & Monthly Reporting'],
+  },
+  {
+    id: 'fre',
+    client: 'FRE Pouches',
+    industry: 'National Tobacco-Free Nicotine Pouch Brand',
+    description: 'Competing directly with ZYN in the fast-growing nicotine pouch category across the US.',
+    package: 'Amplify (Customized)',
+    duration: '6 months (Mar–Aug 2025)',
+    logo: '/logos/fre.webp',
+    logoStyle: { filter: 'invert(1)', maxHeight: '40px' },
+    metrics: [
+      { label: 'Organic Traffic', value: '+78%', sub: '+12,056 monthly visits' },
+      { label: 'Top 3 Keywords', value: '+62%', sub: '+147 keywords' },
+      { label: 'Page 1 Keywords', value: '+50%', sub: '+523 keywords' },
+    ],
+    deliverables: ['Research & Strategy', '8 SEO Content Briefs/mo', '8 Premium Articles/mo (~2,500 words each)', 'Internal Linking', 'White Glove Support & Monthly Reporting'],
+  },
+  {
+    id: 'stiiizy',
+    client: 'STIIIZY',
+    industry: 'Cannabis Brand & Dispensary Retail Chain',
+    description: 'One of the largest privately owned cannabis brands in the US, with dispensary locations across California.',
+    package: 'Amplify (Customized)',
+    duration: '7 months (Jan–Jul 2025)',
+    logo: '/logos/stiiizy.png',
+    logoStyle: { filter: 'invert(1)', maxHeight: '36px' },
+    metrics: [
+      { label: 'Organic Traffic', value: '+22%', sub: '+79,796 monthly visits' },
+      { label: 'Top 3 Keywords', value: '+69%', sub: '+5,389 keywords' },
+      { label: 'Page 1 Keywords', value: '+95%', sub: '+16,667 keywords' },
+    ],
+    deliverables: ['Research & Strategy', '12 SEO Content Briefs/mo', '12 Premium Articles/mo (~2,500 words each)', 'Backlinks', 'White Glove Support & Monthly Reporting'],
+  },
+  {
+    id: 'conesfactory',
+    client: 'The Cones Factory',
+    industry: 'Pre-Rolled Cone & Blunt Manufacturer',
+    description: 'Industry-leading manufacturer of pre-rolled cones, blunts, and tubes — serving brands globally.',
+    package: 'Kickstarter',
+    duration: '11 months (Oct 2024–Aug 2025)',
+    logo: '/logos/conesfactory.png',
+    logoStyle: { maxHeight: '36px' },
+    metrics: [
+      { label: 'Organic Traffic', value: '+54%', sub: '+1,523 monthly visits' },
+      { label: 'Top 3 Keywords', value: '+47%', sub: '+69 keywords' },
+      { label: 'Page 1 Keywords', value: '+38%', sub: '+230 keywords' },
+    ],
+    deliverables: ['Research & Strategy', 'On-Page & Technical SEO', 'Content Creation', 'Backlinks', 'Reporting'],
+  },
+]
+
 export default function ProposalPage() {
   const params = useParams<{ slug: string }>()
   const slug = params.slug || ''
   const proposal = loadProposal(slug)
+  const [, navigate] = useLocation()
 
-  // Keep legacy selectedAddons for any fallback usage
-  const [selectedAddons, setSelectedAddons] = useState<Set<string>>(new Set())
-  const [funnelOpen, setFunnelOpen] = useState(false)
+  const [selectedAddons] = useState<Set<string>>(new Set())
 
   useScrollReveal()
 
@@ -38,7 +104,7 @@ export default function ProposalPage() {
 
   if (!proposal) return <NotFound />
 
-  const { meta, hero, about, team, overview, keywordAreas, scopeOfWork, deliverables, successMetrics, investment, caseStudies, nextSteps } = proposal
+  const { meta, hero, about, team, overview, keywordAreas, scopeOfWork, deliverables, successMetrics, investment, nextSteps } = proposal
 
   // ── Investment helpers ──────────────────────────────────────
   const packages = (investment as any).packages || []
@@ -53,7 +119,7 @@ export default function ProposalPage() {
   const defaultPkg = packages.find((p: any) => p.defaultSelected)?.id || packages[0]?.id || null
   const [selectedPackageId, setSelectedPackageId] = useState<string | null>(defaultPkg)
 
-  // Radio-select for add-ons (only one at a time, none by default)
+  // Radio-select for add-ons (none by default — user must explicitly select)
   const [selectedAddonId, setSelectedAddonId] = useState<string | null>(null)
 
   const toggleAddon = (id: string) => {
@@ -77,6 +143,13 @@ export default function ProposalPage() {
   const selectedPackageObj = packages.find((p: any) => p.id === selectedPackageId) || null
   const selectedAddonObj   = addons.find((a: any) => a.id === selectedAddonId) || null
 
+  // ── Navigate to review page ──────────────────────────────────
+  const handleConfirmPackage = () => {
+    const pkgId = selectedPackageId || ''
+    const addonId = selectedAddonId || ''
+    navigate(`/proposal/${slug}/review?pkg=${pkgId}&addon=${addonId}`)
+  }
+
   // ── H1 line renderer ────────────────────────────────────────
   const renderHeroTitle = (tagline: string) => {
     const lines = tagline.split('\n')
@@ -96,7 +169,7 @@ export default function ProposalPage() {
     if (s.id === 'section-scope') return !!scopeOfWork
     if (s.id === 'section-deliverables') return deliverables && deliverables.length > 0
     if (s.id === 'section-metrics') return successMetrics && successMetrics.length > 0
-    if (s.id === 'section-casestudies') return caseStudies && caseStudies.length > 0
+    if (s.id === 'section-casestudies') return true // always show our real case studies
     return true
   })
 
@@ -422,7 +495,7 @@ export default function ProposalPage() {
                                 </div>
                               ))}
                             </div>
-                            {/* Click-to-select button (decorative) */}
+                            {/* Click-to-select button pinned to bottom */}
                             <div className={`pricing-card-select-btn${isSelected ? ' selected' : ''}`}>
                               <div className="pricing-card-select-btn-inner">
                                 {isSelected ? '✓ Selected' : 'Select Package'}
@@ -506,7 +579,7 @@ export default function ProposalPage() {
                                 </div>
                               ))}
                             </div>
-                            {/* Click-to-select button (decorative) */}
+                            {/* Click-to-select button pinned to bottom */}
                             <div className={`pricing-card-select-btn${isSelected ? ' selected' : ''}`}>
                               <div className="pricing-card-select-btn-inner">
                                 {isSelected ? '✓ Added' : '+ Add On'}
@@ -550,26 +623,12 @@ export default function ProposalPage() {
                 {/* ── Confirm Package CTA ── */}
                 <div style={{ textAlign: 'center', marginTop: '32px' }}>
                   <button
-                    className="btn-primary btn-lg"
-                    onClick={() => setFunnelOpen(true)}
+                    className="btn-primary btn-lg btn-yellow"
+                    onClick={handleConfirmPackage}
                   >
                     Confirm Package &amp; Proceed <span className="arrow">→</span>
                   </button>
-                  <p style={{ marginTop: '12px', fontSize: '12px', color: 'var(--text-muted)' }}>
-                    You'll review your selection, sign the agreement, and add billing details in the next steps.
-                  </p>
                 </div>
-
-                {/* ── Context Notes ── */}
-                {(investment as any).roiContext && (
-                  <div className="roi-context">
-                    <div className="eyebrow" style={{ marginBottom: '16px' }}>Context</div>
-                    <p>{(investment as any).roiContext}</p>
-                  </div>
-                )}
-                {(investment as any).exitClause && (
-                  <p className="pricing-note" style={{ marginTop: '16px' }}>{(investment as any).exitClause}</p>
-                )}
               </div>
             ) : (
               /* ── Legacy table fallback ── */
@@ -609,29 +668,81 @@ export default function ProposalPage() {
         </section>
 
         {/* ── CASE STUDIES ── */}
-        {caseStudies && caseStudies.length > 0 && (
-          <section id="section-casestudies" style={{ background: 'var(--bg-card)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
-            <div className="container">
-              <div className="section-header reveal">
-                <div className="eyebrow">07 — Proof of Work</div>
-                <div className="section-title-wrap">
-                  <div className="section-number">07</div>
-                  <h2 className="section-title display">Case Studies</h2>
-                </div>
+        <section id="section-casestudies" className="case-studies-section">
+          <div className="container">
+            <div className="section-header reveal">
+              <div className="eyebrow">07 — Proof of Work</div>
+              <div className="section-title-wrap">
+                <div className="section-number">07</div>
+                <h2 className="section-title display">Case Studies</h2>
               </div>
-              <div className="case-studies-grid">
-                {caseStudies.map((cs, i) => (
-                  <div key={i} className="case-study-card reveal">
-                    <div className="case-study-service">{cs.service}</div>
-                    <div className="case-study-client">{cs.client}</div>
-                    <div className="case-study-result">{cs.result}</div>
-                    <p className="case-study-desc">{cs.description}</p>
-                  </div>
-                ))}
-              </div>
+              <p style={{ marginTop: '16px', fontSize: '15px', color: 'var(--text-muted)', maxWidth: '640px', lineHeight: '1.7' }}>
+                Real results from real clients. Every engagement below used the same SEO methodology I'm proposing for your practice.
+              </p>
             </div>
-          </section>
-        )}
+
+            <div className="cs-grid">
+              {CASE_STUDIES_DATA.map((cs, i) => (
+                <div key={cs.id} className="cs-card reveal">
+                  {/* Card Header */}
+                  <div className="cs-card-header">
+                    <div className="cs-logo-wrap">
+                      <img
+                        src={cs.logo}
+                        alt={cs.client}
+                        className="cs-logo"
+                        style={cs.logoStyle as React.CSSProperties}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = 'none'
+                        }}
+                      />
+                    </div>
+                    <div className="cs-header-meta">
+                      <div className="cs-client-name">{cs.client}</div>
+                      <div className="cs-industry">{cs.industry}</div>
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <p className="cs-description">{cs.description}</p>
+
+                  {/* Meta row */}
+                  <div className="cs-meta-row">
+                    <div className="cs-meta-item">
+                      <span className="cs-meta-label">Package</span>
+                      <span className="cs-meta-value">{cs.package}</span>
+                    </div>
+                    <div className="cs-meta-item">
+                      <span className="cs-meta-label">Duration</span>
+                      <span className="cs-meta-value">{cs.duration}</span>
+                    </div>
+                  </div>
+
+                  {/* Metrics */}
+                  <div className="cs-metrics">
+                    {cs.metrics.map((m, mi) => (
+                      <div key={mi} className="cs-metric">
+                        <div className="cs-metric-value">{m.value}</div>
+                        <div className="cs-metric-label">{m.label}</div>
+                        <div className="cs-metric-sub">{m.sub}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Deliverables */}
+                  <div className="cs-deliverables">
+                    <div className="cs-deliverables-label">Monthly Deliverables</div>
+                    <ul className="cs-deliverables-list">
+                      {cs.deliverables.map((d, di) => (
+                        <li key={di}>{d}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* ── NEXT STEPS / CTA ── */}
         <section className="cta-section" id="section-nextsteps">
@@ -643,12 +754,15 @@ export default function ProposalPage() {
               </h2>
               <p className="cta-closing reveal">{nextSteps.closing}</p>
               <div className="cta-buttons reveal">
-                <a href={nextSteps.ctaUrl} target="_blank" rel="noopener noreferrer" className="btn-primary">
-                  {nextSteps.ctaLabel} <span className="arrow">→</span>
-                </a>
-                <a href={`mailto:${nextSteps.email}`} className="btn-outline">
-                  Email Me
-                </a>
+                <button
+                  className="btn-primary btn-yellow"
+                  onClick={() => {
+                    const el = document.getElementById('section-investment')
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                  }}
+                >
+                  Build My Package <span className="arrow">→</span>
+                </button>
               </div>
               <p className="cta-email reveal">
                 Or reach me directly at <a href={`mailto:${nextSteps.email}`}>{nextSteps.email}</a>
@@ -660,21 +774,17 @@ export default function ProposalPage() {
         {/* ── FOOTER ── */}
         <footer className="proposal-footer">
           <div className="footer-logo display">cameron gallacher<span>.</span></div>
-          <div className="footer-tagline">Digital Marketing Consultant · camgallacher.com</div>
+          <div className="footer-legal">
+            <a href="/privacy-policy" className="footer-legal-link">Privacy Policy</a>
+            <span className="footer-legal-sep">|</span>
+            <a href="/cookie-policy" className="footer-legal-link">Cookie Policy</a>
+            <span className="footer-legal-sep">|</span>
+            <a href="/terms" className="footer-legal-link">Terms &amp; Conditions</a>
+            <span className="footer-legal-sep">|</span>
+            <span className="footer-copyright">© {new Date().getFullYear()} Cameron Gallacher · All Rights Reserved</span>
+          </div>
         </footer>
       </main>
-
-      {/* ── Funnel Modal ── */}
-      {funnelOpen && (
-        <FunnelModal
-          selectedPackage={selectedPackageObj}
-          selectedAddon={selectedAddonObj}
-          totalMonthly={totalMonthly || 0}
-          clientName={meta.preparedFor}
-          preparedBy={meta.preparedBy}
-          onClose={() => setFunnelOpen(false)}
-        />
-      )}
     </div>
   )
 }

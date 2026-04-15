@@ -1,6 +1,8 @@
 import { Switch, Route, useLocation } from 'wouter'
 import { useEffect } from 'react'
 import ProposalPage from './pages/ProposalPage'
+import PackageReviewPage from './pages/PackageReviewPage'
+import AgreementPage from './pages/AgreementPage'
 import NotFound from './pages/NotFound'
 import Home from './pages/Home'
 import PrivacyPolicy from './pages/PrivacyPolicy'
@@ -22,6 +24,8 @@ export default function App() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/proposal/:slug" component={ProposalPage} />
+        <Route path="/proposal/:slug/review" component={PackageReviewPage} />
+        <Route path="/proposal/:slug/agreement" component={AgreementPage} />
         <Route path="/privacy-policy" component={PrivacyPolicy} />
         <Route path="/cookie-policy" component={CookiePolicy} />
         <Route path="/terms" component={Terms} />
