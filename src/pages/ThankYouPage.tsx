@@ -67,7 +67,9 @@ export default function ThankYouPage() {
   const proposal = loadProposal(slug)
   const searchParams = new URLSearchParams(search)
   const clientName = searchParams.get('name') || proposal?.meta?.preparedFor || 'there'
-  const firstName = clientName.split(' ')[0]
+  const HONORIFICS = ['dr.', 'dr', 'mr.', 'mr', 'mrs.', 'mrs', 'ms.', 'ms', 'prof.', 'prof']
+  const nameParts = clientName.split(' ')
+  const firstName = (HONORIFICS.includes(nameParts[0].toLowerCase()) ? nameParts[1] : nameParts[0]) || nameParts[0]
   const pkgId = searchParams.get('pkg') || ''
   const addonId = searchParams.get('addon') || ''
 
