@@ -28,6 +28,8 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -38,6 +40,9 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100%;
+  position: relative;
 }
 
 a {
@@ -1312,11 +1317,15 @@ section {
 .page-layout {
   display: flex;
   min-height: 100vh;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 .page-main {
   flex: 1;
   min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
   margin-left: 260px;
 }
 
@@ -4690,4 +4699,296 @@ img, video, iframe {
 
 .mobile-toc-chevron.open {
   transform: rotate(180deg);
+}
+
+/* ============================================================
+   OVERFLOW CONTAINMENT — permanent fix for all pages/templates
+   Prevents any element from causing horizontal scroll on mobile
+   ============================================================ */
+
+/* Every section and container must stay within viewport */
+section,
+.container,
+.page-main,
+.page-layout,
+.funnel-page,
+.funnel-page-body,
+.funnel-page-header,
+.password-gate-page,
+.admin-page,
+.admin-content,
+.onboarding-page,
+.billing-page,
+.thank-you-page,
+.legal-page {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Hero decorative elements must not escape their parent */
+.hero {
+  overflow: hidden;
+}
+
+.hero::before,
+.hero-grid,
+.hero-scroll {
+  max-width: 100%;
+}
+
+/* Scope timeline vertical line must not cause overflow */
+.scope-timeline::before {
+  left: 11px;
+}
+
+/* Investment and addon cards */
+.investment-cards,
+.addon-cards {
+  max-width: 100%;
+}
+
+/* Case study grid and cards */
+.cs-grid,
+.cs-card,
+.cs-metrics {
+  max-width: 100%;
+}
+
+/* Funnel page header steps — prevent overflow on very small screens */
+.funnel-page-steps {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Password gate and admin page backgrounds */
+.password-gate-bg {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* NPF modal */
+.npf-modal {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Tables inside funnel pages */
+.funnel-page table {
+  max-width: 100%;
+  table-layout: fixed;
+  word-break: break-word;
+}
+
+/* Any absolutely positioned decorative pseudo-elements */
+.scope-timeline::before,
+.pricing-card--mandatory::before {
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Mobile-specific: ensure nothing bleeds past 100vw */
+@media (max-width: 900px) {
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+
+  * {
+    max-width: 100%;
+  }
+
+  /* Exception: fixed/absolute positioned elements that need to span full width */
+  .mobile-toc,
+  .progress-bar-track,
+  .sidebar {
+    max-width: 100vw;
+  }
+
+  /* Decorative backgrounds — clip to parent */
+  .hero::before,
+  .hero-grid,
+  .password-gate-bg,
+  .funnel-page::before,
+  .funnel-page::after {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  /* Container padding on mobile */
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Scope of work timeline */
+  .scope-month {
+    max-width: 100%;
+  }
+
+  .scope-month-header {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  /* Investment cards */
+  .investment-card {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  /* Keyword pills */
+  .keyword-pills {
+    max-width: 100%;
+    overflow-x: hidden;
+    flex-wrap: wrap;
+  }
+
+  /* Team grid */
+  .team-grid {
+    max-width: 100%;
+  }
+
+  /* About section */
+  .about-section {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  /* Next steps */
+  .next-steps-section {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  /* Admin panel */
+  .admin-proposals-grid {
+    max-width: 100%;
+  }
+
+  .admin-proposal-card {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  /* Funnel form */
+  .funnel-form-grid {
+    max-width: 100%;
+  }
+
+  /* Onboarding form */
+  .onboarding-section-content {
+    max-width: 100%;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Force all direct children of body to stay within viewport */
+  body > * {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  /* Scope timeline: hide the vertical line on mobile to prevent overflow */
+  .scope-timeline::before {
+    display: none;
+  }
+
+  /* Pricing card mandatory bar */
+  .pricing-card--mandatory::before {
+    max-width: 100%;
+  }
+
+  /* Hero inner content */
+  .hero-inner {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  /* Meta row in hero */
+  .hero-meta {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  /* CTA buttons */
+  .hero-ctas {
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+}
+
+/* ============================================================
+   FINAL OVERFLOW FIX — cc-auth fields and remaining elements
+   ============================================================ */
+
+@media (max-width: 640px) {
+  /* Agreement page auth fields — stack label above value on mobile */
+  .cc-auth-field-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .cc-auth-field-label {
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .cc-auth-field-value {
+    width: 100%;
+  }
+
+  /* Team photo — smaller on mobile */
+  .team-photo {
+    width: 80px;
+    height: 80px;
+  }
+
+  /* Scope month header */
+  .scope-month-number {
+    font-size: 48px;
+  }
+
+  /* Pricing deliverable list */
+  .pricing-deliverable-list {
+    max-width: 100%;
+  }
+
+  /* About section layout */
+  .about-layout {
+    flex-direction: column;
+  }
+
+  /* Funnel page steps — allow horizontal scroll but clip to page */
+  .funnel-page-steps {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+
+  .funnel-page-steps::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Ensure the Calendly widget never overflows */
+.calendly-inline-widget {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden;
+}
+
+.calendly-inline-widget iframe {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
 }

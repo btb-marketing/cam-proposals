@@ -129,7 +129,7 @@ export default function OnboardingBookingPage() {
         <div
           className="calendly-inline-widget"
           data-url={`${calendlyUrl}?hide_gdpr_banner=1&primary_color=0d0d0d&text_color=0d0d0d&background_color=ffffff${email ? `&email=${encodeURIComponent(email)}` : ''}`}
-          style={{ minWidth: '320px', height: '700px' }}
+          style={{ minWidth: '0', width: '100%', height: '700px' }}
         />
 
         {/* Skip option */}
