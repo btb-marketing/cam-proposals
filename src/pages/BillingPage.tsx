@@ -61,6 +61,7 @@ function BillingForm({
 
   const [cardName, setCardName] = useState('')
   const [cardholderEmail, setCardholderEmail] = useState('')
+  const [sigName, setSigName] = useState('')
   const [authAgreed, setAuthAgreed] = useState(false)
   const [loading, setLoading] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
@@ -75,6 +76,7 @@ function BillingForm({
     cardComplete.expiry &&
     cardComplete.cvc &&
     authAgreed &&
+    sigName.trim().length > 1 &&
     !loading
 
   const handleBack = () => {
@@ -142,7 +144,7 @@ function BillingForm({
     <div className="funnel-page-body">
       <div className="funnel-page-eyebrow">Step 3 of 3</div>
       <h1 className="funnel-page-title display">Billing Details</h1>
-      <p className="funnel-page-subtitle">Enter your payment information to complete your enrollment. Your first charge begins on your campaign launch date.</p>
+      <p className="funnel-page-subtitle">Enter your payment information to complete your enrollment.</p>
 
       {/* Order Summary */}
       <div className="billing-summary">
@@ -169,9 +171,7 @@ function BillingForm({
             <span>${fmtCAD(totalWithGST)} CAD/mo</span>
           </div>
         </div>
-        <div className="billing-summary-note">
-          <strong>Billing begins only once your campaign is launched.</strong> No charge today.
-        </div>
+
       </div>
 
       {/* Statement Descriptor Warning */}
@@ -200,9 +200,9 @@ function BillingForm({
       <div className="funnel-form-section">
         <div className="funnel-form-title">Payment Information</div>
         <div className="billing-card-icons">
-          <span className="billing-card-icon">VISA</span>
-          <span className="billing-card-icon">MC</span>
-          <span className="billing-card-icon">AMEX</span>
+          <img src="/visa.jpg" alt="Visa" className="billing-card-img" />
+          <img src="/mastercard.png" alt="Mastercard" className="billing-card-img" />
+          <img src="/amex.jpg" alt="American Express" className="billing-card-img" />
         </div>
         <div className="funnel-form-grid" style={{ marginTop: '20px' }}>
           <div className="funnel-field funnel-field--full">
@@ -266,21 +266,32 @@ function BillingForm({
         <div className="cc-auth-doc">
           <div className="cc-auth-doc-title display">Credit Card Authorization Form</div>
           <p className="cc-auth-body">
-            I, <strong>{cardName || '___________________________'}</strong>, authorize{' '}
+            I, <strong>{sigName || cardName || '___________________________'}</strong>, authorize{' '}
             <strong>Cameron Gallacher and his company 12894891 Canada Inc. dba Below the Board Marketing</strong> to charge my credit card on file for agreed upon recurring subscription purchases and/or advertising spend. I understand that my information will be securely saved through Stripe for future transactions on my account.
-          </p>
-          <div className="cc-auth-fields">
+          </p>          <div className="cc-auth-fields">
             <div className="cc-auth-field-row">
               <span className="cc-auth-field-label">Cardholder Name:</span>
-              <span className="cc-auth-field-value">
-                {cardName || '___________________________'}
-              </span>
-            </div>
+              <div className="cc-auth-field-input-wrap">
+                <input
+                  type="text"
+                  className="cc-auth-field-input"
+                  placeholder="Your full name"
+                  value={cardName}
+                  onChange={(e) => setCardName(e.target.value)}
+                />
+              </div>
+       </div>
             <div className="cc-auth-field-row">
               <span className="cc-auth-field-label">Customer Signature:</span>
-              <span className="cc-auth-field-value cc-auth-sig">
-                {cardName || '___________________________'}
-              </span>
+              <div className="cc-auth-field-input-wrap">
+                <input
+                  type="text"
+                  className="cc-auth-field-input cc-auth-sig-input"
+                  placeholder="Type your full name as signature"
+                  value={sigName}
+                  onChange={(e) => setSigName(e.target.value)}
+                />
+              </div>
             </div>
             <div className="cc-auth-field-row">
               <span className="cc-auth-field-label">Date Signed:</span>
@@ -297,7 +308,7 @@ function BillingForm({
             onChange={(e) => setAuthAgreed(e.target.checked)}
           />
           <span>
-            I authorize Cameron Gallacher and his company 12894891 Canada Inc. dba Below the Board Marketing to charge my credit card for the agreed upon recurring monthly subscription of <strong>${fmtCAD(totalWithGST)} CAD/mo</strong> (incl. GST). Billing begins only once my campaign is launched. I understand charges may appear as <strong>BELOW THE BOARD MKTING</strong>, <strong>BTB MKTING</strong>, <strong>12894891 Canada Inc.</strong>, or <strong>Cameron Gallacher</strong> on my statement.
+            I authorize Cameron Gallacher and his company 12894891 Canada Inc. dba Below the Board Marketing to charge my credit card for the agreed upon recurring monthly subscription of <strong>${fmtCAD(totalWithGST)} CAD/mo</strong> (incl. GST). I understand charges may appear as <strong>BELOW THE BOARD MKTING</strong>, <strong>BTB MKTING</strong>, <strong>12894891 Canada Inc.</strong>, or <strong>Cameron Gallacher</strong> on my statement.
           </span>
         </label>
       </div>

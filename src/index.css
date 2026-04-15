@@ -3520,3 +3520,44 @@ section {
   color: #ff8080;
   line-height: 1.5;
 }
+
+/* ── Card brand images ─────────────────────────────────────── */
+.billing-card-img {
+  height: 28px;
+  width: auto;
+  border-radius: 4px;
+  object-fit: contain;
+  background: #ffffff;
+  padding: 2px 6px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ── CC Auth doc fillable fields ───────────────────────────── */
+.cc-auth-field-input-wrap {
+  flex: 1;
+}
+.cc-auth-field-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 4px 0;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.cc-auth-field-input:focus {
+  border-bottom-color: var(--accent);
+}
+.cc-auth-field-input::placeholder {
+  color: var(--text-dim);
+  font-style: italic;
+}
+.cc-auth-sig-input {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-size: 16px;
+  letter-spacing: 0.03em;
+}
