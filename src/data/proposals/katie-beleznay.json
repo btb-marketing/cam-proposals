@@ -135,6 +135,10 @@
     "Stronger lead capture reliability across all forms"
   ],
   "investment": {
+    "sectionTitle": "Build Your Package",
+    "sectionSubtitle": "Select the options below to build your custom package. Your recommended package is already selected by default — simply review it and add any optional items that make sense for your goals. Items marked \"Optional\" require you to click the card to include them. Items marked \"Recommended\" are pre-selected but can be swapped. Only one SEO base package and one backlink add-on can be active at a time.",
+    "packagesLabel": "SEO Packages",
+    "addonsLabel": "Optional SEO Add-Ons — click to select",
     "packages": [
       {
         "id": "kickstarter",
@@ -143,7 +147,8 @@
         "currency": "CAD",
         "period": "mo",
         "plusTax": true,
-        "mandatory": true,
+        "badge": "Recommended",
+        "defaultSelected": true,
         "description": "A focused 3–4 month SEO sprint to build your foundation, close competitive gaps, and start generating measurable organic momentum.",
         "deliverables": [
           { "category": "SEO Strategy", "items": ["Initial keyword research", "Competitive audit"] },
@@ -151,6 +156,42 @@
           { "category": "On-Page + Technical SEO", "items": ["Up to 5 URLs manually optimized/month", "One audit per month", "Optimize site speed"] },
           { "category": "Reporting", "items": ["Monthly Looker Studio report", "One 45-min strategy call/month"] },
           { "category": "Backlinks", "items": ["2 backlinks per month"] }
+        ]
+      },
+      {
+        "id": "elevate",
+        "name": "Elevate",
+        "price": 5000,
+        "currency": "CAD",
+        "period": "mo",
+        "plusTax": true,
+        "badge": "Optional",
+        "defaultSelected": false,
+        "description": "A more intensive SEO engagement with deeper content production, more page optimizations, and bi-weekly strategy touchpoints.",
+        "deliverables": [
+          { "category": "SEO Strategy", "items": ["Initial keyword research", "Competitive audit"] },
+          { "category": "Content Creation", "items": ["15,000 words/month"] },
+          { "category": "On-Page + Technical SEO", "items": ["Up to 10 URLs manually optimized/month", "Weekly audits", "Optimize site speed"] },
+          { "category": "Reporting", "items": ["Bi-weekly SEO strategy calls", "Monday.com + Looker dashboards", "Slack access with 48-hour SLA"] },
+          { "category": "Backlinks", "items": ["4 backlinks per month"] }
+        ]
+      },
+      {
+        "id": "amplify",
+        "name": "Amplify",
+        "price": 8000,
+        "currency": "CAD",
+        "period": "mo",
+        "plusTax": true,
+        "badge": "Optional",
+        "defaultSelected": false,
+        "description": "Full-scale SEO with live roadmap management, maximum content output, and executive-level reporting across all performance dimensions.",
+        "deliverables": [
+          { "category": "SEO Strategy", "items": ["Live roadmap w/ monthly updates", "Full content cluster planning"] },
+          { "category": "Content Creation", "items": ["30,000 words/month"] },
+          { "category": "On-Page + Technical SEO", "items": ["Up to 15 URLs manually optimized/month", "Weekly audits", "Optimize site speed"] },
+          { "category": "Reporting", "items": ["Bi-weekly calls + quarterly executive summary", "Slack support with <24hr response", "Multiple dashboards (content, SEO, keyword lift, ROI)"] },
+          { "category": "Backlinks", "items": ["8 backlinks per month"] }
         ]
       }
     ],
@@ -162,10 +203,39 @@
         "currency": "CAD",
         "period": "mo",
         "plusTax": true,
-        "optional": true,
+        "badge": "Recommended + Optional",
+        "defaultSelected": false,
         "description": "Boost your domain authority with high-DR guest post placements each month.",
         "deliverables": [
           { "category": "Inclusions", "items": ["2 High DR Guest Posts per month", "Keyword Research", "Guest Post Writing", "Placement Outreach", "Negotiations with Backlink Providers", "Monthly Backlink Delivery & Report"] }
+        ]
+      },
+      {
+        "id": "backlink-pack-2",
+        "name": "Backlink Pack 2",
+        "price": 1000,
+        "currency": "CAD",
+        "period": "mo",
+        "plusTax": true,
+        "badge": "Optional",
+        "defaultSelected": false,
+        "description": "Double the guest post volume for accelerated domain authority growth.",
+        "deliverables": [
+          { "category": "Inclusions", "items": ["4 High DR Guest Posts per month", "Keyword Research", "Guest Post Writing", "Placement Outreach", "Negotiations with Backlink Providers", "Monthly Backlink Delivery & Report"] }
+        ]
+      },
+      {
+        "id": "backlink-pack-3",
+        "name": "Backlink Pack 3",
+        "price": 1500,
+        "currency": "CAD",
+        "period": "mo",
+        "plusTax": true,
+        "badge": "Optional",
+        "defaultSelected": false,
+        "description": "Six high-DR guest posts per month for serious link velocity and competitive authority gains.",
+        "deliverables": [
+          { "category": "Inclusions", "items": ["6 High DR Guest Posts per month", "Keyword Research", "Guest Post Writing", "Placement Outreach", "Negotiations with Backlink Providers", "Monthly Backlink Delivery & Report"] }
         ]
       }
     ],

@@ -29,22 +29,33 @@ export default function ProposalPage() {
   const packages = (investment as any).packages || []
   const addons   = (investment as any).addons   || []
   const hasPricingCards = packages.length > 0
+  const sectionTitle   = (investment as any).sectionTitle   || 'Pricing'
+  const sectionSubtitle = (investment as any).sectionSubtitle || ''
+  const packagesLabel  = (investment as any).packagesLabel  || 'Your Package'
+  const addonsLabel    = (investment as any).addonsLabel    || 'Optional Add-Ons — click to select'
+
+  // Radio-select for packages (only one at a time)
+  const defaultPkg = packages.find((p: any) => p.defaultSelected)?.id || packages[0]?.id || null
+  const [selectedPackageId, setSelectedPackageId] = useState<string | null>(defaultPkg)
+
+  // Radio-select for add-ons (only one at a time, none by default)
+  const [selectedAddonId, setSelectedAddonId] = useState<string | null>(null)
 
   const toggleAddon = (id: string) => {
-    setSelectedAddons(prev => {
-      const next = new Set(prev)
-      if (next.has(id)) next.delete(id)
-      else next.add(id)
-      return next
-    })
+    setSelectedAddonId(prev => prev === id ? null : id)
+  }
+
+  const selectPackage = (id: string) => {
+    setSelectedPackageId(id)
   }
 
   const totalMonthly = (() => {
     if (!hasPricingCards) return null
-    const base = packages.reduce((sum: number, p: any) => sum + p.price, 0)
-    const extra = addons
-      .filter((a: any) => selectedAddons.has(a.id))
-      .reduce((sum: number, a: any) => sum + a.price, 0)
+    const selectedPkg = packages.find((p: any) => p.id === selectedPackageId)
+    const base = selectedPkg ? selectedPkg.price : 0
+    const extra = selectedAddonId
+      ? (addons.find((a: any) => a.id === selectedAddonId)?.price || 0)
+      : 0
     return base + extra
   })()
 
@@ -298,76 +309,116 @@ export default function ProposalPage() {
             <div className="eyebrow">06 — Investment</div>
             <div className="section-title-wrap">
               <div className="section-number">06</div>
-              <h2 className="section-title display">Pricing</h2>
+              <h2 className="section-title display">{sectionTitle}</h2>
             </div>
+            {sectionSubtitle && (
+              <p style={{ marginTop: '16px', fontSize: '14px', color: 'var(--text-muted)', maxWidth: '680px', lineHeight: '1.7' }}>
+                {sectionSubtitle}
+              </p>
+            )}
           </div>
 
           {hasPricingCards ? (
             <div className="reveal">
-              {/* ── Package Cards ── */}
+              {/* ── Package Cards (radio — one at a time) ── */}
               {packages.length > 0 && (
                 <>
-                  <div className="pricing-section-label">Your Package</div>
+                  <div className="pricing-section-label" style={{ marginBottom: '20px' }}>{packagesLabel}</div>
                   <div className="pricing-cards-grid">
-                    {packages.map((pkg: any) => (
-                      <div
-                        key={pkg.id}
-                        className={`pricing-card pricing-card--selected${pkg.mandatory ? ' pricing-card--mandatory' : ''}`}
-                      >
-                        <div className="pricing-card-header">
-                          <div className="pricing-card-name">{pkg.name}</div>
-                          {pkg.mandatory && (
-                            <div className="pricing-card-badge">Included</div>
-                          )}
-                        </div>
-                        <div className="pricing-card-price">
-                          <span className="pricing-card-amount">${pkg.price.toLocaleString()}</span>
-                          <span className="pricing-card-period"> {pkg.currency}/{pkg.period}</span>
-                          {pkg.plusTax && <span className="pricing-card-tax"> + GST</span>}
-                        </div>
-                        <p className="pricing-card-desc">{pkg.description}</p>
-                        <div className="pricing-card-deliverables">
-                          {pkg.deliverables.map((group: any, gi: number) => (
-                            <div key={gi} className="pricing-deliverable-group">
-                              <div className="pricing-deliverable-category">{group.category}</div>
-                              <ul className="pricing-deliverable-list">
-                                {group.items.map((item: string, ii: number) => (
-                                  <li key={ii}>{item}</li>
-                                ))}
-                              </ul>
+                    {packages.map((pkg: any) => {
+                      const isSelected = selectedPackageId === pkg.id
+                      const isRecommended = pkg.badge === 'Recommended'
+                      return (
+                        <div
+                          key={pkg.id}
+                          className={`pricing-card pricing-card--addon${isSelected ? ' pricing-card--selected pricing-card--mandatory' : ''}`}
+                          onClick={() => selectPackage(pkg.id)}
+                          role="radio"
+                          aria-checked={isSelected}
+                          tabIndex={0}
+                          onKeyDown={(e) => e.key === 'Enter' && selectPackage(pkg.id)}
+                          style={{ cursor: 'pointer' }}
+                        >
+                          <div className="pricing-card-header">
+                            <div className="pricing-card-name">{pkg.name}</div>
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6px' }}>
+                              {pkg.badge && (
+                                <div className="pricing-card-badge" style={{
+                                  background: isRecommended ? 'var(--accent)' : 'transparent',
+                                  color: isRecommended ? 'var(--bg)' : 'var(--text-dim)',
+                                  border: isRecommended ? 'none' : '1px solid var(--border)'
+                                }}>{pkg.badge}</div>
+                              )}
+                              <div className={`pricing-card-checkbox${isSelected ? ' checked' : ''}`}>
+                                {isSelected ? '✓' : '○'}
+                              </div>
                             </div>
-                          ))}
+                          </div>
+                          <div className="pricing-card-price">
+                            <span className="pricing-card-amount">${pkg.price.toLocaleString()}</span>
+                            <span className="pricing-card-period"> {pkg.currency}/{pkg.period}</span>
+                            {pkg.plusTax && <span className="pricing-card-tax"> + GST</span>}
+                          </div>
+                          <p className="pricing-card-desc">{pkg.description}</p>
+                          <div className="pricing-card-deliverables">
+                            {pkg.deliverables.map((group: any, gi: number) => (
+                              <div key={gi} className="pricing-deliverable-group">
+                                <div className="pricing-deliverable-category">{group.category}</div>
+                                <ul className="pricing-deliverable-list">
+                                  {group.items.map((item: string, ii: number) => (
+                                    <li key={ii}>{item}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      )
+                    })}
                   </div>
                 </>
               )}
 
-              {/* ── Add-On Cards ── */}
+              {/* ── Add-On Cards (radio — one at a time, none default) ── */}
               {addons.length > 0 && (
                 <>
                   <div className="pricing-section-label" style={{ marginTop: '48px' }}>
-                    Optional Add-Ons
-                    <span className="pricing-section-label-hint"> — click to select</span>
+                    {(() => {
+                      const parts = addonsLabel.split(' — ')
+                      if (parts.length === 2) {
+                        return <>{parts[0]}<span className="pricing-section-label-hint"> — {parts[1]}</span></>
+                      }
+                      return addonsLabel
+                    })()}
                   </div>
                   <div className="pricing-cards-grid">
                     {addons.map((addon: any) => {
-                      const isSelected = selectedAddons.has(addon.id)
+                      const isSelected = selectedAddonId === addon.id
+                      const isRecommended = addon.badge?.includes('Recommended')
                       return (
                         <div
                           key={addon.id}
                           className={`pricing-card pricing-card--addon${isSelected ? ' pricing-card--selected' : ''}`}
                           onClick={() => toggleAddon(addon.id)}
-                          role="checkbox"
+                          role="radio"
                           aria-checked={isSelected}
                           tabIndex={0}
                           onKeyDown={(e) => e.key === 'Enter' && toggleAddon(addon.id)}
                         >
                           <div className="pricing-card-header">
                             <div className="pricing-card-name">{addon.name}</div>
-                            <div className={`pricing-card-checkbox${isSelected ? ' checked' : ''}`}>
-                              {isSelected ? '✓' : '+'}
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6px' }}>
+                              {addon.badge && (
+                                <div className="pricing-card-badge" style={{
+                                  background: isRecommended ? 'var(--accent)' : 'transparent',
+                                  color: isRecommended ? 'var(--bg)' : 'var(--text-dim)',
+                                  border: isRecommended ? 'none' : '1px solid var(--border)',
+                                  fontSize: '9px'
+                                }}>{addon.badge}</div>
+                              )}
+                              <div className={`pricing-card-checkbox${isSelected ? ' checked' : ''}`}>
+                                {isSelected ? '✓' : '+'}
+                              </div>
                             </div>
                           </div>
                           <div className="pricing-card-price">
@@ -400,11 +451,15 @@ export default function ProposalPage() {
                 <div className="pricing-total-bar">
                   <div className="pricing-total-label">
                     Estimated Monthly Investment
-                    {selectedAddons.size > 0 && (
-                      <span className="pricing-total-breakdown">
-                        {' '}(Base ${packages.reduce((s: number, p: any) => s + p.price, 0).toLocaleString()} + Add-ons ${addons.filter((a: any) => selectedAddons.has(a.id)).reduce((s: number, a: any) => s + a.price, 0).toLocaleString()})
-                      </span>
-                    )}
+                    {selectedAddonId && (() => {
+                      const selectedPkg = packages.find((p: any) => p.id === selectedPackageId)
+                      const selectedAddon = addons.find((a: any) => a.id === selectedAddonId)
+                      return (
+                        <span className="pricing-total-breakdown">
+                          {' '}({selectedPkg?.name} ${selectedPkg?.price.toLocaleString()} + {selectedAddon?.name} ${selectedAddon?.price.toLocaleString()})
+                        </span>
+                      )
+                    })()}
                   </div>
                   <div className="pricing-total-amount">
                     ${totalMonthly.toLocaleString()} CAD/mo
