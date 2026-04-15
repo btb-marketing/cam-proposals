@@ -3,6 +3,9 @@ import { useEffect } from 'react'
 import ProposalPage from './pages/ProposalPage'
 import NotFound from './pages/NotFound'
 import Home from './pages/Home'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import CookiePolicy from './pages/CookiePolicy'
+import Terms from './pages/Terms'
 
 function ScrollToTop() {
   const [location] = useLocation()
@@ -19,6 +22,9 @@ export default function App() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/proposal/:slug" component={ProposalPage} />
+        <Route path="/privacy-policy" component={PrivacyPolicy} />
+        <Route path="/cookie-policy" component={CookiePolicy} />
+        <Route path="/terms" component={Terms} />
         <Route component={NotFound} />
       </Switch>
     </>
