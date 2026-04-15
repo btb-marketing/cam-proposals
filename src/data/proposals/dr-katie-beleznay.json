@@ -1,0 +1,174 @@
+{
+  "slug": "dr-katie-beleznay",
+  "meta": {
+    "title": "SEO Growth Sprint Proposal",
+    "preparedBy": "Cameron Gallacher",
+    "preparedFor": "Ben Pickering / Dr. Katie Beleznay",
+    "date": "April 2026",
+    "ctaUrl": "https://calendly.com/belowtheboard/intro-call",
+    "ctaLabel": "Book Onboarding Call"
+  },
+  "hero": {
+    "clientName": "Dr. Katie Beleznay",
+    "tagline": "SEO Growth\nSprint.",
+    "subTagline": "A focused 3–4 month engagement to close the competitive gap, optimize high-intent treatment pages, and turn organic traffic into consultation bookings."
+  },
+  "about": {
+    "description": "I'm Cameron Gallacher — a digital marketing consultant specializing in SEO, paid media, and conversion strategy. I work with a focused roster of clients across Canada and the United States, with a track record of driving measurable organic growth for competitive service-based businesses.",
+    "notableClients": []
+  },
+  "team": [
+    {
+      "name": "Cameron Gallacher",
+      "title": "Lead Strategist & Consultant",
+      "initials": "CG"
+    }
+  ],
+  "overview": {
+    "headline": "The Opportunity",
+    "subheadline": "Dr. Katie Beleznay already has strong authority, brand recognition, and credibility in the Vancouver market. The opportunity is to better translate that authority into stronger organic visibility, better treatment-page performance, and more consultation inquiries. Based on my review, there is a clear opportunity to refresh the site's SEO foundation, improve how key treatment pages compete in search, and close the gap between Dr. Katie's site and other high-performing cosmetic dermatology competitors in Vancouver.",
+    "objectives": [
+      "Improve visibility for high-intent treatment searches in Vancouver",
+      "Strengthen the website's ability to generate consultations",
+      "Identify where competitors are currently winning and close those gaps",
+      "Improve the quality and structure of key service pages",
+      "Ensure lead capture and inquiry flow are functioning properly"
+    ],
+    "strategy": [
+      {
+        "title": "Competitive Gap Analysis",
+        "description": "Review Dr. Katie's site against Dr. Shannon Humphrey and other top Vancouver competitors to identify gaps in treatment-page structure, content depth, local targeting, and conversion positioning."
+      },
+      {
+        "title": "High-Intent SEO Optimization",
+        "description": "Refresh and optimize the treatment pages most likely to drive qualified inquiries, with emphasis on local commercial intent and search visibility."
+      },
+      {
+        "title": "Conversion & Lead Path Improvement",
+        "description": "Ensure the site is positioned to turn improved traffic into consultation requests by reviewing forms, inquiry flow, and page-level conversion elements."
+      }
+    ]
+  },
+  "keywordAreas": {
+    "intro": "The initial keyword focus will center on high-intent treatment searches with strong local commercial intent in the Vancouver market.",
+    "keywords": [
+      "Botox Vancouver",
+      "Dermal Fillers Vancouver",
+      "Sculptra Vancouver",
+      "PRP Vancouver",
+      "Microneedling Vancouver",
+      "Thermage Vancouver",
+      "Tixel Vancouver",
+      "Clear + Brilliant Vancouver",
+      "Belkyra Vancouver",
+      "Cosmetic Dermatologist Vancouver"
+    ]
+  },
+  "scopeOfWork": {
+    "months": [
+      {
+        "title": "Month 1 — Audit, Benchmarking & Strategic Foundation",
+        "deliverables": [
+          "Competitor gap analysis (Dr. Shannon Humphrey + top Vancouver competitors)",
+          "Technical, structural, and on-page SEO audit",
+          "Local SEO review",
+          "Lead capture / form review",
+          "Target keyword benchmark setup",
+          "Treatment page prioritization"
+        ]
+      },
+      {
+        "title": "Month 2 — Core Page Optimization",
+        "deliverables": [
+          "Optimization of priority treatment pages",
+          "Title tag and meta description rewrites",
+          "Heading and copy structure improvements",
+          "Internal linking improvements",
+          "Homepage / services page SEO recommendations if needed"
+        ]
+      },
+      {
+        "title": "Month 3 — Content Support & Topic Reinforcement",
+        "deliverables": [
+          "Continued optimization of priority pages",
+          "Support content recommendations and/or creation",
+          "FAQ expansion and long-tail keyword support",
+          "Refinement based on early performance data"
+        ]
+      },
+      {
+        "title": "Month 4 — Refinement & Consolidation (Optional)",
+        "deliverables": [
+          "Second-round optimization of top-performing pages",
+          "Additional supporting content where warranted",
+          "Ranking and opportunity review",
+          "Next-step recommendations for continued growth"
+        ]
+      }
+    ]
+  },
+  "deliverables": [
+    "Competitor gap analysis summary",
+    "Full SEO audit report",
+    "Keyword and page targeting plan",
+    "Optimization of key service pages",
+    "Metadata updates (title tags + meta descriptions)",
+    "Internal linking improvements",
+    "SEO copy refinements",
+    "Support content recommendations and/or creation",
+    "Lead flow review",
+    "Monthly reporting and recommendations"
+  ],
+  "successMetrics": [
+    "Ranking movement for target keywords (Botox Vancouver, Fillers Vancouver, etc.)",
+    "Improved visibility for key treatment pages in Google Search Console",
+    "Growth in organic traffic to optimized pages",
+    "Improved inquiry and consultation readiness",
+    "Stronger lead capture reliability across all forms"
+  ],
+  "investment": {
+    "tiers": [
+      {
+        "label": "Recommended Package",
+        "items": [
+          {
+            "service": "SEO Growth Sprint",
+            "description": "Full 3–4 month engagement: audit, optimization, content support, and monthly reporting",
+            "price": "$2,500–$3,000 CAD/mo"
+          }
+        ],
+        "total": "$2,500–$3,000 CAD/mo",
+        "currency": "CAD",
+        "note": "Recommended term: 3–4 months. This budget range provides enough runway to perform meaningful competitive analysis, optimize the most commercially important pages, strengthen site structure, and measure whether the work is generating the right early signals."
+      }
+    ],
+    "roiContext": "This engagement is designed to be practical, measurable, and aligned with the $2,500–$3,000/month budget and 3–4 month timeline you outlined. SEO is a longer-term play — the goal in this sprint is to lay the right foundation, optimize the pages most likely to drive consultation bookings, and generate clear early signals of momentum before deciding on next steps.",
+    "exitClause": "No long-term lock-in. I recommend a 3–4 month term to allow enough time to see meaningful results, but I'm happy to discuss a month-to-month arrangement after the initial sprint."
+  },
+  "caseStudies": [
+    {
+      "client": "E-Commerce Brand",
+      "service": "SEO",
+      "result": "+982% Revenue in 7 Months",
+      "description": "$630,574 in revenue generated in 7 months vs. $58,306 the prior year. 538+ keywords ranked. Built from near-zero organic presence to market dominance in a competitive niche."
+    },
+    {
+      "client": "Specialty Retailer",
+      "service": "Paid Media",
+      "result": "14x Revenue Growth",
+      "description": "Scaled from $1,699/mo to $23,479/mo in 7 months. 7.57x ROAS on best-performing campaign. Achieved in a competitive niche with limited advertising options."
+    },
+    {
+      "client": "Health & Wellness Brand",
+      "service": "Paid Media + Email",
+      "result": "5.52x Average ROAS",
+      "description": "5.52x average ROAS across 7 campaigns. Grew email revenue from $0 to $45K/month. Full-funnel approach combining paid social with lifecycle email marketing."
+    }
+  ],
+  "nextSteps": {
+    "closing": "I'm ready to get started. The next step is a short call to align on priorities, confirm access to the website and Google Search Console, and kick off the Month 1 audit. The sooner we start, the sooner we can close the gap on Dr. Shannon Humphrey and get Dr. Katie's treatment pages ranking where they should be.",
+    "ctaUrl": "https://calendly.com/belowtheboard/intro-call",
+    "ctaLabel": "Book Onboarding Call",
+    "email": "cam@belowtheboard.com"
+  }
+}
