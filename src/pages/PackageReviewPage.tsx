@@ -49,6 +49,19 @@ export default function PackageReviewPage() {
   }
 
   const handleProceed = () => {
+    // Fire package-selected notification (fire-and-forget)
+    fetch('/api/send-package-selected', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        clientName: proposal.meta?.preparedFor || slug,
+        slug,
+        brand: proposal.brand || 'cameron-gallacher',
+        packageName: selectedPackage?.name || pkgId,
+        packagePrice: selectedPackage?.price ? `$${fmtCAD(selectedPackage.price)}` : undefined,
+        addonName: selectedAddon?.name || undefined,
+      }),
+    }).catch(() => {})
     navigate(`/proposal/${slug}/agreement?pkg=${pkgId}&addon=${addonId}`)
   }
 

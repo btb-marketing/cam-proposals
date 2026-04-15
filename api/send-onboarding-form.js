@@ -1,11 +1,10 @@
 /**
- * Vercel Serverless Function: /api/send-onboarding-form
- * Receives onboarding form submission and emails it to cam@latchedinc.com
- * and sends a confirmation copy to the client.
- *
- * Uses Resend (resend.com) for email delivery.
- * Set RESEND_API_KEY in Vercel environment variables.
+ * Vercel Serverless Function: POST /api/send-onboarding-form
+ * Receives onboarding form submission.
+ * Sends full form data to richard@belowtheboard.com and a confirmation to the client.
+ * Uses Gmail OAuth2 (replaces Resend).
  */
+import { sendEmail, ADMIN_EMAIL, emailWrapper, getSenderName } from './_gmail.js'
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*')
@@ -48,6 +47,7 @@ export default async function handler(req, res) {
       clientName,
       agencyName,
       analyticsEmail,
+      brand,
     } = req.body
 
     if (!clientEmail || !clientEmail.includes('@')) {
@@ -138,47 +138,31 @@ export default async function handler(req, res) {
 </html>
     `.trim()
 
-    const RESEND_API_KEY = process.env.RESEND_API_KEY
-    if (!RESEND_API_KEY) {
-      console.log('RESEND_API_KEY not set — skipping email send')
-      return res.status(200).json({ success: true, message: 'Form received (email skipped — no API key)' })
-    }
+    // Determine brand
+    const brand_ = brand || 'cameron-gallacher'
+    const agencyName = brand_ === 'below-the-board' ? 'Below the Board Marketing' : 'Cameron Gallacher Consulting'
+    const contactEmail = brand_ === 'below-the-board' ? 'zach@belowtheboard.com' : 'cam@latchedinc.com'
+    const firstName = clientName?.split(' ')[0] || 'there'
 
-    // Send to cam@latchedinc.com (internal copy)
-    await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: 'Cameron Gallacher <cam@latchedinc.com>',
-        to: ['cam@latchedinc.com'],
-        subject: `Onboarding Form — ${clientName} (${pkgId})`,
-        html: emailHtml,
-      }),
+    // 1. Send full form data to admin
+    await sendEmail({
+      to: ADMIN_EMAIL,
+      subject: `[${agencyName}] Onboarding Form — ${clientName} (${pkgId || 'unknown pkg'})`,
+      html: emailHtml,
+      from: getSenderName(brand_),
     })
 
-    // Send confirmation to client
-    const confirmHtml = `
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Onboarding Form Received</title></head>
-<body style="margin:0;padding:0;background:#0a0a0a;font-family:Arial,sans-serif;color:#fff;">
-  <div style="max-width:600px;margin:0 auto;padding:40px 24px;">
-    <div style="font-size:24px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:24px;">CAMERON.</div>
-    <h1 style="font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:1px;margin:0 0 16px;">Onboarding Form Received!</h1>
-    <p style="color:#aaa;font-size:15px;line-height:1.7;">Hi ${clientName?.split(' ')[0] || 'there'},</p>
-    <p style="color:#aaa;font-size:15px;line-height:1.7;">We've received your onboarding form. Our team will review your information and reach out within 24 hours to confirm your campaign launch date.</p>
-    <p style="color:#aaa;font-size:15px;line-height:1.7;">If you have any questions, reach out at <a href="mailto:cam@latchedinc.com" style="color:#c6f135;">cam@latchedinc.com</a>.</p>
-    <p style="color:#aaa;font-size:15px;line-height:1.7;">Looking forward to working with you,<br><strong style="color:#fff;">Cameron Gallacher</strong></p>
-    <div style="font-size:12px;color:#555;text-align:center;margin-top:40px;">
-      <p>© ${new Date().getFullYear()} Cameron Gallacher · All Rights Reserved</p>
-    </div>
-  </div>
-</body>
-</html>
-    `.trim()
+    // 2. Send confirmation to client
+    const confirmContent = `
+      <h1>Onboarding Form Received! ✅</h1>
+      <p>Hi <span class="highlight">${firstName}</span>,</p>
+      <p>We've received your onboarding form. Our team will review your information and reach out within 24 hours to confirm your campaign launch date.</p>
+      <hr class="divider">
+      <p>If you have any questions, reach out at <a href="mailto:${contactEmail}" style="color:#c6f135;">${contactEmail}</a>.</p>
+      <p>Looking forward to working with you,</p>
+      <p><strong class="highlight">${brand_ === 'below-the-board' ? 'Zach Gallis' : 'Cameron Gallacher'}</strong><br>
+      <span style="color:#555;font-size:13px;">${agencyName}</span></p>
+    `
 
     const toAddresses = [clientEmail]
     if (additionalEmails) {
@@ -188,18 +172,11 @@ export default async function handler(req, res) {
       })
     }
 
-    await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: 'Cameron Gallacher <cam@latchedinc.com>',
-        to: toAddresses,
-        subject: 'Onboarding Form Received — Cameron Gallacher',
-        html: confirmHtml,
-      }),
+    await sendEmail({
+      to: toAddresses,
+      subject: `Onboarding Form Received — ${agencyName}`,
+      html: emailWrapper(confirmContent, brand_),
+      from: getSenderName(brand_),
     })
 
     return res.status(200).json({ success: true })

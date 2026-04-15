@@ -26,7 +26,7 @@ export default function OnboardingBookingPage() {
   const addonId = searchParams.get('addon') || ''
   const email = searchParams.get('email') || ''
 
-  const brand = (proposal?.meta as any)?.brand || 'cameron-gallacher'
+  const brand = proposal?.brand || (proposal?.meta as any)?.brand || 'cameron-gallacher'
   const calendlyUrl = CALENDLY_LINKS[brand] || CALENDLY_LINKS['cameron-gallacher']
 
   const goToStep5 = () => {
@@ -53,6 +53,21 @@ export default function OnboardingBookingPage() {
         e.origin === 'https://calendly.com' &&
         e.data?.event === 'calendly.event_scheduled'
       ) {
+        // Fire call-booked notification (fire-and-forget)
+        const invitee = e.data?.payload?.invitee
+        const eventTime = e.data?.payload?.event?.start_time
+        fetch('/api/send-call-booked', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            clientName: invitee?.name || proposal?.meta?.preparedFor || slug,
+            clientEmail: invitee?.email || email || undefined,
+            slug,
+            brand,
+            callDate: eventTime ? new Date(eventTime).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'America/Vancouver' }) : undefined,
+            callTime: eventTime ? new Date(eventTime).toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Vancouver' }) : undefined,
+          }),
+        }).catch(() => {})
         // Small delay so user sees the confirmation screen briefly
         setTimeout(() => {
           goToStep5()

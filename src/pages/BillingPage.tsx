@@ -132,7 +132,7 @@ function BillingForm({
         if (confirmError) throw new Error(confirmError.message)
       }
 
-      // 4. Send follow-up email with onboarding form link
+      // 4. Send follow-up email with onboarding steps
       try {
         await fetch('/api/send-onboarding-email', {
           method: 'POST',
@@ -143,8 +143,9 @@ function BillingForm({
             slug,
             pkgId,
             addonId,
-            agencyName: 'Cameron Gallacher',
-            brand: 'cameron-gallacher',
+            brand: proposal?.brand || 'cameron-gallacher',
+            packageName: selectedPackage?.name || pkgId,
+            packagePrice: selectedPackage?.price ? `$${selectedPackage.price.toLocaleString('en-CA', { minimumFractionDigits: 2 })}` : undefined,
           }),
         })
       } catch (emailErr) {

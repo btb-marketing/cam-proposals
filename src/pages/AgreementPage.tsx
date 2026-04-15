@@ -66,6 +66,19 @@ export default function AgreementPage() {
   }
 
   const handleSubmit = () => {
+    // Fire agreement-signed notification (fire-and-forget)
+    fetch('/api/send-agreement-signed', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        clientName: `${form.firstName} ${form.lastName}`.trim() || proposal.meta?.preparedFor || slug,
+        clientEmail: form.email || undefined,
+        slug,
+        brand: proposal.brand || 'cameron-gallacher',
+        packageName: selectedPackage?.name || pkgId,
+        packagePrice: selectedPackage?.price ? `$${fmtCAD(selectedPackage.price)}` : undefined,
+      }),
+    }).catch(() => {})
     navigate(`/proposal/${slug}/billing?pkg=${pkgId}&addon=${addonId}`)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }

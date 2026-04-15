@@ -1,5 +1,5 @@
 import { useParams, useLocation } from 'wouter'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { loadProposal } from '../data/loader'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { useBrandMeta } from '../hooks/useBrandMeta'
@@ -100,6 +100,25 @@ export default function ProposalPage() {
     brand: proposal?.brand ?? 'cameron-gallacher',
     pageTitle: 'Proposal',
   })
+
+  // Fire proposal-viewed notification once per session
+  const viewedRef = useRef(false)
+  useEffect(() => {
+    if (!proposal || viewedRef.current) return
+    viewedRef.current = true
+    const sessionKey = `viewed_${slug}`
+    if (sessionStorage.getItem(sessionKey)) return
+    sessionStorage.setItem(sessionKey, '1')
+    fetch('/api/send-proposal-viewed', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        clientName: proposal.meta?.preparedFor || slug,
+        slug,
+        brand: proposal.brand || 'cameron-gallacher',
+      }),
+    }).catch(() => {}) // fire-and-forget
+  }, [slug, proposal])
 
   if (!proposal) return <NotFound />
 
