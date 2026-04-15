@@ -56,7 +56,7 @@ export default function AgreementPage() {
   }
 
   const handleSubmit = () => {
-    setSubmitted(true)
+    navigate(`/proposal/${slug}/billing?pkg=${pkgId}&addon=${addonId}`)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -134,11 +134,11 @@ export default function AgreementPage() {
         {/* Agreement Document */}
         <div className="agreement-doc">
           <div className="agreement-doc-header">
-            <div className="agreement-doc-logo display">Latched Creative Inc.</div>
+            <div className="agreement-doc-logo display">12894891 Canada Inc.</div>
             <div className="agreement-doc-title display">Digital Marketing Agreement</div>
             <div className="agreement-doc-meta">
               <div><strong>Effective Date:</strong> {today}</div>
-              <div><strong>Service Provider:</strong> Latched Creative Inc. ("The Marketer") — 170-422 Richards Street, Vancouver BC</div>
+              <div><strong>Service Provider:</strong> 12894891 Canada Inc. ("The Marketer") — 170-422 Richards Street, Vancouver BC</div>
               <div><strong>Client:</strong> {proposal.meta.preparedFor} ("The Company")</div>
             </div>
           </div>

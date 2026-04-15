@@ -3182,3 +3182,145 @@ section {
 .pricing-commitment-note strong {
   color: var(--text);
 }
+
+/* ============================================================
+   FOOTER CONTACT ROW (between logo and legal links)
+   ============================================================ */
+
+.footer-contact-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.footer-contact-email {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.footer-contact-email:hover {
+  opacity: 0.8;
+}
+
+.footer-contact-sep {
+  color: var(--border);
+  font-size: 12px;
+  user-select: none;
+}
+
+.footer-contact-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-contact-social:hover {
+  color: var(--accent);
+}
+
+/* ============================================================
+   BILLING PAGE
+   ============================================================ */
+
+.billing-summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 28px 32px;
+  margin-bottom: 0;
+}
+
+.billing-summary-title {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+}
+
+.billing-summary-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.billing-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  font-size: 14px;
+  color: var(--text-muted);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.billing-summary-row:last-child {
+  border-bottom: none;
+}
+
+.billing-summary-gst {
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+.billing-summary-total {
+  font-weight: 700;
+  color: var(--text) !important;
+  font-size: 16px !important;
+  padding-top: 16px !important;
+  border-top: 1px solid var(--border);
+  border-bottom: none !important;
+}
+
+.billing-summary-total span:last-child {
+  color: var(--accent);
+}
+
+.billing-summary-note {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.billing-card-icons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.billing-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  background: var(--bg-card);
+}
+
+.billing-secure-note {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}

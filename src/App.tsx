@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import ProposalPage from './pages/ProposalPage'
 import PackageReviewPage from './pages/PackageReviewPage'
 import AgreementPage from './pages/AgreementPage'
+import BillingPage from './pages/BillingPage'
 import NotFound from './pages/NotFound'
 import Home from './pages/Home'
 import PrivacyPolicy from './pages/PrivacyPolicy'
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="/proposal/:slug" component={ProposalPage} />
         <Route path="/proposal/:slug/review" component={PackageReviewPage} />
         <Route path="/proposal/:slug/agreement" component={AgreementPage} />
+        <Route path="/proposal/:slug/billing" component={BillingPage} />
         <Route path="/privacy-policy" component={PrivacyPolicy} />
         <Route path="/cookie-policy" component={CookiePolicy} />
         <Route path="/terms" component={Terms} />
