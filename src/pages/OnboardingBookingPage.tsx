@@ -24,8 +24,14 @@ export default function OnboardingBookingPage() {
   const brand = (proposal?.meta as any)?.brand || 'cameron-gallacher'
   const calendlyUrl = CALENDLY_LINKS[brand] || CALENDLY_LINKS['cameron-gallacher']
 
-  // Embed Calendly widget script
+  const goToStep5 = () => {
+    navigate(`/proposal/${slug}/onboarding-form?pkg=${pkgId}&addon=${addonId}&email=${encodeURIComponent(email)}`)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  // Embed Calendly widget script + listen for booking completion
   useEffect(() => {
+    // Load the Calendly embed script if not already loaded
     const existing = document.getElementById('calendly-script')
     if (!existing) {
       const script = document.createElement('script')
@@ -34,7 +40,24 @@ export default function OnboardingBookingPage() {
       script.async = true
       document.head.appendChild(script)
     }
-  }, [])
+
+    // Listen for the Calendly "event_scheduled" message
+    // Calendly fires a postMessage when the booking is confirmed
+    const handleCalendlyEvent = (e: MessageEvent) => {
+      if (
+        e.origin === 'https://calendly.com' &&
+        e.data?.event === 'calendly.event_scheduled'
+      ) {
+        // Small delay so user sees the confirmation screen briefly
+        setTimeout(() => {
+          goToStep5()
+        }, 2500)
+      }
+    }
+
+    window.addEventListener('message', handleCalendlyEvent)
+    return () => window.removeEventListener('message', handleCalendlyEvent)
+  }, [slug, pkgId, addonId, email])
 
   if (!proposal) {
     return (
@@ -51,11 +74,6 @@ export default function OnboardingBookingPage() {
     { n: 4, label: 'Book Call' },
     { n: 5, label: 'Onboarding' },
   ]
-
-  const handleSkip = () => {
-    navigate(`/proposal/${slug}/onboarding-form?pkg=${pkgId}&addon=${addonId}&email=${encodeURIComponent(email)}`)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
 
   return (
     <div className="funnel-page">
@@ -83,17 +101,21 @@ export default function OnboardingBookingPage() {
           Your agreement is signed and your billing details are saved. The next step is to book your onboarding call so we can get your campaign launched.
         </p>
 
-        {/* Calendly Inline Embed */}
+        {/* Calendly Inline Embed
+            primary_color=0d0d0d — dark charcoal so buttons are readable on Calendly's white bg
+            text_color=0d0d0d — dark text
+            background_color=ffffff — keep Calendly's default white bg (matches their design)
+        */}
         <div
           className="calendly-inline-widget"
-          data-url={`${calendlyUrl}?hide_gdpr_banner=1&primary_color=c6f135${email ? `&email=${encodeURIComponent(email)}` : ''}`}
+          data-url={`${calendlyUrl}?hide_gdpr_banner=1&primary_color=0d0d0d&text_color=0d0d0d&background_color=ffffff${email ? `&email=${encodeURIComponent(email)}` : ''}`}
           style={{ minWidth: '320px', height: '700px' }}
         />
 
         {/* Skip option */}
         <div className="onboarding-booking-skip">
           <p>Can't book right now? You'll receive a link to schedule your call via email.</p>
-          <button className="btn-outline" onClick={handleSkip}>
+          <button className="btn-outline" onClick={goToStep5}>
             Skip for Now — Fill Out Onboarding Form <span className="arrow">→</span>
           </button>
         </div>
