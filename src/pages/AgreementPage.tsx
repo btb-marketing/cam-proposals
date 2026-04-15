@@ -74,11 +74,13 @@ export default function AgreementPage() {
               { n: 1, label: 'Review' },
               { n: 2, label: 'Agreement' },
               { n: 3, label: 'Billing' },
+              { n: 4, label: 'Book Call' },
+              { n: 5, label: 'Onboarding' },
             ].map(({ n, label }) => (
               <div key={n} className={`funnel-page-step${n <= 2 ? ' active' : ''}${n === 2 ? ' current' : ''}`}>
-                <div className="funnel-page-step-dot">{n <= 2 ? '✓' : n}</div>
+                <div className="funnel-page-step-dot">{n <= 1 ? '✓' : n}</div>
                 <div className="funnel-page-step-label">{label}</div>
-                {n < 3 && <div className="funnel-page-step-line" />}
+                {n < 5 && <div className="funnel-page-step-line" />}
               </div>
             ))}
           </div>
@@ -120,11 +122,13 @@ export default function AgreementPage() {
             { n: 1, label: 'Review' },
             { n: 2, label: 'Agreement' },
             { n: 3, label: 'Billing' },
+            { n: 4, label: 'Book Call' },
+            { n: 5, label: 'Onboarding' },
           ].map(({ n, label }) => (
             <div key={n} className={`funnel-page-step${n <= 2 ? ' active' : ''}${n === 2 ? ' current' : ''}`}>
               <div className="funnel-page-step-dot">{n === 1 ? '✓' : n}</div>
               <div className="funnel-page-step-label">{label}</div>
-              {n < 3 && <div className="funnel-page-step-line" />}
+              {n < 5 && <div className="funnel-page-step-line" />}
             </div>
           ))}
         </div>
@@ -132,18 +136,18 @@ export default function AgreementPage() {
 
       {/* Main Content */}
       <div className="funnel-page-body">
-        <div className="funnel-page-eyebrow">Step 2 of 3</div>
+        <div className="funnel-page-eyebrow">Step 2 of 5</div>
         <h1 className="funnel-page-title display">Marketing Agreement</h1>
         <p className="funnel-page-subtitle">Please review the agreement below, fill in your details, and sign to proceed.</p>
 
         {/* Agreement Document */}
         <div className="agreement-doc">
           <div className="agreement-doc-header">
-            <div className="agreement-doc-logo display">12894891 Canada Inc.</div>
+            <div className="agreement-doc-logo display">12894891 Canada Inc. dba Below the Board Marketing</div>
             <div className="agreement-doc-title display">Digital Marketing Agreement</div>
             <div className="agreement-doc-meta">
               <div><strong>Effective Date:</strong> {today}</div>
-              <div><strong>Service Provider:</strong> 12894891 Canada Inc. ("The Marketer") — 170-422 Richards Street, Vancouver BC</div>
+              <div><strong>Service Provider:</strong> 12894891 Canada Inc. dba Below the Board Marketing ("The Marketer") — 170-422 Richards Street, Vancouver BC</div>
               <div><strong>Client:</strong> {proposal.meta.preparedFor} ("The Company")</div>
             </div>
           </div>

@@ -3561,3 +3561,160 @@ section {
   font-size: 16px;
   letter-spacing: 0.03em;
 }
+
+
+/* ============================================================
+   ONBOARDING BOOKING PAGE (Step 4)
+   ============================================================ */
+
+.onboarding-booking-body { max-width: 900px; }
+
+.calendly-inline-widget {
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 32px 0;
+  border: 1px solid var(--border);
+}
+
+.onboarding-booking-skip {
+  margin-top: 24px;
+  padding: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.onboarding-booking-skip p {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin: 0 0 16px;
+}
+
+/* ============================================================
+   ONBOARDING FORM PAGE (Step 5)
+   ============================================================ */
+
+.onboarding-form-body { max-width: 760px; }
+
+.onboarding-section-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 24px 0 32px;
+}
+
+.onboarding-section-nav-btn {
+  padding: 8px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-body);
+}
+
+.onboarding-section-nav-btn:hover { border-color: var(--accent); color: var(--text); }
+.onboarding-section-nav-btn.active { background: var(--accent); border-color: var(--accent); color: #000; }
+.onboarding-section-nav-btn.done { border-color: var(--accent); color: var(--accent); }
+
+.onboarding-form-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.onboarding-form-section-header {
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+}
+
+.onboarding-form-section-title { font-size: 20px; margin: 0 0 8px; color: var(--text); }
+.onboarding-form-section-desc { font-size: 13px; color: var(--text-muted); margin: 0; }
+
+.onboarding-form-fields {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.onboarding-form-field { display: flex; flex-direction: column; gap: 8px; }
+
+.onboarding-form-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.onboarding-form-label .required { color: var(--accent); }
+
+.onboarding-form-hint {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+
+.onboarding-form-hint a { color: var(--accent); text-decoration: none; }
+
+.onboarding-form-input,
+.onboarding-form-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.onboarding-form-textarea { resize: vertical; line-height: 1.6; }
+.onboarding-form-input:focus,
+.onboarding-form-textarea:focus { border-color: var(--accent); }
+
+.onboarding-form-radio-group { display: flex; flex-direction: column; gap: 10px; }
+
+.onboarding-form-radio {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.onboarding-form-radio input[type="radio"] {
+  margin-top: 2px;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+}
+
+.onboarding-form-progress {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 16px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}

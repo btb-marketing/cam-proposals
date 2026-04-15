@@ -1,5 +1,5 @@
 import { useParams, useLocation, useSearch } from 'wouter'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { loadProposal } from '../data/loader'
 import { loadStripe } from '@stripe/stripe-js'
 import {
@@ -131,8 +131,29 @@ function BillingForm({
         if (confirmError) throw new Error(confirmError.message)
       }
 
-      // 4. Success
-      onSuccess()
+      // 4. Send follow-up email with onboarding form link
+      try {
+        await fetch('/api/send-onboarding-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            clientEmail: cardholderEmail,
+            clientName: cardName,
+            slug,
+            pkgId,
+            addonId,
+            agencyName: 'Cameron Gallacher',
+            brand: 'cameron-gallacher',
+          }),
+        })
+      } catch (emailErr) {
+        // Email sending is non-critical — don't block success
+        console.warn('Failed to send follow-up email:', emailErr)
+      }
+
+      // 5. Navigate to onboarding booking page
+      navigate(`/proposal/${slug}/onboarding?pkg=${pkgId}&addon=${addonId}&email=${encodeURIComponent(cardholderEmail)}`)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     } catch (err: any) {
       setErrorMsg(err.message || 'An error occurred. Please try again.')
     } finally {
@@ -142,7 +163,7 @@ function BillingForm({
 
   return (
     <div className="funnel-page-body">
-      <div className="funnel-page-eyebrow">Step 3 of 3</div>
+        <div className="funnel-page-eyebrow">Step 3 of 5</div>
       <h1 className="funnel-page-title display">Billing Details</h1>
       <p className="funnel-page-subtitle">Enter your payment information to complete your enrollment.</p>
 
@@ -378,45 +399,19 @@ export default function BillingPage() {
     { n: 1, label: 'Review' },
     { n: 2, label: 'Agreement' },
     { n: 3, label: 'Billing' },
+    { n: 4, label: 'Book Call' },
+    { n: 5, label: 'Onboarding' },
   ]
 
+  // Success state is now handled by navigation to onboarding page
+  // The submitted state is kept for fallback only
   if (submitted) {
     return (
       <div className="funnel-page">
-        <div className="funnel-page-header">
-          <div className="funnel-page-steps">
-            {steps.map(({ n, label }) => (
-              <div key={n} className="funnel-page-step active">
-                <div className="funnel-page-step-dot">✓</div>
-                <div className="funnel-page-step-label">{label}</div>
-                {n < 3 && <div className="funnel-page-step-line" />}
-              </div>
-            ))}
-          </div>
-        </div>
         <div className="funnel-page-body funnel-success">
           <div className="funnel-success-icon">✓</div>
-          <h2 className="funnel-page-title display">You're All Set!</h2>
-          <p className="funnel-page-subtitle">
-            Your subscription has been activated and your billing details are securely saved. Cameron will be in touch within 24 hours to confirm your campaign start date and kick off onboarding.
-          </p>
-          <div className="funnel-page-actions" style={{ justifyContent: 'center' }}>
-            <a
-              href="https://calendly.com/cam-latchedinc/onboarding"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
-            >
-              Book Onboarding Call <span className="arrow">→</span>
-            </a>
-          </div>
-          <p style={{ textAlign: 'center', marginTop: '16px', fontSize: '13px', color: 'var(--text-muted)' }}>
-            A confirmation email will be sent to you shortly.
-          </p>
-        </div>
-        <div className="funnel-page-footer">
-          <span className="funnel-page-footer-logo display">CG.</span>
-          <span className="funnel-page-footer-text">© {new Date().getFullYear()} Cameron Gallacher · All Rights Reserved</span>
+          <h2 className="funnel-page-title display">Billing Complete!</h2>
+          <p className="funnel-page-subtitle">Redirecting to your onboarding booking...</p>
         </div>
       </div>
     )
@@ -431,7 +426,7 @@ export default function BillingPage() {
             <div key={n} className={`funnel-page-step${n <= 3 ? ' active' : ''}${n === 3 ? ' current' : ''}`}>
               <div className="funnel-page-step-dot">{n <= 2 ? '✓' : n}</div>
               <div className="funnel-page-step-label">{label}</div>
-              {n < 3 && <div className="funnel-page-step-line" />}
+              {n < 5 && <div className="funnel-page-step-line" />}
             </div>
           ))}
         </div>

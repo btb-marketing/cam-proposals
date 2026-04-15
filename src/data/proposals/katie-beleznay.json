@@ -6,7 +6,8 @@
     "preparedFor": "Dr. Katie Beleznay",
     "date": "April 2026",
     "ctaUrl": "https://calendly.com/belowtheboard/intro-call",
-    "ctaLabel": "Book Onboarding Call"
+    "ctaLabel": "Book Onboarding Call",
+    "brand": "cameron-gallacher"
   },
   "hero": {
     "clientName": "Dr. Katie Beleznay",
@@ -151,11 +152,40 @@
         "defaultSelected": true,
         "description": "A focused 3–4 month SEO sprint to build your foundation, close competitive gaps, and start generating measurable organic momentum.",
         "deliverables": [
-          { "category": "SEO Strategy", "items": ["Initial keyword research", "Competitive audit"] },
-          { "category": "Content Creation", "items": ["5,000 words/month"] },
-          { "category": "On-Page + Technical SEO", "items": ["Up to 5 URLs manually optimized/month", "One audit per month", "Optimize site speed"] },
-          { "category": "Reporting", "items": ["Monthly Looker Studio report", "One 45-min strategy call/month"] },
-          { "category": "Backlinks", "items": ["2 backlinks per month"] }
+          {
+            "category": "SEO Strategy",
+            "items": [
+              "Initial keyword research",
+              "Competitive audit"
+            ]
+          },
+          {
+            "category": "Content Creation",
+            "items": [
+              "5,000 words/month"
+            ]
+          },
+          {
+            "category": "On-Page + Technical SEO",
+            "items": [
+              "Up to 5 URLs manually optimized/month",
+              "One audit per month",
+              "Optimize site speed"
+            ]
+          },
+          {
+            "category": "Reporting",
+            "items": [
+              "Monthly Looker Studio report",
+              "One 45-min strategy call/month"
+            ]
+          },
+          {
+            "category": "Backlinks",
+            "items": [
+              "2 backlinks per month"
+            ]
+          }
         ]
       },
       {
@@ -169,11 +199,41 @@
         "defaultSelected": false,
         "description": "A more intensive SEO engagement with deeper content production, more page optimizations, and bi-weekly strategy touchpoints.",
         "deliverables": [
-          { "category": "SEO Strategy", "items": ["Initial keyword research", "Competitive audit"] },
-          { "category": "Content Creation", "items": ["15,000 words/month"] },
-          { "category": "On-Page + Technical SEO", "items": ["Up to 10 URLs manually optimized/month", "Weekly audits", "Optimize site speed"] },
-          { "category": "Reporting", "items": ["Bi-weekly SEO strategy calls", "Monday.com + Looker dashboards", "Slack access with 48-hour SLA"] },
-          { "category": "Backlinks", "items": ["4 backlinks per month"] }
+          {
+            "category": "SEO Strategy",
+            "items": [
+              "Initial keyword research",
+              "Competitive audit"
+            ]
+          },
+          {
+            "category": "Content Creation",
+            "items": [
+              "15,000 words/month"
+            ]
+          },
+          {
+            "category": "On-Page + Technical SEO",
+            "items": [
+              "Up to 10 URLs manually optimized/month",
+              "Weekly audits",
+              "Optimize site speed"
+            ]
+          },
+          {
+            "category": "Reporting",
+            "items": [
+              "Bi-weekly SEO strategy calls",
+              "Monday.com + Looker dashboards",
+              "Slack access with 48-hour SLA"
+            ]
+          },
+          {
+            "category": "Backlinks",
+            "items": [
+              "4 backlinks per month"
+            ]
+          }
         ]
       },
       {
@@ -187,11 +247,41 @@
         "defaultSelected": false,
         "description": "Full-scale SEO with live roadmap management, maximum content output, and executive-level reporting across all performance dimensions.",
         "deliverables": [
-          { "category": "SEO Strategy", "items": ["Live roadmap w/ monthly updates", "Full content cluster planning"] },
-          { "category": "Content Creation", "items": ["30,000 words/month"] },
-          { "category": "On-Page + Technical SEO", "items": ["Up to 15 URLs manually optimized/month", "Weekly audits", "Optimize site speed"] },
-          { "category": "Reporting", "items": ["Bi-weekly calls + quarterly executive summary", "Slack support with <24hr response", "Multiple dashboards (content, SEO, keyword lift, ROI)"] },
-          { "category": "Backlinks", "items": ["8 backlinks per month"] }
+          {
+            "category": "SEO Strategy",
+            "items": [
+              "Live roadmap w/ monthly updates",
+              "Full content cluster planning"
+            ]
+          },
+          {
+            "category": "Content Creation",
+            "items": [
+              "30,000 words/month"
+            ]
+          },
+          {
+            "category": "On-Page + Technical SEO",
+            "items": [
+              "Up to 15 URLs manually optimized/month",
+              "Weekly audits",
+              "Optimize site speed"
+            ]
+          },
+          {
+            "category": "Reporting",
+            "items": [
+              "Bi-weekly calls + quarterly executive summary",
+              "Slack support with <24hr response",
+              "Multiple dashboards (content, SEO, keyword lift, ROI)"
+            ]
+          },
+          {
+            "category": "Backlinks",
+            "items": [
+              "8 backlinks per month"
+            ]
+          }
         ]
       }
     ],
@@ -207,7 +297,17 @@
         "defaultSelected": false,
         "description": "Boost your domain authority with high-DR guest post placements each month.",
         "deliverables": [
-          { "category": "Inclusions", "items": ["2 High DR Guest Posts per month", "Keyword Research", "Guest Post Writing", "Placement Outreach", "Negotiations with Backlink Providers", "Monthly Backlink Delivery & Report"] }
+          {
+            "category": "Inclusions",
+            "items": [
+              "2 High DR Guest Posts per month",
+              "Keyword Research",
+              "Guest Post Writing",
+              "Placement Outreach",
+              "Negotiations with Backlink Providers",
+              "Monthly Backlink Delivery & Report"
+            ]
+          }
         ]
       },
       {
@@ -221,7 +321,17 @@
         "defaultSelected": false,
         "description": "Double the guest post volume for accelerated domain authority growth.",
         "deliverables": [
-          { "category": "Inclusions", "items": ["4 High DR Guest Posts per month", "Keyword Research", "Guest Post Writing", "Placement Outreach", "Negotiations with Backlink Providers", "Monthly Backlink Delivery & Report"] }
+          {
+            "category": "Inclusions",
+            "items": [
+              "4 High DR Guest Posts per month",
+              "Keyword Research",
+              "Guest Post Writing",
+              "Placement Outreach",
+              "Negotiations with Backlink Providers",
+              "Monthly Backlink Delivery & Report"
+            ]
+          }
         ]
       },
       {
@@ -235,7 +345,17 @@
         "defaultSelected": false,
         "description": "Six high-DR guest posts per month for serious link velocity and competitive authority gains.",
         "deliverables": [
-          { "category": "Inclusions", "items": ["6 High DR Guest Posts per month", "Keyword Research", "Guest Post Writing", "Placement Outreach", "Negotiations with Backlink Providers", "Monthly Backlink Delivery & Report"] }
+          {
+            "category": "Inclusions",
+            "items": [
+              "6 High DR Guest Posts per month",
+              "Keyword Research",
+              "Guest Post Writing",
+              "Placement Outreach",
+              "Negotiations with Backlink Providers",
+              "Monthly Backlink Delivery & Report"
+            ]
+          }
         ]
       }
     ],

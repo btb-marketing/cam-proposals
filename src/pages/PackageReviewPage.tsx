@@ -56,11 +56,13 @@ export default function PackageReviewPage() {
             { n: 1, label: 'Review' },
             { n: 2, label: 'Agreement' },
             { n: 3, label: 'Billing' },
+            { n: 4, label: 'Book Call' },
+            { n: 5, label: 'Onboarding' },
           ].map(({ n, label }) => (
             <div key={n} className={`funnel-page-step${n === 1 ? ' active current' : ''}`}>
               <div className="funnel-page-step-dot">{n}</div>
               <div className="funnel-page-step-label">{label}</div>
-              {n < 3 && <div className="funnel-page-step-line" />}
+              {n < 5 && <div className="funnel-page-step-line" />}
             </div>
           ))}
         </div>
@@ -68,7 +70,7 @@ export default function PackageReviewPage() {
 
       {/* Main Content */}
       <div className="funnel-page-body">
-        <div className="funnel-page-eyebrow">Step 1 of 3</div>
+        <div className="funnel-page-eyebrow">Step 1 of 5</div>
         <h1 className="funnel-page-title display">Review Your Package</h1>
         <p className="funnel-page-subtitle">Confirm the services you've selected before proceeding to the agreement.</p>
 
