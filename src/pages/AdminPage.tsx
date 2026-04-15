@@ -295,37 +295,46 @@ function NewProposalForm({ onClose }: { onClose: () => void }) {
           </div>
           <div className="npf-field">
             <label>Recommended Package</label>
-            <select value={form.recommendedPkg} onChange={e => set('recommendedPkg', e.target.value as 'kickstarter' | 'elevate' | 'amplify')}>
-              <option value="kickstarter">Kickstarter ($3,000/mo)</option>
-              <option value="elevate">Elevate ($5,000/mo)</option>
-              <option value="amplify">Amplify ($8,000/mo)</option>
+            <select
+              value={form.recommendedPkg}
+              onChange={e => set('recommendedPkg', e.target.value as 'kickstarter' | 'elevate' | 'amplify')}
+            >
+              <option value="kickstarter">Kickstarter — $3,000/mo</option>
+              <option value="elevate">Elevate — $5,000/mo</option>
+              <option value="amplify">Amplify — $8,000/mo</option>
             </select>
           </div>
         </div>
 
-        <div className="npf-field">
-          <label>Custom Password <span className="npf-optional">(leave blank to auto-generate)</span></label>
-          <input
-            type="text"
-            value={form.password}
-            onChange={e => set('password', e.target.value)}
-            placeholder="Auto-generated if blank"
-          />
+        <div className="npf-row">
+          <div className="npf-field npf-field-full">
+            <label>Custom Password <span className="npf-optional">(leave blank to auto-generate)</span></label>
+            <input
+              type="text"
+              value={form.password}
+              onChange={e => set('password', e.target.value)}
+              placeholder="e.g. smith2026"
+            />
+          </div>
         </div>
 
-        <div className="npf-section-title">Research Notes &amp; Requirements</div>
-        <div className="npf-field">
-          <label>Notes for AI Research</label>
-          <textarea
-            value={form.notes}
-            onChange={e => set('notes', e.target.value)}
-            placeholder="Include any specific requirements, pain points, competitor names, target keywords, budget constraints, or anything else the AI should know when generating this proposal..."
-            rows={5}
-          />
+        <div className="npf-section-title">Research Notes</div>
+        <div className="npf-row">
+          <div className="npf-field npf-field-full">
+            <label>Notes for AI <span className="npf-optional">(specific pain points, goals, context from discovery call)</span></label>
+            <textarea
+              value={form.notes}
+              onChange={e => set('notes', e.target.value)}
+              placeholder="e.g. They mentioned struggling with local SEO, have tried Google Ads before with poor results, main goal is to increase consultation bookings by 30% in 6 months..."
+              rows={5}
+            />
+          </div>
         </div>
 
         {status === 'error' && (
-          <div className="npf-error">{errorMsg}</div>
+          <div className="npf-error-msg">
+            <strong>Error:</strong> {errorMsg}
+          </div>
         )}
 
         <div className="npf-actions">
@@ -333,14 +342,24 @@ function NewProposalForm({ onClose }: { onClose: () => void }) {
             Cancel
           </button>
           <button type="submit" className="npf-submit-btn" disabled={isLoading || !form.clientName || !form.clientEmail}>
-            {status === 'uploading-logo' ? 'Uploading logo...' :
-             status === 'generating' ? 'Generating proposal...' :
-             'Generate Proposal →'}
+            {status === 'uploading-logo' ? 'Uploading logo...' : status === 'generating' ? 'Generating proposal...' : 'Generate Proposal →'}
           </button>
         </div>
       </form>
     </div>
   )
+}
+
+// ─── Sister proposal type ─────────────────────────────────────────────────────
+
+interface SisterProposal {
+  slug: string
+  clientName: string
+  clientEmail: string
+  brand: string
+  password: string
+  package: string
+  date: string
 }
 
 // ─── Main Admin Page ──────────────────────────────────────────────────────────
@@ -353,10 +372,28 @@ export default function AdminPage() {
   const [copied, setCopied] = useState<string | null>(null)
   const [, forceUpdate] = useState(0)
   const [showNewProposal, setShowNewProposal] = useState(false)
+  const [sisterProposals, setSisterProposals] = useState<SisterProposal[]>([])
+  const [sisterLoading, setSisterLoading] = useState(false)
+  const [sisterError, setSisterError] = useState<string | null>(null)
 
   useEffect(() => {
     if (sessionStorage.getItem('admin_authed') === 'true') setAuthed(true)
   }, [])
+
+  useEffect(() => {
+    if (!authed) return
+    setSisterLoading(true)
+    fetch('/api/list-sister-proposals', {
+      headers: { 'x-admin-key': ADMIN_PASSWORD },
+    })
+      .then(r => r.json())
+      .then(data => {
+        if (data.proposals) setSisterProposals(data.proposals)
+        if (data.error) setSisterError(data.error)
+      })
+      .catch(e => setSisterError(e.message))
+      .finally(() => setSisterLoading(false))
+  }, [authed])
 
   function handleAdminLogin(e: React.FormEvent) {
     e.preventDefault()
@@ -412,11 +449,159 @@ export default function AdminPage() {
 
   const slugs = getAllSlugs()
   const origin = window.location.origin
+  // Sister project origin — BTB proposals live on view.belowtheboard.com
+  const sisterOrigin = 'https://view.belowtheboard.com'
+
+  // Render a proposal card for local proposals
+  function renderLocalCard(slug: string) {
+    const proposal = loadProposal(slug)
+    if (!proposal) return null
+    const brand = proposal.brand ?? 'cameron-gallacher'
+    const password = proposal.password ?? '(no password set)'
+    const isAuth = isProposalAuthenticated(slug)
+    const proposalUrl = `${origin}/proposal/${slug}`
+    const gateUrl = `${origin}/proposal/`
+
+    return (
+      <div key={slug} className={`admin-proposal-card ${brand === 'below-the-board' ? 'card-btb' : 'card-cg'}`}>
+        <div className={`admin-brand-badge ${brand === 'below-the-board' ? 'btb' : 'cg'}`}>
+          {brand === 'below-the-board' ? 'Below the Board' : 'Cameron Gallacher'}
+        </div>
+
+        <h2 className="admin-proposal-client">{proposal.meta.preparedFor}</h2>
+        <p className="admin-proposal-slug">/{slug}</p>
+        <p className="admin-proposal-date">Prepared: {proposal.meta.date}</p>
+
+        <div className="admin-password-row">
+          <span className="admin-password-label">Password</span>
+          <code className="admin-password-value">{password}</code>
+          <button
+            className="admin-copy-btn"
+            onClick={() => handleCopy(password, `pw-${slug}`)}
+          >
+            {copied === `pw-${slug}` ? '✓ Copied' : 'Copy'}
+          </button>
+        </div>
+
+        <div className="admin-auth-status">
+          <span className={`admin-auth-dot ${isAuth ? 'active' : 'inactive'}`} />
+          <span>{isAuth ? 'Authenticated in this browser' : 'Not authenticated'}</span>
+          {isAuth && (
+            <button
+              className="admin-revoke-btn"
+              onClick={() => { clearProposalAuth(slug); forceUpdate(n => n + 1) }}
+            >
+              Revoke
+            </button>
+          )}
+        </div>
+
+        <div className="admin-links">
+          <a
+            href={proposalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="admin-link-btn primary"
+          >
+            View Proposal ↗
+          </a>
+          <button
+            className="admin-link-btn secondary"
+            onClick={() =>
+              handleCopy(
+                `Your proposal is ready!\n\nAccess it here: ${gateUrl}\nPassword: ${password}`,
+                `share-${slug}`
+              )
+            }
+          >
+            {copied === `share-${slug}` ? '✓ Copied!' : 'Copy Share Text'}
+          </button>
+        </div>
+
+        <div className="admin-funnel-links">
+          <span className="admin-funnel-label">Test Funnel Steps:</span>
+          <div className="admin-funnel-steps">
+            {[
+              { label: '1 Review', path: `review?pkg=kickstarter&addon=` },
+              { label: '2 Agreement', path: `agreement?pkg=kickstarter&addon=` },
+              { label: '3 Billing', path: `billing?pkg=kickstarter&addon=` },
+              { label: '4 Book Call', path: `onboarding?pkg=kickstarter&addon=&email=test@test.com` },
+              { label: '5 Form', path: `onboarding-form?pkg=kickstarter&addon=&email=test@test.com` },
+              {
+                label: '6 Thank You',
+                path: `thank-you?pkg=kickstarter&addon=&name=${encodeURIComponent(proposal.meta.preparedFor)}&email=test@test.com`,
+              },
+            ].map(step => (
+              <a
+                key={step.label}
+                href={`${origin}/proposal/${slug}/${step.path}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="admin-funnel-step-link"
+              >
+                {step.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Render a card for sister project proposals (read-only, links to sister domain)
+  function renderSisterCard(p: SisterProposal) {
+    const proposalUrl = `${sisterOrigin}/proposal/${p.slug}`
+    const gateUrl = `${sisterOrigin}/proposal/`
+
+    return (
+      <div key={`sister-${p.slug}`} className="admin-proposal-card card-btb card-sister">
+        <div className="admin-brand-badge btb">Below the Board</div>
+        <div className="admin-sister-tag">BTB Project</div>
+
+        <h2 className="admin-proposal-client">{p.clientName}</h2>
+        <p className="admin-proposal-slug">/{p.slug}</p>
+        <p className="admin-proposal-date">Prepared: {p.date}</p>
+
+        <div className="admin-password-row">
+          <span className="admin-password-label">Password</span>
+          <code className="admin-password-value">{p.password || '(not set)'}</code>
+          <button
+            className="admin-copy-btn"
+            onClick={() => handleCopy(p.password, `pw-sister-${p.slug}`)}
+          >
+            {copied === `pw-sister-${p.slug}` ? '✓ Copied' : 'Copy'}
+          </button>
+        </div>
+
+        <div className="admin-links">
+          <a
+            href={proposalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="admin-link-btn primary"
+          >
+            View Proposal ↗
+          </a>
+          <button
+            className="admin-link-btn secondary"
+            onClick={() =>
+              handleCopy(
+                `Your proposal is ready!\n\nAccess it here: ${gateUrl}\nPassword: ${p.password}`,
+                `share-sister-${p.slug}`
+              )
+            }
+          >
+            {copied === `share-sister-${p.slug}` ? '✓ Copied!' : 'Copy Share Text'}
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="admin-page">
       <div className="admin-header">
-        <div className="admin-header-logo">CG. Admin</div>
+        <div className="admin-header-logo">Proposals Admin</div>
         <div className="admin-header-actions">
           <button
             className="admin-new-proposal-btn"
@@ -446,117 +631,58 @@ export default function AdminPage() {
       <div className="admin-content">
         <h1 className="admin-title">Proposal Management</h1>
         <p className="admin-subtitle">
-          Manage all active proposals, passwords, and client access below.
+          All proposals from both Cameron Gallacher Consulting and Below the Board Marketing.
         </p>
 
+        {/* Legend */}
+        <div className="admin-legend">
+          <span className="admin-legend-item">
+            <span className="admin-legend-dot cg" />
+            Cameron Gallacher Consulting
+          </span>
+          <span className="admin-legend-item">
+            <span className="admin-legend-dot btb" />
+            Below the Board Marketing
+          </span>
+        </div>
+
         <div className="admin-proposals-grid">
-          {slugs.map(slug => {
-            const proposal = loadProposal(slug)
-            if (!proposal) return null
-            const brand = proposal.brand ?? 'cameron-gallacher'
-            const password = proposal.password ?? '(no password set)'
-            const isAuth = isProposalAuthenticated(slug)
-            const proposalUrl = `${origin}/proposal/${slug}`
-            const gateUrl = `${origin}/proposal/`
+          {/* Local proposals */}
+          {slugs.map(slug => renderLocalCard(slug))}
 
-            return (
-              <div key={slug} className="admin-proposal-card">
-                <div className={`admin-brand-badge ${brand === 'below-the-board' ? 'btb' : 'cg'}`}>
-                  {brand === 'below-the-board' ? 'Below the Board' : 'Cameron Gallacher'}
-                </div>
-
-                <h2 className="admin-proposal-client">{proposal.meta.preparedFor}</h2>
-                <p className="admin-proposal-slug">/{slug}</p>
-                <p className="admin-proposal-date">Prepared: {proposal.meta.date}</p>
-
-                <div className="admin-password-row">
-                  <span className="admin-password-label">Password</span>
-                  <code className="admin-password-value">{password}</code>
-                  <button
-                    className="admin-copy-btn"
-                    onClick={() => handleCopy(password, `pw-${slug}`)}
-                  >
-                    {copied === `pw-${slug}` ? '✓ Copied' : 'Copy'}
-                  </button>
-                </div>
-
-                <div className="admin-auth-status">
-                  <span className={`admin-auth-dot ${isAuth ? 'active' : 'inactive'}`} />
-                  <span>{isAuth ? 'Authenticated in this browser' : 'Not authenticated'}</span>
-                  {isAuth && (
-                    <button
-                      className="admin-revoke-btn"
-                      onClick={() => { clearProposalAuth(slug); forceUpdate(n => n + 1) }}
-                    >
-                      Revoke
-                    </button>
-                  )}
-                </div>
-
-                <div className="admin-links">
-                  <a
-                    href={proposalUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="admin-link-btn primary"
-                  >
-                    View Proposal ↗
-                  </a>
-                  <button
-                    className="admin-link-btn secondary"
-                    onClick={() =>
-                      handleCopy(
-                        `Your proposal is ready!\n\nAccess it here: ${gateUrl}\nPassword: ${password}`,
-                        `share-${slug}`
-                      )
-                    }
-                  >
-                    {copied === `share-${slug}` ? '✓ Copied!' : 'Copy Share Text'}
-                  </button>
-                </div>
-
-                <div className="admin-funnel-links">
-                  <span className="admin-funnel-label">Test Funnel Steps:</span>
-                  <div className="admin-funnel-steps">
-                    {[
-                      { label: '1 Review', path: `review?pkg=kickstarter&addon=` },
-                      { label: '2 Agreement', path: `agreement?pkg=kickstarter&addon=` },
-                      { label: '3 Billing', path: `billing?pkg=kickstarter&addon=` },
-                      { label: '4 Book Call', path: `onboarding?pkg=kickstarter&addon=&email=test@test.com` },
-                      { label: '5 Form', path: `onboarding-form?pkg=kickstarter&addon=&email=test@test.com` },
-                      {
-                        label: '6 Thank You',
-                        path: `thank-you?pkg=kickstarter&addon=&name=${encodeURIComponent(proposal.meta.preparedFor)}&email=test@test.com`,
-                      },
-                    ].map(step => (
-                      <a
-                        key={step.label}
-                        href={`${origin}/proposal/${slug}/${step.path}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="admin-funnel-step-link"
-                      >
-                        {step.label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )
-          })}
+          {/* Sister project proposals */}
+          {sisterLoading && (
+            <div className="admin-sister-loading">Loading BTB proposals...</div>
+          )}
+          {sisterError && (
+            <div className="admin-sister-error">
+              Could not load BTB proposals: {sisterError}
+            </div>
+          )}
+          {!sisterLoading && sisterProposals.map(p => renderSisterCard(p))}
         </div>
 
         <div className="admin-quick-ref">
           <h3 className="admin-section-title">Quick Reference</h3>
           <div className="admin-ref-grid">
             <div className="admin-ref-card">
-              <h4>Password Gate URL</h4>
+              <h4>CG Password Gate</h4>
               <code>{origin}/proposal/</code>
               <button
                 className="admin-copy-btn"
-                onClick={() => handleCopy(`${origin}/proposal/`, 'gate-url')}
+                onClick={() => handleCopy(`${origin}/proposal/`, 'gate-url-cg')}
               >
-                {copied === 'gate-url' ? '✓ Copied' : 'Copy'}
+                {copied === 'gate-url-cg' ? '✓ Copied' : 'Copy'}
+              </button>
+            </div>
+            <div className="admin-ref-card">
+              <h4>BTB Password Gate</h4>
+              <code>{sisterOrigin}/proposal/</code>
+              <button
+                className="admin-copy-btn"
+                onClick={() => handleCopy(`${sisterOrigin}/proposal/`, 'gate-url-btb')}
+              >
+                {copied === 'gate-url-btb' ? '✓ Copied' : 'Copy'}
               </button>
             </div>
             <div className="admin-ref-card">
