@@ -758,6 +758,8 @@ section {
   transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .pricing-card--addon {
@@ -882,6 +884,7 @@ section {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  flex: 1;
 }
 
 .pricing-deliverable-group {}
@@ -1356,19 +1359,21 @@ section {
   overflow-y: auto;
 }
 
-.sidebar-logo {
-  padding: 28px 24px 20px;
+.sidebar-logo-wrap {
+  padding: 28px 24px 24px;
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
 }
 
 .sidebar-logo-text {
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: 32px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text);
-  line-height: 1;
+  line-height: 1.1;
+  word-break: break-word;
+  max-width: 180px;
 }
 
 .sidebar-logo-text span {
@@ -1381,20 +1386,13 @@ section {
   overflow-y: auto;
 }
 
-.sidebar-toc-label {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  padding: 0 24px 12px;
-}
+/* .sidebar-toc-label is unused — class names are sidebar-toc-number and sidebar-toc-text */
 
 .sidebar-toc-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 24px;
+  padding: 14px 24px;
   cursor: pointer;
   border: none;
   background: none;
@@ -1415,11 +1413,11 @@ section {
 
 .sidebar-toc-number {
   font-family: var(--font-display);
-  font-size: 13px;
-  color: var(--text-dim);
+  font-size: 14px;
+  color: #ffffff;
   letter-spacing: 0.08em;
   flex-shrink: 0;
-  width: 24px;
+  width: 26px;
   transition: color 0.15s;
 }
 
@@ -1427,16 +1425,17 @@ section {
   color: var(--accent);
 }
 
+.sidebar-toc-item--active .sidebar-toc-text {
+  color: var(--text);
+  font-weight: 700;
+}
+
 .sidebar-toc-text {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--text-muted);
   letter-spacing: 0.03em;
   transition: color 0.15s;
-}
-
-.sidebar-toc-item--active .sidebar-toc-text {
-  color: var(--text);
 }
 
 .sidebar-footer {
@@ -1455,6 +1454,8 @@ section {
 }
 
 .sidebar-contact-email {
+  display: flex;
+  align-items: center;
   font-size: 11px;
   color: var(--text-muted);
   margin-bottom: 10px;
@@ -1468,8 +1469,16 @@ section {
 
 .sidebar-socials {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 8px;
   margin-bottom: 14px;
+}
+
+.sidebar-social-sep {
+  color: var(--border);
+  font-size: 12px;
+  line-height: 1;
+  user-select: none;
 }
 
 .sidebar-social-link {
@@ -1497,8 +1506,15 @@ section {
 .sidebar-legal-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 12px;
+  align-items: center;
+  gap: 4px 6px;
   margin-bottom: 12px;
+}
+
+.sidebar-legal-sep {
+  color: var(--border);
+  font-size: 10px;
+  user-select: none;
 }
 
 .sidebar-legal-link {
@@ -1515,7 +1531,7 @@ section {
 .sidebar-copyright {
   font-size: 9px;
   color: var(--text-dim);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 /* ============================================================
@@ -1651,16 +1667,24 @@ section {
 }
 
 .pricing-card-badge-stack {
+  position: absolute;
+  top: 12px;
+  right: 12px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   align-items: flex-end;
-  flex-shrink: 0;
+  z-index: 2;
 }
 
 /* Decorative select button at bottom of card */
 .pricing-card-select-btn {
-  margin-top: 20px;
+  margin-top: auto;
+  padding-top: 20px;
+  padding-bottom: 0;
+}
+
+.pricing-card-select-btn-inner {
   padding: 10px 16px;
   font-size: 11px;
   font-weight: 700;
@@ -1674,13 +1698,13 @@ section {
   user-select: none;
 }
 
-.pricing-card-select-btn.selected {
+.pricing-card-select-btn.selected .pricing-card-select-btn-inner {
   border-color: var(--accent);
   color: var(--accent);
   background: var(--accent-dim);
 }
 
-.pricing-card:hover .pricing-card-select-btn:not(.selected) {
+.pricing-card:hover .pricing-card-select-btn:not(.selected) .pricing-card-select-btn-inner {
   border-color: rgba(200,241,53,0.3);
   color: var(--text);
 }

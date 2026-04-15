@@ -394,11 +394,13 @@ export default function ProposalPage() {
 
                             {/* Badge top-right */}
                             {pkg.badge && (
-                              <div className="pricing-card-badge-corner" style={{
-                                background: isRecommended ? 'var(--accent)' : 'transparent',
-                                color: isRecommended ? 'var(--bg)' : 'var(--text-dim)',
-                                border: isRecommended ? 'none' : '1px solid var(--border)'
-                              }}>{pkg.badge}</div>
+                              <div className="pricing-card-badge-stack">
+                                <div className="pricing-card-badge-corner" style={{
+                                  background: isRecommended ? 'var(--accent)' : 'transparent',
+                                  color: isRecommended ? 'var(--bg)' : 'var(--text-dim)',
+                                  border: isRecommended ? 'none' : '1px solid var(--border)'
+                                }}>{pkg.badge}</div>
+                              </div>
                             )}
 
                             <div className="pricing-card-name" style={{ marginTop: '32px' }}>{pkg.name}</div>
@@ -422,7 +424,9 @@ export default function ProposalPage() {
                             </div>
                             {/* Click-to-select button (decorative) */}
                             <div className={`pricing-card-select-btn${isSelected ? ' selected' : ''}`}>
-                              {isSelected ? '✓ Selected' : 'Select Package'}
+                              <div className="pricing-card-select-btn-inner">
+                                {isSelected ? '✓ Selected' : 'Select Package'}
+                              </div>
                             </div>
                           </div>
                         )
@@ -504,7 +508,9 @@ export default function ProposalPage() {
                             </div>
                             {/* Click-to-select button (decorative) */}
                             <div className={`pricing-card-select-btn${isSelected ? ' selected' : ''}`}>
-                              {isSelected ? '✓ Added' : '+ Add On'}
+                              <div className="pricing-card-select-btn-inner">
+                                {isSelected ? '✓ Added' : '+ Add On'}
+                              </div>
                             </div>
                           </div>
                         )

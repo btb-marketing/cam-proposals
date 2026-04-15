@@ -47,9 +47,12 @@ export default function Sidebar({ sections }: SidebarProps) {
     <>
       {/* ── Desktop Sidebar ── */}
       <nav className="sidebar" aria-label="Proposal navigation">
+
         {/* Logo */}
-        <div className="sidebar-logo display">
-          cameron<br />gallacher<span className="sidebar-logo-dot">.</span>
+        <div className="sidebar-logo-wrap">
+          <div className="sidebar-logo-text">
+            Cameron<br />Gallacher<span className="sidebar-logo-dot">.</span>
+          </div>
         </div>
 
         {/* TOC */}
@@ -60,8 +63,8 @@ export default function Sidebar({ sections }: SidebarProps) {
                 className={`sidebar-toc-item${activeId === s.id ? ' sidebar-toc-item--active' : ''}`}
                 onClick={() => scrollTo(s.id)}
               >
-                <span className="sidebar-toc-num">{s.number}</span>
-                <span className="sidebar-toc-label">{s.label}</span>
+                <span className="sidebar-toc-number">{s.number}</span>
+                <span className="sidebar-toc-text">{s.label}</span>
               </button>
             </li>
           ))}
@@ -69,34 +72,44 @@ export default function Sidebar({ sections }: SidebarProps) {
 
         {/* Footer */}
         <div className="sidebar-footer">
-          <div className="sidebar-contact">
-            <a href="mailto:cam@latchedinc.com" className="sidebar-contact-link">cam@latchedinc.com</a>
-            <div className="sidebar-socials">
-              <a href="https://www.instagram.com/camthemarketer" target="_blank" rel="noopener noreferrer" className="sidebar-social-link" aria-label="Instagram">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                  <circle cx="12" cy="12" r="4"/>
-                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-                </svg>
-                Instagram
-              </a>
-              <a href="https://linkedin.com/in/camthemarketer/" target="_blank" rel="noopener noreferrer" className="sidebar-social-link" aria-label="LinkedIn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                  <rect x="2" y="9" width="4" height="12"/>
-                  <circle cx="4" cy="4" r="2"/>
-                </svg>
-                LinkedIn
-              </a>
-            </div>
+          <div className="sidebar-contact-label">Contact</div>
+
+          <div className="sidebar-contact-email">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '5px', verticalAlign: 'middle', flexShrink: 0 }}>
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <polyline points="2,4 12,13 22,4"/>
+            </svg>
+            <a href="mailto:cam@latchedinc.com">cam@latchedinc.com</a>
           </div>
-          <div className="sidebar-legal">
+
+          <div className="sidebar-socials">
+            <a href="https://www.instagram.com/camthemarketer" target="_blank" rel="noopener noreferrer" className="sidebar-social-link" aria-label="Instagram">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+              </svg>
+            </a>
+            <span className="sidebar-social-sep">|</span>
+            <a href="https://linkedin.com/in/camthemarketer/" target="_blank" rel="noopener noreferrer" className="sidebar-social-link" aria-label="LinkedIn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect x="2" y="9" width="4" height="12"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+            </a>
+          </div>
+
+          <div className="sidebar-legal-links">
             <a href="/privacy-policy" className="sidebar-legal-link">Privacy Policy</a>
+            <span className="sidebar-legal-sep">|</span>
             <a href="/cookie-policy" className="sidebar-legal-link">Cookie Policy</a>
-            <a href="/terms" className="sidebar-legal-link">Terms</a>
+            <span className="sidebar-legal-sep">|</span>
+            <a href="/terms" className="sidebar-legal-link">Terms &amp; Conditions</a>
           </div>
+
           <div className="sidebar-copyright">
-            © {new Date().getFullYear()} Cameron Gallacher<br />All Rights Reserved
+            © {new Date().getFullYear()} Cameron Gallacher · All Rights Reserved
           </div>
         </div>
       </nav>
