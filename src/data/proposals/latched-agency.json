@@ -18,7 +18,7 @@
   },
   "about": {
     "heading": "About Us",
-    "description": "With over a decade of experience in digital marketing, I've had the privilege of working with 200+ businesses across Canada and the United States — from small local businesses to large publicly traded enterprises. My client roster spans CPG brands, brick-and-mortar retail, e-commerce, software companies, consultants, medical professionals, and real estate agents, among others. Across those engagements, I've helped generate over $500 million USD in revenue for clients through highly targeted, performance-driven digital strategies. I'm the founder and CEO of multiple marketing agencies, and I bring that same operator-level thinking to every client relationship.",
+    "description": "With over a decade of experience in digital marketing, I've had the privilege of working with 200+ businesses across Canada and the United States \u2014 from small local businesses to large publicly traded enterprises. My client roster spans CPG brands, brick-and-mortar retail, e-commerce, software companies, consultants, medical professionals, and real estate agents, among others. Across those engagements, I've helped generate over $500 million USD in revenue for clients through highly targeted, performance-driven digital strategies. I'm the founder and CEO of multiple marketing agencies, and I bring that same operator-level thinking to every client relationship.",
     "notableClients": []
   },
   "team": [
@@ -37,7 +37,7 @@
   ],
   "overview": {
     "headline": "The Opportunity",
-    "subheadline": "Latched Agency is already the recognized leader in cannabis digital marketing — serving hundreds of cannabis brands across North America with SEO, CRO, content, and web design. The opportunity is to ensure Latched's own website ranks as aggressively for cannabis marketing keywords as the clients it serves. Right now, high-value searches like 'cannabis marketing agency', 'cannabis SEO agency', and 'dispensary SEO' are being captured by competitors. A focused SEO engagement will close that gap, build Latched's domain authority, and generate a consistent flow of inbound leads directly from organic search.",
+    "subheadline": "Latched Agency is already the recognized leader in cannabis digital marketing \u2014 serving hundreds of cannabis brands across North America with SEO, CRO, content, and web design. The opportunity is to ensure Latched's own website ranks as aggressively for cannabis marketing keywords as the clients it serves. Right now, high-value searches like 'cannabis marketing agency', 'cannabis SEO agency', and 'dispensary SEO' are being captured by competitors. A focused SEO engagement will close that gap, build Latched's domain authority, and generate a consistent flow of inbound leads directly from organic search.",
     "objectives": [
       "Rank for high-intent 'cannabis marketing agency' and 'cannabis SEO' keywords in the US and Canada",
       "Outrank competitors including Coalition Technologies, Client Verge, and Hybrid Marketing Co.",
@@ -48,7 +48,7 @@
     "strategy": [
       {
         "title": "Competitive Gap Analysis",
-        "description": "Audit Latched's current rankings against top competitors (Coalition Technologies, Client Verge, Hybrid Marketing Co.) to identify exactly which keywords they're winning and why — then build a plan to close those gaps."
+        "description": "Audit Latched's current rankings against top competitors (Coalition Technologies, Client Verge, Hybrid Marketing Co.) to identify exactly which keywords they're winning and why \u2014 then build a plan to close those gaps."
       },
       {
         "title": "High-Intent SEO Optimization",
@@ -84,9 +84,8 @@
   "scopeOfWork": {
     "months": [
       {
-        "month": "Month 1",
-        "title": "Foundation & Audit",
-        "tasks": [
+        "title": "Month 1 \u2014 Foundation & Audit",
+        "deliverables": [
           "Full technical SEO audit of latchedagency.com",
           "Competitive gap analysis vs. Coalition Technologies, Client Verge, Hybrid Marketing Co.",
           "Keyword mapping across all service pages and blog content",
@@ -96,9 +95,8 @@
         ]
       },
       {
-        "month": "Month 2",
-        "title": "On-Page Optimization",
-        "tasks": [
+        "title": "Month 2 \u2014 On-Page Optimization",
+        "deliverables": [
           "Optimize all primary service pages for target keywords",
           "Rewrite and expand meta titles and descriptions site-wide",
           "Improve internal linking structure across service and blog pages",
@@ -108,11 +106,10 @@
         ]
       },
       {
-        "month": "Month 3",
-        "title": "Authority & Content",
-        "tasks": [
+        "title": "Month 3 \u2014 Authority & Content",
+        "deliverables": [
           "Publish 4 SEO-optimized blog articles targeting high-volume cannabis marketing keywords",
-          "Continue backlink acquisition (target: 4–6 high-DR placements)",
+          "Continue backlink acquisition (target: 4\u20136 high-DR placements)",
           "Optimize Google Business Profile for local search",
           "Build local citation consistency across directories",
           "Review and optimize conversion paths on key landing pages",
@@ -120,9 +117,8 @@
         ]
       },
       {
-        "month": "Month 4+",
-        "title": "Scale & Momentum",
-        "tasks": [
+        "title": "Month 4+ \u2014 Scale & Momentum",
+        "deliverables": [
           "Ongoing content production and keyword expansion",
           "Accelerated backlink acquisition based on Month 3 results",
           "A/B testing on high-traffic landing pages",
@@ -138,7 +134,7 @@
     "Keyword map covering all service pages and blog content",
     "On-page optimization of up to 15 URLs per month",
     "4 SEO-optimized blog articles per month (Month 3+)",
-    "4–8 high-DR backlinks per month",
+    "4\u20138 high-DR backlinks per month",
     "Google Business Profile optimization",
     "Local citation buildout and consistency audit",
     "Monthly keyword ranking report",
@@ -147,32 +143,17 @@
     "Slack support with <24hr response time"
   ],
   "successMetrics": [
-    {
-      "metric": "Keyword Rankings",
-      "description": "Track position improvements for target cannabis marketing and SEO keywords in Google US and Canada"
-    },
-    {
-      "metric": "Organic Traffic Growth",
-      "description": "Month-over-month increase in organic sessions to latchedagency.com"
-    },
-    {
-      "metric": "Domain Authority",
-      "description": "Improvement in Ahrefs DR / Moz DA from backlink acquisition"
-    },
-    {
-      "metric": "Inbound Lead Volume",
-      "description": "Increase in 'Book an Intro Call' form submissions and Calendly bookings from organic traffic"
-    },
-    {
-      "metric": "Conversion Rate",
-      "description": "Improvement in organic visitor-to-lead conversion rate on key service pages"
-    }
+    "Keyword Rankings: Track position improvements for target cannabis marketing and SEO keywords in Google US and Canada",
+    "Organic Traffic Growth: Month-over-month increase in organic sessions to latchedagency.com",
+    "Domain Authority: Improvement in Ahrefs DR / Moz DA from backlink acquisition",
+    "Inbound Lead Volume: Increase in 'Book an Intro Call' form submissions and Calendly bookings from organic traffic",
+    "Conversion Rate: Improvement in organic visitor-to-lead conversion rate on key service pages"
   ],
   "investment": {
     "sectionTitle": "Investment",
     "sectionSubtitle": "Choose the engagement level that fits your current growth goals.",
     "packagesLabel": "SEO Packages",
-    "addonsLabel": "Optional Add-Ons — click to select",
+    "addonsLabel": "Optional Add-Ons \u2014 click to select",
     "packages": [
       {
         "id": "kickstarter",
@@ -225,7 +206,7 @@
         "plusTax": true,
         "badge": "Most Popular",
         "defaultSelected": true,
-        "description": "The full-stack SEO engagement — on-page optimization, content production, authority building, and conversion optimization working together.",
+        "description": "The full-stack SEO engagement \u2014 on-page optimization, content production, authority building, and conversion optimization working together.",
         "deliverables": [
           {
             "category": "Keyword Research",
@@ -276,7 +257,7 @@
         "plusTax": true,
         "badge": "Maximum Impact",
         "defaultSelected": false,
-        "description": "Full-scale SEO domination — designed to outrank every competitor in the cannabis marketing space within 6 months.",
+        "description": "Full-scale SEO domination \u2014 designed to outrank every competitor in the cannabis marketing space within 6 months.",
         "deliverables": [
           {
             "category": "Keyword Research",
@@ -373,8 +354,8 @@
         ]
       }
     ],
-    "roiContext": "Latched already has a proven service offering and a strong client base. The missing piece is organic visibility — the agency's own website should be generating as many inbound leads as the clients it serves. This engagement is designed to fix that directly and measurably.",
-    "exitClause": "No long-term lock-in. I recommend a 3–4 month initial term to allow enough time to see meaningful ranking movement, but I'm happy to discuss a month-to-month arrangement after the initial sprint."
+    "roiContext": "Latched already has a proven service offering and a strong client base. The missing piece is organic visibility \u2014 the agency's own website should be generating as many inbound leads as the clients it serves. This engagement is designed to fix that directly and measurably.",
+    "exitClause": "No long-term lock-in. I recommend a 3\u20134 month initial term to allow enough time to see meaningful ranking movement, but I'm happy to discuss a month-to-month arrangement after the initial sprint."
   },
   "caseStudies": [
     {
