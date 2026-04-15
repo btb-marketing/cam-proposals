@@ -1,11 +1,18 @@
-import { useState, useEffect, useRef } from 'react'
+/**
+ * PasswordGatePage — /proposal/
+ *
+ * Always shows the password form. No auto-redirect on load.
+ * On submit:
+ *   - If the password matches a proposal → set 30-day slug cookie → redirect to /proposal/:slug
+ *   - If the password matches the admin password → redirect to /admin
+ *   - Otherwise → show error
+ */
+import { useState, useRef } from 'react'
 import { useLocation } from 'wouter'
 import { getAllSlugs, loadProposal } from '../data/loader'
-import {
-  isProposalAuthenticated,
-  authenticateProposal,
-  getAllAuthenticatedSlugs,
-} from '../hooks/useProposalAuth'
+import { authenticateProposal } from '../hooks/useProposalAuth'
+
+const ADMIN_PASSWORD = '@GymZQFbofDaci4uEfiR'
 
 export default function PasswordGatePage() {
   const [, navigate] = useLocation()
@@ -14,28 +21,27 @@ export default function PasswordGatePage() {
   const [loading, setLoading] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  // On mount: if user already has a valid auth cookie, auto-redirect
-  useEffect(() => {
-    const authenticated = getAllAuthenticatedSlugs()
-    if (authenticated.length >= 1) {
-      navigate(`/proposal/${authenticated[0]}`, { replace: true })
-      return
-    }
-    setTimeout(() => inputRef.current?.focus(), 100)
-  }, [navigate])
-
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setError('')
     setLoading(true)
 
+    const trimmed = password.trim()
+
+    // Check admin password first
+    if (trimmed === ADMIN_PASSWORD) {
+      setTimeout(() => navigate('/admin', { replace: true }), 200)
+      return
+    }
+
+    // Check against all proposal passwords
     const slugs = getAllSlugs()
     let matched = false
 
     for (const slug of slugs) {
       const proposal = loadProposal(slug)
       if (!proposal?.password) continue
-      if (authenticateProposal(slug, password, proposal.password)) {
+      if (authenticateProposal(slug, trimmed, proposal.password)) {
         matched = true
         setTimeout(() => navigate(`/proposal/${slug}`, { replace: true }), 300)
         break
@@ -78,6 +84,7 @@ export default function PasswordGatePage() {
               autoComplete="off"
               spellCheck={false}
               disabled={loading}
+              autoFocus
             />
             {error && <p className="password-gate-error">{error}</p>}
           </div>

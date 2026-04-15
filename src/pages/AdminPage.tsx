@@ -3,7 +3,7 @@ import { getAllSlugs, loadProposal } from '../data/loader'
 import { isProposalAuthenticated, clearProposalAuth } from '../hooks/useProposalAuth'
 import { useBrandMeta } from '../hooks/useBrandMeta'
 
-const ADMIN_PASSWORD = 'btb-admin-2026'
+const ADMIN_PASSWORD = '@GymZQFbofDaci4uEfiR'
 
 function copyToClipboard(text: string) {
   navigator.clipboard.writeText(text).catch(() => {
