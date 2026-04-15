@@ -6,6 +6,7 @@ import AgreementPage from './pages/AgreementPage'
 import BillingPage from './pages/BillingPage'
 import OnboardingBookingPage from './pages/OnboardingBookingPage'
 import OnboardingFormPage from './pages/OnboardingFormPage'
+import ThankYouPage from './pages/ThankYouPage'
 import NotFound from './pages/NotFound'
 import Home from './pages/Home'
 import PrivacyPolicy from './pages/PrivacyPolicy'
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="/proposal/:slug/billing" component={BillingPage} />
         <Route path="/proposal/:slug/onboarding" component={OnboardingBookingPage} />
         <Route path="/proposal/:slug/onboarding-form" component={OnboardingFormPage} />
+        <Route path="/proposal/:slug/thank-you" component={ThankYouPage} />
         <Route path="/privacy-policy" component={PrivacyPolicy} />
         <Route path="/cookie-policy" component={CookiePolicy} />
         <Route path="/terms" component={Terms} />

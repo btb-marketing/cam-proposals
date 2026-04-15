@@ -9,7 +9,7 @@ function getAgencyName(brand: string): string {
 
 // Determine analytics email based on brand
 function getAnalyticsEmail(brand: string): string {
-  return brand === 'below-the-board' ? 'analytics@belowtheboard.com' : 'analytics@latchedinc.com'
+  return 'cam@belowtheboard.com'
 }
 
 interface FormState {
@@ -151,8 +151,8 @@ export default function OnboardingFormPage() {
       })
       const data = await response.json()
       if (!response.ok) throw new Error(data.error || 'Failed to submit form')
-      setSubmitted(true)
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      // Navigate to thank-you page
+      navigate(`/proposal/${slug}/thank-you?pkg=${pkgId}&addon=${addonId}&name=${encodeURIComponent(proposal.meta.preparedFor)}&email=${encodeURIComponent(form.clientEmail)}`)
     } catch (err: any) {
       setErrorMsg(err.message || 'Failed to submit. Please try again.')
     } finally {

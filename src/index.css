@@ -3718,3 +3718,69 @@ section {
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
+
+/* =====================================================
+   THANK YOU PAGE (Step 6)
+   ===================================================== */
+.thankyou-page {
+  position: relative; min-height: 100vh; background: var(--bg); color: var(--text);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: hidden; padding: 60px 24px 40px;
+}
+.thankyou-confetti {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+}
+.thankyou-content {
+  position: relative; z-index: 1; max-width: 680px; width: 100%;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+.thankyou-logo { font-size: 28px; color: var(--accent); margin-bottom: 32px; opacity: 0.7; }
+.thankyou-badge { margin-bottom: 28px; animation: thankyou-pop 0.6s cubic-bezier(0.34,1.56,0.64,1) both; }
+@keyframes thankyou-pop {
+  from { transform: scale(0) rotate(-20deg); opacity: 0; }
+  to { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.thankyou-headline {
+  font-size: clamp(40px,7vw,72px); line-height: 1.05; color: var(--text);
+  margin: 0 0 20px; animation: thankyou-fade-up 0.7s 0.2s both;
+}
+.thankyou-subheadline {
+  font-size: 16px; line-height: 1.7; color: var(--text-muted); max-width: 520px;
+  margin: 0 0 48px; animation: thankyou-fade-up 0.7s 0.35s both;
+}
+.thankyou-subheadline strong { color: var(--accent); font-weight: 600; }
+@keyframes thankyou-fade-up {
+  from { transform: translateY(24px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.thankyou-next-steps {
+  width: 100%; display: flex; flex-direction: column; gap: 16px;
+  margin-bottom: 48px; animation: thankyou-fade-up 0.7s 0.5s both;
+}
+.thankyou-next-step {
+  display: flex; align-items: flex-start; gap: 20px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px 24px; text-align: left; transition: border-color 0.2s;
+}
+.thankyou-next-step:hover { border-color: var(--accent); }
+.thankyou-next-step-num { font-size: 28px; color: var(--accent); line-height: 1; flex-shrink: 0; min-width: 40px; }
+.thankyou-next-step-body { display: flex; flex-direction: column; gap: 4px; }
+.thankyou-next-step-title { font-size: 15px; font-weight: 600; color: var(--text); letter-spacing: 0.02em; }
+.thankyou-next-step-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+.thankyou-contact { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; animation: thankyou-fade-up 0.7s 0.65s both; }
+.thankyou-email { color: var(--accent); text-decoration: none; font-weight: 500; }
+.thankyou-email:hover { text-decoration: underline; }
+.thankyou-back-btn {
+  background: transparent; border: 1px solid var(--border); color: var(--text-muted);
+  padding: 10px 20px; border-radius: 8px; font-size: 13px; cursor: pointer;
+  transition: all 0.2s; animation: thankyou-fade-up 0.7s 0.75s both;
+}
+.thankyou-back-btn:hover { border-color: var(--accent); color: var(--accent); }
+.thankyou-footer {
+  position: relative; z-index: 1; margin-top: 60px;
+  display: flex; align-items: center; gap: 12px;
+  font-size: 12px; color: var(--text-muted); opacity: 0.6;
+}
+.thankyou-footer .display { font-size: 16px; color: var(--text); }
+.thankyou-footer-sep { opacity: 0.4; }
