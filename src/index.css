@@ -3784,3 +3784,80 @@ section {
 }
 .thankyou-footer .display { font-size: 16px; color: var(--text); }
 .thankyou-footer-sep { opacity: 0.4; }
+
+
+/* PASSWORD GATE PAGE */
+.password-gate-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--bg); padding: 24px; position: relative; overflow: hidden; }
+.password-gate-bg { position: absolute; inset: 0; background-image: linear-gradient(rgba(198,241,53,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(198,241,53,0.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+.password-gate-card { position: relative; z-index: 1; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 48px 40px; width: 100%; max-width: 440px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.password-gate-logo { font-family: "Bebas Neue", sans-serif; font-size: 2.5rem; letter-spacing: 0.05em; color: var(--accent); margin-bottom: 20px; line-height: 1; }
+.password-gate-title { font-family: "Bebas Neue", sans-serif; font-size: 1.8rem; letter-spacing: 0.04em; color: var(--text); margin: 0 0 10px; line-height: 1.1; }
+.password-gate-subtitle { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0 0 32px; max-width: 320px; }
+.password-gate-form { width: 100%; display: flex; flex-direction: column; gap: 16px; }
+.password-gate-field { display: flex; flex-direction: column; gap: 6px; text-align: left; }
+.password-gate-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+.password-gate-input { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 15px; padding: 12px 14px; width: 100%; outline: none; transition: border-color 0.2s; box-sizing: border-box; }
+.password-gate-input:focus { border-color: var(--accent); }
+.password-gate-input.error { border-color: #ff4d4d; }
+.password-gate-input:disabled { opacity: 0.5; cursor: not-allowed; }
+.password-gate-error { font-size: 12px; color: #ff4d4d; margin: 0; }
+.password-gate-btn { background: var(--accent); color: #0d0d0d; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; letter-spacing: 0.04em; padding: 14px 24px; cursor: pointer; transition: opacity 0.2s, transform 0.15s; width: 100%; margin-top: 4px; }
+.password-gate-btn:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+.password-gate-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.password-gate-help { font-size: 13px; color: var(--text-muted); margin: 20px 0 0; }
+.password-gate-link { color: var(--accent); text-decoration: none; }
+.password-gate-link:hover { text-decoration: underline; }
+
+/* ADMIN PAGE */
+.admin-page { min-height: 100vh; background: var(--bg); color: var(--text); }
+.admin-header { position: sticky; top: 0; z-index: 100; background: var(--bg-card); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; }
+.admin-header-logo { font-family: "Bebas Neue", sans-serif; font-size: 1.4rem; letter-spacing: 0.06em; color: var(--accent); }
+.admin-logout-btn { background: transparent; border: 1px solid var(--border); color: var(--text-muted); padding: 8px 16px; border-radius: 6px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+.admin-logout-btn:hover { border-color: var(--accent); color: var(--accent); }
+.admin-content { max-width: 1100px; margin: 0 auto; padding: 48px 32px; }
+.admin-title { font-family: "Bebas Neue", sans-serif; font-size: 2.4rem; letter-spacing: 0.04em; color: var(--text); margin: 0 0 8px; }
+.admin-subtitle { font-size: 14px; color: var(--text-muted); margin: 0 0 40px; }
+.admin-proposals-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 24px; margin-bottom: 48px; }
+.admin-proposal-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 12px; }
+.admin-brand-badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; width: fit-content; }
+.admin-brand-badge.cg { background: rgba(198,241,53,0.12); color: var(--accent); border: 1px solid rgba(198,241,53,0.25); }
+.admin-brand-badge.btb { background: rgba(100,180,255,0.12); color: #64b4ff; border: 1px solid rgba(100,180,255,0.25); }
+.admin-proposal-client { font-family: "Bebas Neue", sans-serif; font-size: 1.5rem; letter-spacing: 0.04em; color: var(--text); margin: 0; }
+.admin-proposal-slug { font-size: 12px; color: var(--text-muted); font-family: monospace; margin: 0; }
+.admin-proposal-date { font-size: 12px; color: var(--text-muted); margin: 0; }
+.admin-password-row { display: flex; align-items: center; gap: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; }
+.admin-password-label { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); flex-shrink: 0; }
+.admin-password-value { font-family: monospace; font-size: 14px; color: var(--accent); flex: 1; }
+.admin-copy-btn { background: transparent; border: 1px solid var(--border); color: var(--text-muted); padding: 4px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; transition: all 0.15s; white-space: nowrap; flex-shrink: 0; }
+.admin-copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+.admin-auth-status { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); }
+.admin-auth-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.admin-auth-dot.active { background: #4ade80; box-shadow: 0 0 6px rgba(74,222,128,0.5); }
+.admin-auth-dot.inactive { background: var(--border); }
+.admin-revoke-btn { background: transparent; border: 1px solid rgba(255,80,80,0.4); color: rgba(255,80,80,0.8); padding: 2px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; transition: all 0.15s; }
+.admin-revoke-btn:hover { border-color: #ff5050; color: #ff5050; }
+.admin-links { display: flex; gap: 10px; }
+.admin-link-btn { flex: 1; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; text-align: center; text-decoration: none; transition: all 0.2s; border: none; display: inline-flex; align-items: center; justify-content: center; }
+.admin-link-btn.primary { background: var(--accent); color: #0d0d0d; }
+.admin-link-btn.primary:hover { opacity: 0.88; }
+.admin-link-btn.secondary { background: transparent; border: 1px solid var(--border); color: var(--text-muted); }
+.admin-link-btn.secondary:hover { border-color: var(--accent); color: var(--accent); }
+.admin-funnel-links { display: flex; flex-direction: column; gap: 8px; }
+.admin-funnel-label { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+.admin-funnel-steps { display: flex; flex-wrap: wrap; gap: 6px; }
+.admin-funnel-step-link { background: var(--bg); border: 1px solid var(--border); color: var(--text-muted); padding: 4px 10px; border-radius: 4px; font-size: 11px; text-decoration: none; transition: all 0.15s; }
+.admin-funnel-step-link:hover { border-color: var(--accent); color: var(--accent); }
+.admin-quick-ref { border-top: 1px solid var(--border); padding-top: 40px; }
+.admin-section-title { font-family: "Bebas Neue", sans-serif; font-size: 1.4rem; letter-spacing: 0.04em; color: var(--text); margin: 0 0 20px; }
+.admin-ref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+.admin-ref-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+.admin-ref-card h4 { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); margin: 0; }
+.admin-ref-card code { font-family: monospace; font-size: 12px; color: var(--accent); word-break: break-all; }
+.admin-external-link { font-size: 13px; color: var(--accent); text-decoration: none; }
+.admin-external-link:hover { text-decoration: underline; }
+@media (max-width: 600px) {
+  .password-gate-card { padding: 32px 24px; }
+  .admin-proposals-grid { grid-template-columns: 1fr; }
+  .admin-content { padding: 32px 20px; }
+  .admin-header { padding: 14px 20px; }
+}

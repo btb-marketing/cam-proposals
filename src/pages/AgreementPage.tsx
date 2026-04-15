@@ -1,6 +1,7 @@
 import { useParams, useLocation, useSearch } from 'wouter'
 import { useState } from 'react'
 import { loadProposal } from '../data/loader'
+import { useBrandMeta } from '../hooks/useBrandMeta'
 
 // Format a number as North American currency: $3,150.00
 function fmtCAD(amount: number): string {
@@ -14,6 +15,10 @@ export default function AgreementPage() {
   const [, navigate] = useLocation()
 
   const proposal = loadProposal(slug)
+  useBrandMeta({
+    brand: proposal?.brand ?? 'cameron-gallacher',
+    pageTitle: 'Marketing Agreement',
+  })
 
   const searchParams = new URLSearchParams(search)
   const pkgId = searchParams.get('pkg') || ''

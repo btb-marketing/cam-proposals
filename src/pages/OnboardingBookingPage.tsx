@@ -1,6 +1,7 @@
 import { useParams, useLocation, useSearch } from 'wouter'
 import { useEffect } from 'react'
 import { loadProposal } from '../data/loader'
+import { useBrandMeta } from '../hooks/useBrandMeta'
 
 // Calendly links by brand
 const CALENDLY_LINKS: Record<string, string> = {
@@ -15,6 +16,10 @@ export default function OnboardingBookingPage() {
   const [, navigate] = useLocation()
 
   const proposal = loadProposal(slug)
+  useBrandMeta({
+    brand: proposal?.brand ?? 'cameron-gallacher',
+    pageTitle: 'Book Your Onboarding Call',
+  })
 
   const searchParams = new URLSearchParams(search)
   const pkgId = searchParams.get('pkg') || ''

@@ -1,6 +1,7 @@
 import { useParams, useLocation, useSearch } from 'wouter'
 import { useState, useEffect, useCallback } from 'react'
 import { loadProposal } from '../data/loader'
+import { useBrandMeta } from '../hooks/useBrandMeta'
 import { loadStripe } from '@stripe/stripe-js'
 import {
   Elements,
@@ -370,6 +371,10 @@ export default function BillingPage() {
   const search = useSearch()
 
   const proposal = loadProposal(slug)
+  useBrandMeta({
+    brand: proposal?.brand ?? 'cameron-gallacher',
+    pageTitle: 'Billing & Payment',
+  })
 
   const searchParams = new URLSearchParams(search)
   const pkgId = searchParams.get('pkg') || ''

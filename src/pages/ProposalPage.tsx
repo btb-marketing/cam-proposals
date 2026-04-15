@@ -1,7 +1,8 @@
 import { useParams, useLocation } from 'wouter'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { loadProposal } from '../data/loader'
 import { useScrollReveal } from '../hooks/useScrollReveal'
+import { useBrandMeta } from '../hooks/useBrandMeta'
 import type { Proposal } from '../types/proposal'
 import NotFound from './NotFound'
 import ProgressBar from '../components/ProgressBar'
@@ -95,12 +96,10 @@ export default function ProposalPage() {
   const [selectedAddons] = useState<Set<string>>(new Set())
 
   useScrollReveal()
-
-  useEffect(() => {
-    if (proposal) {
-      document.title = `${proposal.hero.clientName} — Cameron Gallacher Proposal`
-    }
-  }, [proposal])
+  useBrandMeta({
+    brand: proposal?.brand ?? 'cameron-gallacher',
+    pageTitle: 'Proposal',
+  })
 
   if (!proposal) return <NotFound />
 

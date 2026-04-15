@@ -1,6 +1,7 @@
 import { useParams, useLocation, useSearch } from 'wouter'
 import { useState } from 'react'
 import { loadProposal } from '../data/loader'
+import { useBrandMeta } from '../hooks/useBrandMeta'
 
 // Determine agency name based on brand
 function getAgencyName(brand: string): string {
@@ -90,6 +91,10 @@ export default function OnboardingFormPage() {
   const [, navigate] = useLocation()
 
   const proposal = loadProposal(slug)
+  useBrandMeta({
+    brand: proposal?.brand ?? 'cameron-gallacher',
+    pageTitle: 'Onboarding Form',
+  })
 
   const searchParams = new URLSearchParams(search)
   const pkgId = searchParams.get('pkg') || ''

@@ -1,5 +1,6 @@
 import { useParams, useLocation, useSearch } from 'wouter'
 import { loadProposal } from '../data/loader'
+import { useBrandMeta } from '../hooks/useBrandMeta'
 
 // Format a number as North American currency: $3,150.00
 function fmtCAD(amount: number): string {
@@ -13,6 +14,10 @@ export default function PackageReviewPage() {
   const [, navigate] = useLocation()
 
   const proposal = loadProposal(slug)
+  useBrandMeta({
+    brand: proposal?.brand ?? 'cameron-gallacher',
+    pageTitle: 'Review Your Package',
+  })
 
   // Parse query params
   const searchParams = new URLSearchParams(search)

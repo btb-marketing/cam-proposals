@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useParams, useSearch, useLocation } from 'wouter'
 import { loadProposal } from '../data/loader'
+import { useBrandMeta } from '../hooks/useBrandMeta'
 
 // Confetti particle system
 interface Particle {
@@ -65,6 +66,10 @@ export default function ThankYouPage() {
   const spawnTimerRef = useRef<number>(0)
 
   const proposal = loadProposal(slug)
+  useBrandMeta({
+    brand: proposal?.brand ?? 'cameron-gallacher',
+    pageTitle: 'Welcome Aboard',
+  })
   const searchParams = new URLSearchParams(search)
   const clientName = searchParams.get('name') || proposal?.meta?.preparedFor || 'there'
   const HONORIFICS = ['dr.', 'dr', 'mr.', 'mr', 'mrs.', 'mrs', 'ms.', 'ms', 'prof.', 'prof']
