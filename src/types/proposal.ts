@@ -29,8 +29,14 @@ export interface KeywordArea {
   keyword: string;
 }
 
+export type Brand = 'cameron-gallacher' | 'below-the-board'
+
 export interface Proposal {
   slug: string;
+  /** Brand variant — determines consultant name, contact info, favicon, and Calendly link */
+  brand?: Brand;
+  /** Access password for this proposal (plain text, stored client-side only) */
+  password?: string;
   meta: {
     title: string;
     preparedBy: string;
