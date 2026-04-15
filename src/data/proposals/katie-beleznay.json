@@ -10,12 +10,12 @@
   },
   "hero": {
     "clientName": "Dr. Katie Beleznay",
-    "tagline": "SEO Growth Sprint Proposal",
+    "tagline": "SEO Growth\nSprint\nProposal",
     "subTagline": "A focused 3–4 month engagement to close the competitive gap, optimize high-intent treatment pages, and turn organic traffic into consultation bookings."
   },
   "about": {
     "heading": "About Us",
-    "description": "Worked with 200+ businesses across Canada and the United States ranging from small businesses to large publicly traded enterprises. Worked with clients ranging from CPG brands, brick & mortar retail, e-commerce, software companies, consultants, doctors, real estate agents, and more. Generated over $500 million USD in revenue for clients through highly targeted digital marketing strategies. Founder and CEO of multiple marketing agencies.",
+    "description": "With over a decade of experience in digital marketing, I've had the privilege of working with 200+ businesses across Canada and the United States — from small local businesses to large publicly traded enterprises. My client roster spans CPG brands, brick-and-mortar retail, e-commerce, software companies, consultants, medical professionals, and real estate agents, among others. Across those engagements, I've helped generate over $500 million USD in revenue for clients through highly targeted, performance-driven digital strategies. I'm the founder and CEO of multiple marketing agencies, and I bring that same operator-level thinking to every client relationship.",
     "notableClients": []
   },
   "team": [
@@ -135,22 +135,41 @@
     "Stronger lead capture reliability across all forms"
   ],
   "investment": {
-    "tiers": [
+    "packages": [
       {
-        "label": "Recommended Package",
-        "items": [
-          {
-            "service": "SEO Growth Sprint",
-            "description": "Full 3–4 month engagement: audit, optimization, content support, and monthly reporting",
-            "price": "$2,500–$3,000 CAD/mo"
-          }
-        ],
-        "total": "$2,500–$3,000 CAD/mo",
+        "id": "kickstarter",
+        "name": "Kickstarter",
+        "price": 3000,
         "currency": "CAD",
-        "note": "Recommended term: 3–4 months. This budget range provides enough runway to perform meaningful competitive analysis, optimize the most commercially important pages, strengthen site structure, and measure whether the work is generating the right early signals."
+        "period": "mo",
+        "plusTax": true,
+        "mandatory": true,
+        "description": "A focused 3–4 month SEO sprint to build your foundation, close competitive gaps, and start generating measurable organic momentum.",
+        "deliverables": [
+          { "category": "SEO Strategy", "items": ["Initial keyword research", "Competitive audit"] },
+          { "category": "Content Creation", "items": ["5,000 words/month"] },
+          { "category": "On-Page + Technical SEO", "items": ["Up to 5 URLs manually optimized/month", "One audit per month", "Optimize site speed"] },
+          { "category": "Reporting", "items": ["Monthly Looker Studio report", "One 45-min strategy call/month"] },
+          { "category": "Backlinks", "items": ["2 backlinks per month"] }
+        ]
       }
     ],
-    "roiContext": "This engagement is designed to be practical, measurable, and aligned with the $2,500–$3,000/month budget and 3–4 month timeline you outlined. SEO is a longer-term play — the goal in this sprint is to lay the right foundation, optimize the pages most likely to drive consultation bookings, and generate clear early signals of momentum before deciding on next steps.",
+    "addons": [
+      {
+        "id": "backlink-pack-1",
+        "name": "Backlink Pack 1",
+        "price": 500,
+        "currency": "CAD",
+        "period": "mo",
+        "plusTax": true,
+        "optional": true,
+        "description": "Boost your domain authority with high-DR guest post placements each month.",
+        "deliverables": [
+          { "category": "Inclusions", "items": ["2 High DR Guest Posts per month", "Keyword Research", "Guest Post Writing", "Placement Outreach", "Negotiations with Backlink Providers", "Monthly Backlink Delivery & Report"] }
+        ]
+      }
+    ],
+    "roiContext": "This engagement is designed to be practical, measurable, and focused on the right priorities for your practice. SEO is a longer-term play — the goal in this sprint is to lay the right foundation, optimize the pages most likely to drive consultation bookings, and generate clear early signals of momentum before deciding on next steps.",
     "exitClause": "No long-term lock-in. I recommend a 3–4 month term to allow enough time to see meaningful results, but I'm happy to discuss a month-to-month arrangement after the initial sprint."
   },
   "caseStudies": [

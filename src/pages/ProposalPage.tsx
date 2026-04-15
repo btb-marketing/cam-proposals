@@ -2,14 +2,16 @@ import { useParams } from 'wouter'
 import { useState, useEffect } from 'react'
 import { loadProposal } from '../data/loader'
 import { useScrollReveal } from '../hooks/useScrollReveal'
-import type { Proposal, PricingTier } from '../types/proposal'
+import type { Proposal } from '../types/proposal'
 import NotFound from './NotFound'
 
 export default function ProposalPage() {
   const params = useParams<{ slug: string }>()
   const slug = params.slug || ''
   const proposal = loadProposal(slug)
-  const [activeTab, setActiveTab] = useState(0)
+
+  // Track which optional add-ons are selected
+  const [selectedAddons, setSelectedAddons] = useState<Set<string>>(new Set())
 
   useScrollReveal()
 
@@ -22,6 +24,43 @@ export default function ProposalPage() {
   if (!proposal) return <NotFound />
 
   const { meta, hero, about, team, overview, keywordAreas, scopeOfWork, deliverables, successMetrics, investment, caseStudies, nextSteps } = proposal
+
+  // ── Investment helpers ──────────────────────────────────────
+  const packages = (investment as any).packages || []
+  const addons   = (investment as any).addons   || []
+  const hasPricingCards = packages.length > 0
+
+  const toggleAddon = (id: string) => {
+    setSelectedAddons(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
+
+  const totalMonthly = (() => {
+    if (!hasPricingCards) return null
+    const base = packages.reduce((sum: number, p: any) => sum + p.price, 0)
+    const extra = addons
+      .filter((a: any) => selectedAddons.has(a.id))
+      .reduce((sum: number, a: any) => sum + a.price, 0)
+    return base + extra
+  })()
+
+  // ── H1 line renderer ────────────────────────────────────────
+  const renderHeroTitle = (tagline: string) => {
+    const lines = tagline.split('\n')
+    return lines.map((line, i) => {
+      if (i === lines.length - 1) {
+        // Last line: gradient accent
+        return (
+          <span key={i} className="hero-title-gradient-line">{line}</span>
+        )
+      }
+      return <span key={i} style={{ display: 'block' }}>{line}</span>
+    })
+  }
 
   return (
     <div>
@@ -47,9 +86,7 @@ export default function ProposalPage() {
           <div className="hero-client-tag">{hero.clientName}</div>
 
           <h1 className="hero-title display">
-            {hero.tagline.split('\n').map((line, i) =>
-              i === 1 ? <span key={i} className="accent-line">{line}</span> : <span key={i} style={{ display: 'block' }}>{line}</span>
-            )}
+            {renderHeroTitle(hero.tagline)}
           </h1>
 
           <p className="hero-subtitle">{hero.subTagline}</p>
@@ -240,7 +277,7 @@ export default function ProposalPage() {
               <div className="eyebrow">05 — Success Metrics</div>
               <div className="section-title-wrap">
                 <div className="section-number">05</div>
-                <h2 className="section-title display">How We Measure Win</h2>
+                <h2 className="section-title display">How We Measure Wins</h2>
               </div>
             </div>
             <div className="metrics-grid reveal">
@@ -265,62 +302,162 @@ export default function ProposalPage() {
             </div>
           </div>
 
-          <div className="reveal">
-            {investment.tiers.length > 1 && (
-              <div className="investment-tabs">
-                {investment.tiers.map((tier, i) => (
-                  <button
-                    key={i}
-                    className={`investment-tab${activeTab === i ? ' active' : ''}`}
-                    onClick={() => setActiveTab(i)}
-                  >
-                    {tier.label}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {investment.tiers.map((tier: PricingTier, i: number) => (
-              <div key={i} className={`investment-panel${activeTab === i || investment.tiers.length === 1 ? ' active' : ''}`}>
-                <table className="pricing-table">
-                  <thead>
-                    <tr>
-                      <th>Service</th>
-                      <th>Description</th>
-                      <th className="price-col">Price</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {tier.items.map((item, j) => (
-                      <tr key={j}>
-                        <td style={{ fontWeight: 600, color: 'var(--text)' }}>{item.service}</td>
-                        <td>{item.description || ''}</td>
-                        <td className="price-col">{item.price}</td>
-                      </tr>
+          {hasPricingCards ? (
+            <div className="reveal">
+              {/* ── Package Cards ── */}
+              {packages.length > 0 && (
+                <>
+                  <div className="pricing-section-label">Your Package</div>
+                  <div className="pricing-cards-grid">
+                    {packages.map((pkg: any) => (
+                      <div
+                        key={pkg.id}
+                        className={`pricing-card pricing-card--selected${pkg.mandatory ? ' pricing-card--mandatory' : ''}`}
+                      >
+                        <div className="pricing-card-header">
+                          <div className="pricing-card-name">{pkg.name}</div>
+                          {pkg.mandatory && (
+                            <div className="pricing-card-badge">Included</div>
+                          )}
+                        </div>
+                        <div className="pricing-card-price">
+                          <span className="pricing-card-amount">${pkg.price.toLocaleString()}</span>
+                          <span className="pricing-card-period"> {pkg.currency}/{pkg.period}</span>
+                          {pkg.plusTax && <span className="pricing-card-tax"> + GST</span>}
+                        </div>
+                        <p className="pricing-card-desc">{pkg.description}</p>
+                        <div className="pricing-card-deliverables">
+                          {pkg.deliverables.map((group: any, gi: number) => (
+                            <div key={gi} className="pricing-deliverable-group">
+                              <div className="pricing-deliverable-category">{group.category}</div>
+                              <ul className="pricing-deliverable-list">
+                                {group.items.map((item: string, ii: number) => (
+                                  <li key={ii}>{item}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     ))}
-                    <tr className="pricing-total-row">
-                      <td colSpan={2} style={{ fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                        Total Investment
-                      </td>
-                      <td className="price-col">{tier.total}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                {tier.note && <p className="pricing-note">{tier.note}</p>}
-              </div>
-            ))}
+                  </div>
+                </>
+              )}
 
-            {investment.roiContext && (
-              <div className="roi-context">
-                <div className="eyebrow" style={{ marginBottom: '16px' }}>Context</div>
-                <p>{investment.roiContext}</p>
-              </div>
-            )}
+              {/* ── Add-On Cards ── */}
+              {addons.length > 0 && (
+                <>
+                  <div className="pricing-section-label" style={{ marginTop: '48px' }}>
+                    Optional Add-Ons
+                    <span className="pricing-section-label-hint"> — click to select</span>
+                  </div>
+                  <div className="pricing-cards-grid">
+                    {addons.map((addon: any) => {
+                      const isSelected = selectedAddons.has(addon.id)
+                      return (
+                        <div
+                          key={addon.id}
+                          className={`pricing-card pricing-card--addon${isSelected ? ' pricing-card--selected' : ''}`}
+                          onClick={() => toggleAddon(addon.id)}
+                          role="checkbox"
+                          aria-checked={isSelected}
+                          tabIndex={0}
+                          onKeyDown={(e) => e.key === 'Enter' && toggleAddon(addon.id)}
+                        >
+                          <div className="pricing-card-header">
+                            <div className="pricing-card-name">{addon.name}</div>
+                            <div className={`pricing-card-checkbox${isSelected ? ' checked' : ''}`}>
+                              {isSelected ? '✓' : '+'}
+                            </div>
+                          </div>
+                          <div className="pricing-card-price">
+                            <span className="pricing-card-amount">${addon.price.toLocaleString()}</span>
+                            <span className="pricing-card-period"> {addon.currency}/{addon.period}</span>
+                            {addon.plusTax && <span className="pricing-card-tax"> + GST</span>}
+                          </div>
+                          <p className="pricing-card-desc">{addon.description}</p>
+                          <div className="pricing-card-deliverables">
+                            {addon.deliverables.map((group: any, gi: number) => (
+                              <div key={gi} className="pricing-deliverable-group">
+                                <div className="pricing-deliverable-category">{group.category}</div>
+                                <ul className="pricing-deliverable-list">
+                                  {group.items.map((item: string, ii: number) => (
+                                    <li key={ii}>{item}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </>
+              )}
 
-            {investment.exitClause && (
-              <p className="pricing-note" style={{ marginTop: '16px' }}>{investment.exitClause}</p>
-            )}
-          </div>
+              {/* ── Total Bar ── */}
+              {totalMonthly !== null && (
+                <div className="pricing-total-bar">
+                  <div className="pricing-total-label">
+                    Estimated Monthly Investment
+                    {selectedAddons.size > 0 && (
+                      <span className="pricing-total-breakdown">
+                        {' '}(Base ${packages.reduce((s: number, p: any) => s + p.price, 0).toLocaleString()} + Add-ons ${addons.filter((a: any) => selectedAddons.has(a.id)).reduce((s: number, a: any) => s + a.price, 0).toLocaleString()})
+                      </span>
+                    )}
+                  </div>
+                  <div className="pricing-total-amount">
+                    ${totalMonthly.toLocaleString()} CAD/mo
+                    <span className="pricing-total-tax"> + GST</span>
+                  </div>
+                </div>
+              )}
+
+              {/* ── Context Notes ── */}
+              {(investment as any).roiContext && (
+                <div className="roi-context">
+                  <div className="eyebrow" style={{ marginBottom: '16px' }}>Context</div>
+                  <p>{(investment as any).roiContext}</p>
+                </div>
+              )}
+              {(investment as any).exitClause && (
+                <p className="pricing-note" style={{ marginTop: '16px' }}>{(investment as any).exitClause}</p>
+              )}
+            </div>
+          ) : (
+            /* ── Legacy table fallback ── */
+            <div className="reveal">
+              {(investment as any).tiers?.map((tier: any, i: number) => (
+                <div key={i} className="investment-panel active">
+                  <table className="pricing-table">
+                    <thead>
+                      <tr>
+                        <th>Service</th>
+                        <th>Description</th>
+                        <th className="price-col">Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {tier.items.map((item: any, j: number) => (
+                        <tr key={j}>
+                          <td style={{ fontWeight: 600, color: 'var(--text)' }}>{item.service}</td>
+                          <td>{item.description || ''}</td>
+                          <td className="price-col">{item.price}</td>
+                        </tr>
+                      ))}
+                      <tr className="pricing-total-row">
+                        <td colSpan={2} style={{ fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                          Total Investment
+                        </td>
+                        <td className="price-col">{tier.total}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  {tier.note && <p className="pricing-note">{tier.note}</p>}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
