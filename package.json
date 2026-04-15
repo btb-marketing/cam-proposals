@@ -9,8 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "^6.2.0",
+    "@stripe/stripe-js": "^9.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "stripe": "^22.0.1",
     "wouter": "^3.3.5"
   },
   "devDependencies": {

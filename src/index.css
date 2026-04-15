@@ -3426,3 +3426,97 @@ section {
   line-height: 1.6;
   color: var(--text);
 }
+
+/* ─── Statement Descriptor Warning ─────────────────────────────────── */
+.billing-statement-warning {
+  display: flex;
+  gap: 16px;
+  background: rgba(200, 241, 53, 0.05);
+  border: 1px solid rgba(200, 241, 53, 0.25);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-top: 24px;
+}
+
+.billing-statement-warning-icon {
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.billing-statement-warning-body {
+  flex: 1;
+}
+
+.billing-statement-warning-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.billing-statement-warning-body p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.billing-statement-descriptors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.billing-descriptor-pill {
+  background: var(--bg-card2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  font-family: 'Courier New', monospace;
+}
+
+.billing-statement-warning-note {
+  font-size: 12px !important;
+  color: var(--text-dim) !important;
+  margin-bottom: 0 !important;
+}
+
+.billing-statement-warning-note a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* ─── Stripe Element Wrapper ────────────────────────────────────────── */
+.stripe-element-wrap {
+  background: var(--bg-card2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 12px 16px;
+  transition: border-color 0.2s;
+}
+
+.stripe-element-wrap:focus-within {
+  border-color: var(--accent-border);
+}
+
+/* ─── Billing Error Message ─────────────────────────────────────────── */
+.billing-error-msg {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(255, 77, 77, 0.08);
+  border: 1px solid rgba(255, 77, 77, 0.3);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-top: 20px;
+  font-size: 13px;
+  color: #ff8080;
+  line-height: 1.5;
+}
