@@ -122,7 +122,8 @@ export default function Sidebar({ sections }: SidebarProps) {
           onClick={() => setMobileOpen((o) => !o)}
           aria-expanded={mobileOpen}
         >
-          <span className="mobile-toc-label">{activeLabel}</span>
+          <span className="mobile-toc-label">Contents</span>
+          <span className="mobile-toc-active-label">{activeLabel !== 'Contents' ? activeLabel : ''}</span>
           <svg
             className={`mobile-toc-chevron${mobileOpen ? ' open' : ''}`}
             width="16" height="16" viewBox="0 0 24 24" fill="none"
