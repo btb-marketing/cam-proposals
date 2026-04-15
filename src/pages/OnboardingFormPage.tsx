@@ -518,7 +518,7 @@ export default function OnboardingFormPage() {
                 <textarea
                   name="targetCategories"
                   className="onboarding-form-textarea"
-                  placeholder="e.g. Botox, Fillers, Laser Treatments"
+                  placeholder="e.g. Product A, Service B, Category C"
                   rows={4}
                   value={form.targetCategories}
                   onChange={handleChange}
@@ -532,7 +532,7 @@ export default function OnboardingFormPage() {
                 <textarea
                   name="targetKeywords"
                   className="onboarding-form-textarea"
-                  placeholder="e.g. botox Vancouver, lip filler Vancouver, dermatologist Vancouver"
+                  placeholder="e.g. [service] [city], [service] near me, [industry] [city]"
                   rows={5}
                   value={form.targetKeywords}
                   onChange={handleChange}
@@ -546,7 +546,7 @@ export default function OnboardingFormPage() {
                 <textarea
                   name="targetAudience"
                   className="onboarding-form-textarea"
-                  placeholder="e.g. Women 30-55 in Vancouver looking for cosmetic dermatology treatments..."
+                  placeholder="e.g. Adults 25-55 in [city] looking for [your service or product]..."
                   rows={4}
                   value={form.targetAudience}
                   onChange={handleChange}
@@ -626,7 +626,7 @@ export default function OnboardingFormPage() {
                 <textarea
                   name="successGoals"
                   className="onboarding-form-textarea"
-                  placeholder="e.g. Rank #1 for 'botox Vancouver', increase consultation bookings by 30%..."
+                  placeholder="e.g. Rank #1 for '[primary keyword]', increase leads/bookings by 30%..."
                   rows={4}
                   value={form.successGoals}
                   onChange={handleChange}
@@ -674,7 +674,7 @@ export default function OnboardingFormPage() {
                 <textarea
                   name="focusProducts"
                   className="onboarding-form-textarea"
-                  placeholder="e.g. Botox, Sculptra, Laser Resurfacing"
+                  placeholder="e.g. Service A, Service B, Service C"
                   rows={3}
                   value={form.focusProducts}
                   onChange={handleChange}

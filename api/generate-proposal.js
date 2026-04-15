@@ -114,9 +114,9 @@ The proposal JSON must follow this exact TypeScript interface structure:
   team: [{ name, title, initials, photo }],
   overview: { headline, subheadline, objectives: string[], strategy: [{title, description}] },
   keywordAreas: { intro, keywords: string[] },
-  scopeOfWork: { months: [{month, title, tasks: string[]}] },
+  scopeOfWork: { months: [{title: string, deliverables: string[]}] },
   deliverables: string[],
-  successMetrics: [{metric, description}],
+  successMetrics: string[],
   investment: {
     sectionTitle, sectionSubtitle, packagesLabel, addonsLabel,
     packages: [{id, name, price (CAD number), currency:"CAD", period:"mo", plusTax:true, badge, defaultSelected, description, deliverables:[{category,items:string[]}]}],
@@ -127,11 +127,16 @@ The proposal JSON must follow this exact TypeScript interface structure:
   nextSteps: { closing, ctaUrl, ctaLabel, email }
 }
 
-Rules:
+CRITICAL SCHEMA RULES (do not deviate):
+- scopeOfWork.months[].title must be a string like "Month 1 — Foundation & Audit"
+- scopeOfWork.months[].deliverables must be an array of strings (NOT tasks, NOT objects)
+- successMetrics must be a plain array of strings (NOT objects with metric/description fields)
+- investment.packages and investment.addons must use EXACTLY the following standard pricing — do not change prices, ids, or names:
+  Packages: [{id:"kickstarter",name:"Kickstarter",price:3000,badge:"Recommended"}, {id:"elevate",name:"Elevate",price:5000,badge:"Optional"}, {id:"amplify",name:"Amplify",price:8000,badge:"Optional"}]
+  Addons: [{id:"backlink-pack-1",name:"Backlink Pack 1",price:500,badge:"Recommended + Optional"}, {id:"backlink-pack-2",name:"Backlink Pack 2",price:1000,badge:"Optional"}, {id:"backlink-pack-3",name:"Backlink Pack 3",price:1500,badge:"Optional"}]
+- Set defaultSelected:true on the recommended package (based on recommendedPkg input), false on all others
+- All addons default to defaultSelected:false
 - Make the proposal highly specific to the client's industry, location, and business
-- The recommended package should have defaultSelected: true, others false
-- Always include 3 packages: kickstarter (~$2,500 CAD/mo), growth (~$4,500 CAD/mo), domination (~$7,500 CAD/mo) — adjust names/prices to fit the industry
-- Always include 2-3 backlink add-on packages at $500, $1000, $1500 CAD/mo
 - Use the provided agency details for all contact info and team members
 - Return ONLY valid JSON, no markdown, no explanation`
 

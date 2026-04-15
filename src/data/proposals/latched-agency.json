@@ -150,43 +150,48 @@
     "Conversion Rate: Improvement in organic visitor-to-lead conversion rate on key service pages"
   ],
   "investment": {
-    "sectionTitle": "Investment",
-    "sectionSubtitle": "Choose the engagement level that fits your current growth goals.",
+    "sectionTitle": "Build Your Package",
+    "sectionSubtitle": "Select the options below to build your custom package. Your recommended package is already selected by default \u2014 simply review it and add any optional items that make sense for your goals. Items marked \"Optional\" require you to click the card to include them. Items marked \"Recommended\" are pre-selected but can be swapped. Only one SEO base package and one backlink add-on can be active at a time.",
     "packagesLabel": "SEO Packages",
-    "addonsLabel": "Optional Add-Ons \u2014 click to select",
+    "addonsLabel": "Optional SEO Add-Ons \u2014 click to select",
     "packages": [
       {
         "id": "kickstarter",
         "name": "Kickstarter",
-        "price": 2500,
+        "price": 3000,
         "currency": "CAD",
         "period": "mo",
         "plusTax": true,
-        "badge": "Best for Getting Started",
-        "defaultSelected": false,
-        "description": "A focused foundation sprint to audit, optimize, and start building authority for Latched's most important service pages.",
+        "badge": "Recommended",
+        "defaultSelected": true,
+        "description": "A focused 3\u20134 month SEO sprint to build your foundation, close competitive gaps, and start generating measurable organic momentum.",
         "deliverables": [
           {
-            "category": "Keyword Research",
+            "category": "SEO Strategy",
             "items": [
-              "Full keyword research & mapping",
-              "Competitor gap analysis"
+              "Initial keyword research",
+              "Competitive audit"
+            ]
+          },
+          {
+            "category": "Content Creation",
+            "items": [
+              "5,000 words/month"
             ]
           },
           {
             "category": "On-Page + Technical SEO",
             "items": [
-              "Up to 8 URLs manually optimized/month",
-              "Technical SEO audit + fixes",
-              "Meta title & description optimization"
+              "Up to 5 URLs manually optimized/month",
+              "One audit per month",
+              "Optimize site speed"
             ]
           },
           {
             "category": "Reporting",
             "items": [
-              "Monthly reporting call",
-              "Email support with <48hr response",
-              "Keyword ranking dashboard"
+              "Monthly Looker Studio report",
+              "One 45-min strategy call/month"
             ]
           },
           {
@@ -198,38 +203,83 @@
         ]
       },
       {
-        "id": "growth",
-        "name": "Growth",
-        "price": 4500,
+        "id": "elevate",
+        "name": "Elevate",
+        "price": 5000,
         "currency": "CAD",
         "period": "mo",
         "plusTax": true,
-        "badge": "Most Popular",
-        "defaultSelected": true,
-        "description": "The full-stack SEO engagement \u2014 on-page optimization, content production, authority building, and conversion optimization working together.",
+        "badge": "Optional",
+        "defaultSelected": false,
+        "description": "A more intensive SEO engagement with deeper content production, more page optimizations, and bi-weekly strategy touchpoints.",
         "deliverables": [
           {
-            "category": "Keyword Research",
+            "category": "SEO Strategy",
             "items": [
-              "Full keyword research & mapping",
-              "Competitor gap analysis",
-              "Monthly keyword expansion"
+              "Initial keyword research",
+              "Competitive audit"
             ]
           },
           {
-            "category": "Content",
+            "category": "Content Creation",
             "items": [
-              "4 SEO-optimized blog articles/month",
-              "Service page copy refresh"
+              "15,000 words/month"
+            ]
+          },
+          {
+            "category": "On-Page + Technical SEO",
+            "items": [
+              "Up to 10 URLs manually optimized/month",
+              "Weekly audits",
+              "Optimize site speed"
+            ]
+          },
+          {
+            "category": "Reporting",
+            "items": [
+              "Bi-weekly SEO strategy calls",
+              "Monday.com + Looker dashboards",
+              "Slack access with 48-hour SLA"
+            ]
+          },
+          {
+            "category": "Backlinks",
+            "items": [
+              "4 backlinks per month"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "amplify",
+        "name": "Amplify",
+        "price": 8000,
+        "currency": "CAD",
+        "period": "mo",
+        "plusTax": true,
+        "badge": "Optional",
+        "defaultSelected": false,
+        "description": "Full-scale SEO with live roadmap management, maximum content output, and executive-level reporting across all performance dimensions.",
+        "deliverables": [
+          {
+            "category": "SEO Strategy",
+            "items": [
+              "Live roadmap w/ monthly updates",
+              "Full content cluster planning"
+            ]
+          },
+          {
+            "category": "Content Creation",
+            "items": [
+              "30,000 words/month"
             ]
           },
           {
             "category": "On-Page + Technical SEO",
             "items": [
               "Up to 15 URLs manually optimized/month",
-              "Weekly technical audits",
-              "Core Web Vitals optimization",
-              "Schema markup implementation"
+              "Weekly audits",
+              "Optimize site speed"
             ]
           },
           {
@@ -243,62 +293,7 @@
           {
             "category": "Backlinks",
             "items": [
-              "6 backlinks per month"
-            ]
-          }
-        ]
-      },
-      {
-        "id": "domination",
-        "name": "Domination",
-        "price": 7500,
-        "currency": "CAD",
-        "period": "mo",
-        "plusTax": true,
-        "badge": "Maximum Impact",
-        "defaultSelected": false,
-        "description": "Full-scale SEO domination \u2014 designed to outrank every competitor in the cannabis marketing space within 6 months.",
-        "deliverables": [
-          {
-            "category": "Keyword Research",
-            "items": [
-              "Full keyword research & mapping",
-              "Competitor gap analysis",
-              "Monthly keyword expansion",
-              "International keyword targeting (US + Canada)"
-            ]
-          },
-          {
-            "category": "Content",
-            "items": [
-              "8 SEO-optimized blog articles/month",
-              "Full service page rewrites",
-              "Landing page creation for new keyword targets"
-            ]
-          },
-          {
-            "category": "On-Page + Technical SEO",
-            "items": [
-              "Unlimited URL optimization",
-              "Weekly technical audits",
-              "Core Web Vitals optimization",
-              "Schema markup implementation",
-              "CRO review + A/B testing setup"
-            ]
-          },
-          {
-            "category": "Reporting",
-            "items": [
-              "Weekly calls + monthly executive summary",
-              "Dedicated Slack channel with <4hr response",
-              "Full analytics suite with custom dashboards"
-            ]
-          },
-          {
-            "category": "Backlinks",
-            "items": [
-              "12 backlinks per month",
-              "Priority outreach to high-DR cannabis publications"
+              "8 backlinks per month"
             ]
           }
         ]
@@ -314,7 +309,7 @@
         "plusTax": true,
         "badge": "Recommended + Optional",
         "defaultSelected": false,
-        "description": "Boost domain authority with 2 high-DR guest post placements per month in cannabis and marketing publications.",
+        "description": "Boost your domain authority with high-DR guest post placements each month.",
         "deliverables": [
           {
             "category": "Inclusions",
@@ -352,10 +347,34 @@
             ]
           }
         ]
+      },
+      {
+        "id": "backlink-pack-3",
+        "name": "Backlink Pack 3",
+        "price": 1500,
+        "currency": "CAD",
+        "period": "mo",
+        "plusTax": true,
+        "badge": "Optional",
+        "defaultSelected": false,
+        "description": "Six high-DR guest posts per month for serious link velocity and competitive authority gains.",
+        "deliverables": [
+          {
+            "category": "Inclusions",
+            "items": [
+              "6 High DR Guest Posts per month",
+              "Keyword Research",
+              "Guest Post Writing",
+              "Placement Outreach",
+              "Negotiations with Backlink Providers",
+              "Monthly Backlink Delivery & Report"
+            ]
+          }
+        ]
       }
     ],
-    "roiContext": "Latched already has a proven service offering and a strong client base. The missing piece is organic visibility \u2014 the agency's own website should be generating as many inbound leads as the clients it serves. This engagement is designed to fix that directly and measurably.",
-    "exitClause": "No long-term lock-in. I recommend a 3\u20134 month initial term to allow enough time to see meaningful ranking movement, but I'm happy to discuss a month-to-month arrangement after the initial sprint."
+    "roiContext": "This engagement is designed to be practical, measurable, and focused on the right priorities for your business. SEO is a longer-term play \u2014 the goal in this sprint is to lay the right foundation, optimize the pages most likely to drive leads and conversions, and generate clear early signals of momentum before deciding on next steps.",
+    "exitClause": "No long-term lock-in. I recommend a 3\u20134 month term to allow enough time to see meaningful results, but I'm happy to discuss a month-to-month arrangement after the initial sprint."
   },
   "caseStudies": [
     {

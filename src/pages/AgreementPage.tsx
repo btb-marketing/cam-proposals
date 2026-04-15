@@ -271,23 +271,23 @@ export default function AgreementPage() {
           <div className="funnel-form-grid">
             <div className="funnel-field">
               <label>First Name *</label>
-              <input name="firstName" value={form.firstName} onChange={handleFormChange} placeholder="Katie" />
+              <input name="firstName" value={form.firstName} onChange={handleFormChange} placeholder="First name" />
             </div>
             <div className="funnel-field">
               <label>Last Name *</label>
-              <input name="lastName" value={form.lastName} onChange={handleFormChange} placeholder="Beleznay" />
+              <input name="lastName" value={form.lastName} onChange={handleFormChange} placeholder="Last name" />
             </div>
             <div className="funnel-field funnel-field--full">
               <label>Email Address *</label>
-              <input name="email" type="email" value={form.email} onChange={handleFormChange} placeholder="katie@example.com" />
+              <input name="email" type="email" value={form.email} onChange={handleFormChange} placeholder="your@email.com" />
             </div>
             <div className="funnel-field">
               <label>Phone Number</label>
-              <input name="phone" value={form.phone} onChange={handleFormChange} placeholder="+1 (604) 000-0000" />
+              <input name="phone" value={form.phone} onChange={handleFormChange} placeholder="+1 (000) 000-0000" />
             </div>
             <div className="funnel-field">
               <label>Business / Practice Name</label>
-              <input name="company" value={form.company} onChange={handleFormChange} placeholder="Dr. Katie Beleznay Dermatology" />
+              <input name="company" value={form.company} onChange={handleFormChange} placeholder="Your business name" />
             </div>
           </div>
         </div>

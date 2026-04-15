@@ -27,7 +27,7 @@ interface ProposalFormData {
   location: string
   services: string
   notes: string
-  recommendedPkg: 'kickstarter' | 'growth' | 'domination'
+  recommendedPkg: 'kickstarter' | 'elevate' | 'amplify'
   password: string
   logoFile: File | null
   logoPreview: string | null
@@ -43,7 +43,7 @@ function NewProposalForm({ onClose }: { onClose: () => void }) {
     location: '',
     services: 'SEO, Content Marketing',
     notes: '',
-    recommendedPkg: 'growth',
+    recommendedPkg: 'elevate',
     password: '',
     logoFile: null,
     logoPreview: null,
@@ -190,7 +190,7 @@ function NewProposalForm({ onClose }: { onClose: () => void }) {
               type="text"
               value={form.clientName}
               onChange={e => set('clientName', e.target.value)}
-              placeholder="e.g. Dr. Katie Beleznay"
+              placeholder="e.g. John Smith"
               required
             />
           </div>
@@ -200,7 +200,7 @@ function NewProposalForm({ onClose }: { onClose: () => void }) {
               type="email"
               value={form.clientEmail}
               onChange={e => set('clientEmail', e.target.value)}
-              placeholder="e.g. katie@example.com"
+              placeholder="e.g. client@company.com"
               required
             />
           </div>
@@ -222,7 +222,7 @@ function NewProposalForm({ onClose }: { onClose: () => void }) {
               type="text"
               value={form.industry}
               onChange={e => set('industry', e.target.value)}
-              placeholder="e.g. Cosmetic Dermatology"
+              placeholder="e.g. Law Firm, Dental, E-Commerce"
             />
           </div>
         </div>
@@ -234,7 +234,7 @@ function NewProposalForm({ onClose }: { onClose: () => void }) {
               type="text"
               value={form.location}
               onChange={e => set('location', e.target.value)}
-              placeholder="e.g. Vancouver, BC"
+              placeholder="e.g. Toronto, ON"
             />
           </div>
           <div className="npf-field">
@@ -295,10 +295,10 @@ function NewProposalForm({ onClose }: { onClose: () => void }) {
           </div>
           <div className="npf-field">
             <label>Recommended Package</label>
-            <select value={form.recommendedPkg} onChange={e => set('recommendedPkg', e.target.value as 'kickstarter' | 'growth' | 'domination')}>
-              <option value="kickstarter">Kickstarter (~$2,500/mo)</option>
-              <option value="growth">Growth (~$4,500/mo)</option>
-              <option value="domination">Domination (~$7,500/mo)</option>
+            <select value={form.recommendedPkg} onChange={e => set('recommendedPkg', e.target.value as 'kickstarter' | 'elevate' | 'amplify')}>
+              <option value="kickstarter">Kickstarter ($3,000/mo)</option>
+              <option value="elevate">Elevate ($5,000/mo)</option>
+              <option value="amplify">Amplify ($8,000/mo)</option>
             </select>
           </div>
         </div>

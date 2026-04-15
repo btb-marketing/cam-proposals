@@ -4131,3 +4131,385 @@ section {
   transition: border-color 0.2s, color 0.2s;
 }
 .npf-close-btn:hover { border-color: #666; color: #fff; }
+
+
+/* ============================================================
+   COMPREHENSIVE MOBILE RESPONSIVENESS FIXES
+   All breakpoints: 900px, 768px, 640px, 480px, 375px
+   ============================================================ */
+
+/* ── Funnel Page: Progress Steps Header ────────────────────── */
+@media (max-width: 768px) {
+  .funnel-page-header {
+    padding: 16px 20px;
+    overflow-x: auto;
+  }
+
+  .funnel-page-steps {
+    min-width: max-content;
+  }
+
+  .funnel-page-step-line {
+    width: 24px;
+    margin: 0 6px;
+  }
+
+  .funnel-page-step-label {
+    font-size: 10px;
+  }
+
+  .funnel-page-step-dot {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .funnel-page-header {
+    padding: 12px 16px;
+  }
+
+  .funnel-page-step-label {
+    display: none;
+  }
+
+  .funnel-page-step {
+    gap: 6px;
+  }
+
+  .funnel-page-step-line {
+    width: 16px;
+    margin: 0 4px;
+  }
+}
+
+/* ── Funnel Page: Body & Actions ───────────────────────────── */
+@media (max-width: 480px) {
+  .funnel-page-body {
+    padding: 32px 16px;
+  }
+
+  .funnel-page-title {
+    font-size: clamp(28px, 8vw, 40px);
+  }
+
+  .funnel-page-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .funnel-page-actions .btn-primary,
+  .funnel-page-actions .btn-outline {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .funnel-page-footer {
+    padding: 20px 16px;
+    gap: 12px;
+  }
+}
+
+/* ── Agreement Page ────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .agreement-doc {
+    padding: 24px 16px;
+  }
+
+  .agreement-doc-meta {
+    font-size: 12px;
+  }
+
+  .agreement-section h3 {
+    font-size: 14px;
+  }
+
+  .funnel-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .funnel-field--full {
+    grid-column: 1;
+  }
+}
+
+/* ── Billing Page ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .billing-order-summary {
+    padding: 20px 16px;
+  }
+
+  .billing-order-row {
+    font-size: 13px;
+  }
+
+  .billing-card-form {
+    padding: 20px 16px;
+  }
+}
+
+/* ── Package Review Page ───────────────────────────────────── */
+@media (max-width: 640px) {
+  .invoice-table {
+    font-size: 13px;
+  }
+
+  .invoice-table td,
+  .invoice-table th {
+    padding: 10px 8px;
+  }
+}
+
+/* ── Onboarding Booking Page ───────────────────────────────── */
+@media (max-width: 640px) {
+  .calendly-inline-widget {
+    margin: 20px 0;
+  }
+
+  .onboarding-booking-body {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* ── Onboarding Form Page ──────────────────────────────────── */
+@media (max-width: 640px) {
+  .onboarding-section-nav {
+    gap: 6px;
+  }
+
+  .onboarding-section-nav-btn {
+    font-size: 10px;
+    padding: 6px 10px;
+    letter-spacing: 0.03em;
+  }
+
+  .onboarding-form-section-header {
+    padding: 20px 16px;
+  }
+
+  .onboarding-form-fields {
+    padding: 20px 16px;
+    gap: 20px;
+  }
+}
+
+/* ── Thank You Page ────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .thankyou-page {
+    padding: 40px 16px 32px;
+  }
+
+  .thankyou-next-step {
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .thankyou-next-step-num {
+    font-size: 22px;
+    min-width: 32px;
+  }
+}
+
+/* ── Password Gate Page ────────────────────────────────────── */
+@media (max-width: 480px) {
+  .password-gate-card {
+    padding: 32px 20px;
+  }
+
+  .password-gate-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* ── Admin Panel ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .admin-header {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .admin-header-actions {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .admin-content {
+    padding: 24px 16px;
+  }
+
+  .admin-proposals-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-password-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .admin-links {
+    flex-direction: column;
+  }
+
+  .admin-link-btn {
+    width: 100%;
+  }
+
+  .admin-funnel-steps {
+    gap: 4px;
+  }
+
+  .admin-funnel-step-link {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+}
+
+/* ── New Proposal Form Modal ───────────────────────────────── */
+@media (max-width: 640px) {
+  .new-proposal-form {
+    padding: 20px 16px;
+    border-radius: 12px;
+  }
+
+  .npf-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .npf-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .npf-cancel-btn,
+  .npf-submit-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .npf-result-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .npf-result-actions {
+    flex-direction: column;
+  }
+
+  .npf-approve-btn,
+  .npf-close-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ── ProposalPage: Sidebar + Main Layout ───────────────────── */
+@media (max-width: 900px) {
+  .hero-title {
+    font-size: clamp(48px, 14vw, 90px);
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+
+  .investment-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .addon-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 80px 20px 60px;
+  }
+
+  .hero-title {
+    font-size: clamp(40px, 12vw, 70px);
+  }
+
+  .hero-cta-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .hero-cta-row .btn-primary,
+  .hero-cta-row .btn-outline {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .section-header {
+    padding: 0 20px;
+  }
+
+  .section-title {
+    font-size: clamp(28px, 8vw, 44px);
+  }
+
+  .keyword-pills {
+    gap: 6px;
+  }
+
+  .keyword-pill {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+
+  .scope-month-content {
+    padding: 20px 16px;
+  }
+
+  .investment-card {
+    padding: 24px 20px;
+  }
+
+  .investment-card-price {
+    font-size: clamp(32px, 8vw, 48px);
+  }
+
+  .addon-card {
+    padding: 20px 16px;
+  }
+
+  .next-steps-section {
+    padding: 60px 20px;
+  }
+
+  .next-steps-cta-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .next-steps-cta-row .btn-primary,
+  .next-steps-cta-row .btn-outline {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ── Global overflow prevention ────────────────────────────── */
+html, body {
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img, video, iframe {
+  max-width: 100%;
+}
+
+/* Calendly embed: prevent horizontal overflow on mobile */
+.calendly-inline-widget iframe {
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
